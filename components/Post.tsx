@@ -24,8 +24,11 @@ const Post = ({ post }: { post: PostType }) => {
       </div>
       <div className="bg-gray-200 px-4 py-2 rounded-sm">{post.content}</div>
       <div className="ml-auto flex gap-2">
-        {post.tags.map((tag) => (
-          <span key={post.id + tag} className="px-3 bg-stone-200 rounded-sm">
+        {post.tags.map((tag, idx) => (
+          <span
+            key={post.id + tag + idx}
+            className="px-3 bg-stone-200 rounded-sm"
+          >
             {tag}
           </span>
         ))}
