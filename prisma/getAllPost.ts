@@ -27,6 +27,17 @@ export const getAllPost = async ({
           },
         },
       },
+      select: {
+        id: true,
+        tags: true,
+        content: true,
+        User: {
+          select: {
+            username: true,
+            id: true,
+          },
+        },
+      },
     });
     prisma.$disconnect;
     return posts;
