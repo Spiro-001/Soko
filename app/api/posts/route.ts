@@ -7,7 +7,6 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       const { searchParams } = new URL(req.url);
 
       const query = {
-        allowed: JSON.parse(searchParams.get("allowed") ?? "[]"),
         blocked: JSON.parse(searchParams.get("blocked") ?? "[]"),
         skip: JSON.parse(searchParams.get("skip") ?? "0"),
         take: JSON.parse(searchParams.get("take") ?? "10"),

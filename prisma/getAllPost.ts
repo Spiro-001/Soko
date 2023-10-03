@@ -2,28 +2,26 @@ import { prisma } from ".";
 
 export const getAllPost = async ({
   blocked,
-  allowed,
   skip = 0,
   take = 10,
 }: {
   blocked: string[];
-  allowed: string[];
   skip: number;
   take: number;
 }) => {
   try {
     const posts = await prisma.post.findMany({
+      orderBy: [
+        {
+          createdAt: "desc",
+        },
+      ],
       skip,
       take,
       where: {
         NOT: {
           id: {
             in: blocked,
-          },
-        },
-        AND: {
-          id: {
-            in: allowed,
           },
         },
       },
@@ -37,6 +35,8 @@ export const getAllPost = async ({
             id: true,
           },
         },
+        createdAt: true,
+        updatedAt: true,
       },
     });
     prisma.$disconnect;

@@ -26,5 +26,7 @@ model Post {
   content String
   userId  String?
 
-  User User? @relation(fields: [userId], references: [id])
+  User      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
