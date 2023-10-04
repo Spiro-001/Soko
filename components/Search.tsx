@@ -1,8 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { ChangeEvent, SyntheticEvent, useState } from "react";
 
 const Search = () => {
+  const router = useRouter();
   const [filter, setFilter] = useState<string>("");
 
   const handleSearchFilter = (event: ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +13,7 @@ const Search = () => {
 
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
-    console.log(filter);
+    router.push(`/search?query=${filter}`);
   };
 
   return (
@@ -22,6 +24,7 @@ const Search = () => {
           className="border border-black w-full px-4 py-2 outline-none"
           placeholder="Search..."
           onChange={handleSearchFilter}
+          autoComplete="off"
         />
       </form>
       {/* <div className="absolute bg-black w-full top-full">Menu</div> */}

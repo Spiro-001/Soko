@@ -7,7 +7,7 @@ const Post = async ({ params }: { params: { postId: string } }) => {
   const post = await getPostByIdServer(params.postId);
 
   return (
-    <div className="border border-black row-start-1 row-end-7 flex flex-col pt-8 pb-16 px-4 gap-4 col-start-1 col-end-3">
+    <div className="border border-black row-start-1 row-end-7 flex flex-col pt-8 pb-16 px-4 gap-4 col-start-1 col-end-4">
       <div className="flex flex-col">
         <span>{post.User.username}</span>
         <span>{post.content}</span>
