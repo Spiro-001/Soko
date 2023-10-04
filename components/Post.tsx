@@ -1,8 +1,8 @@
+import { dateFormat, timeFormat } from "@/utils/timeFormat";
 import Link from "next/link";
 import React from "react";
 
 const Post = ({ post }: { post: PostType }) => {
-  console.log(post);
   return (
     <section className="flex flex-col border border-black px-8 py-4 w-full gap-y-6 rounded-sm text-xs xl:text-base">
       <div className="flex gap-2 items-center">
@@ -21,27 +21,26 @@ const Post = ({ post }: { post: PostType }) => {
         </Link>
         <div className="ml-auto flex gap-x-2 flex-wrap justify-end gap-y-1">
           <span className="bg-zinc-900 text-stone-200 px-2 rounded-sm  h-fit">
-            {new Date(post.createdAt)
-              .toLocaleDateString("en-US", {
-                dateStyle: "short",
-              })
-              .replace(/\//g, ".")}
+            {dateFormat(post.createdAt)}
           </span>
           <span className="bg-zinc-900 text-stone-200 px-2 rounded-sm h-fit">
-            {new Date(post.createdAt).toLocaleTimeString()}
+            {timeFormat(post.createdAt)}
           </span>
         </div>
       </div>
       <div className="bg-gray-200 px-4 py-2 rounded-sm">{post.content}</div>
-      <div className="ml-auto flex gap-2">
-        {post.tags.map((tag, idx) => (
-          <span
-            key={post.id + tag + idx}
-            className="px-3 bg-stone-200 rounded-sm"
-          >
-            {tag}
-          </span>
-        ))}
+      <div className="flex justify-between">
+        <div>{post.Comments.length} Comments</div>
+        <div className="flex gap-2">
+          {post.tags.map((tag, idx) => (
+            <span
+              key={post.id + tag + idx}
+              className="px-3 bg-stone-200 rounded-sm"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,43 +1,35 @@
 import { prisma } from ".";
 
-export const getAllPost = async ({
-  blocked,
-  skip = 0,
-  take = 10,
-}: {
-  blocked: string[];
-  skip: number;
-  take: number;
-}) => {
+export const getPostById = async (id: string) => {
   try {
-    const posts = await prisma.post.findMany({
-      orderBy: [
-        {
-          createdAt: "desc",
-        },
-      ],
-      skip,
-      take,
+    const posts = await prisma.post.findUnique({
       where: {
-        NOT: {
-          id: {
-            in: blocked,
-          },
-        },
+        id,
       },
       select: {
         id: true,
         tags: true,
-        content: true,
         User: {
           select: {
             id: true,
             username: true,
           },
         },
+        content: true,
         Comments: {
+          skip: 0,
+          take: 10,
           select: {
             id: true,
+            content: true,
+            User: {
+              select: {
+                id: true,
+                username: true,
+              },
+            },
+            createdAt: true,
+            updatedAt: true,
           },
         },
         createdAt: true,

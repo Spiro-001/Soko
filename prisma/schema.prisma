@@ -19,8 +19,9 @@ model User {
   JoinedCommunities Community[]
   Posts             Post[]
   Comments          Comments[]
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime    @default(now()) @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Post {
@@ -29,10 +30,11 @@ model Post {
   content String
   userId  String
 
-  User      User       @relation(fields: [userId], references: [id])
-  Comments  Comments[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @default(now()) @updatedAt
+  User     User       @relation(fields: [userId], references: [id])
+  Comments Comments[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Comments {
@@ -43,6 +45,9 @@ model Comments {
 
   User User @relation(fields: [userId], references: [id])
   Post Post @relation(fields: [postId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Community {
@@ -51,6 +56,9 @@ model Community {
 
   Owner   User   @relation(name: "ownedCommunities", fields: [ownerId], references: [id])
   Members User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 // model UserOwnedCommunities {
