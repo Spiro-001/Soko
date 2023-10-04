@@ -14,19 +14,58 @@ model User {
   id              String @id @unique @default(uuid())
   username        String @unique
   password_digest String
-  Posts           Post[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  OwnedCommunities  Community[] @relation("ownedCommunities")
+  JoinedCommunities Community[]
+  Posts             Post[]
+  Comments          Comments[]
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @default(now()) @updatedAt
 }
 
 model Post {
   id      String   @id @unique @default(uuid())
   tags    String[] @default([])
   content String
-  userId  String?
+  userId  String
 
-  User      User?    @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  User      User       @relation(fields: [userId], references: [id])
+  Comments  Comments[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now()) @updatedAt
 }
+
+model Comments {
+  id      String @id @unique @default(uuid())
+  content String
+  userId  String
+  postId  String
+
+  User User @relation(fields: [userId], references: [id])
+  Post Post @relation(fields: [postId], references: [id])
+}
+
+model Community {
+  id      String @id @unique @default(uuid())
+  ownerId String
+
+  Owner   User   @relation(name: "ownedCommunities", fields: [ownerId], references: [id])
+  Members User[]
+}
+
+// model UserOwnedCommunities {
+//   id     String @id @unique @default(uuid())
+//   userId String
+
+//   User      User        @relation(fields: [userId], references: [id])
+//   Community Community[]
+// }
+
+// model UserJoinedCommunities {
+//   id     String @id @unique @default(uuid())
+//   userId String
+//   communityId String
+
+//   User        User       @relation(fields: [userId], references: [id])
+//   Community   Community @relation(fields: [communityId], references: [id])
+// }

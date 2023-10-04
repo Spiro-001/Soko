@@ -35,6 +35,7 @@ export const getAllPost = async ({
             id: true,
           },
         },
+        Comments: true,
         createdAt: true,
         updatedAt: true,
       },
