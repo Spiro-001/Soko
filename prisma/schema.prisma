@@ -51,10 +51,11 @@ model Comments {
 }
 
 model Community {
-  id      String   @id @unique @default(uuid())
-  title   String   @default("undefined")
-  ownerId String
-  tags    String[] @default([])
+  id          String   @id @unique @default(uuid())
+  title       String   @default("undefined")
+  ownerId     String
+  description String   @default("")
+  tags        String[] @default([])
 
   Owner   User              @relation(name: "ownedCommunities", fields: [ownerId], references: [id])
   Members UserCommunities[]

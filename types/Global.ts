@@ -49,6 +49,7 @@ declare global {
     id: string;
     title: string;
     ownerId: string;
+    description: string;
     tags: string[];
     createdAt: string;
     updatedAt: string;
@@ -59,6 +60,7 @@ declare global {
     id: string;
     title: string;
     ownerId: string;
+    description: string;
     tags: string[];
     Owner: MinimalUserType;
     Members: MinimalUserType[];
