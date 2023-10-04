@@ -4,8 +4,8 @@ import React from "react";
 
 const Post = ({ post }: { post: PostType }) => {
   return (
-    <section className="flex flex-col border border-black px-8 py-4 w-full gap-y-6 rounded-sm text-xs xl:text-base">
-      <div className="flex gap-2 items-center">
+    <section className="flex flex-col border border-black px-8 py-4 w-full gap-y-6 rounded-sm ">
+      <div className="flex gap-2 items-center flex-wrap">
         <Link
           href={`/user/${post.User.id}`}
           className="bg-slate-200 px-2 font-bold rounded-sm hover:underline"
@@ -15,7 +15,7 @@ const Post = ({ post }: { post: PostType }) => {
         {"</>"}
         <Link
           href={`/post/${post.id}`}
-          className="bg-slate-200 px-2 text-gray-500 rounded-sm hover:underline"
+          className="bg-slate-200 px-2 text-gray-500 rounded-sm text-xs hover:underline"
         >
           {post.id}
         </Link>
@@ -31,11 +31,11 @@ const Post = ({ post }: { post: PostType }) => {
       <div className="bg-gray-200 px-4 py-2 rounded-sm">{post.content}</div>
       <div className="flex justify-between">
         <Link href={`/post/${post.id}`}>{post.Comments.length} Comments</Link>
-        <div className="flex gap-2">
+        <div className="gap-2 sm:flex hidden">
           {post.tags.map((tag, idx) => (
             <span
               key={post.id + tag + idx}
-              className="px-3 bg-stone-200 rounded-sm"
+              className="px-3 bg-stone-200 rounded-sm h-fit"
             >
               {tag}
             </span>
