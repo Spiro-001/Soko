@@ -14,8 +14,16 @@ const Feed = ({ posts }: { posts: PostType[] }) => {
       post.User.id,
       post.User.username,
     ];
+    const createdDate = new Date(post.createdAt).toLocaleDateString("en-US", {
+      dateStyle: "full",
+    });
     const postContentRegExp = new RegExp(`${filter}`, "i");
-    if (searchParams.includes(filter) || postContentRegExp.test(post.content))
+    const dateRegExp = new RegExp(`${filter}`, "i");
+    if (
+      searchParams.includes(filter) ||
+      postContentRegExp.test(post.content) ||
+      dateRegExp.test(createdDate)
+    )
       return post;
   };
 

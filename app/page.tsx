@@ -1,7 +1,5 @@
 import { getPostServer } from "@/utils/getPostServer";
-import Post from "@/components/Post";
 import React from "react";
-import Search from "@/components/Search";
 import Feed from "@/components/Feed";
 
 export default async function Home() {

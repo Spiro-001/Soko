@@ -18,8 +18,17 @@ const Post = ({ post }: { post: PostType }) => {
         >
           {post.id}
         </Link>
-        <div className="ml-auto">
-          {new Date(post.createdAt).toLocaleString()}
+        <div className="ml-auto flex gap-x-2">
+          <span className="bg-zinc-900 text-stone-200 px-2 rounded-sm">
+            {new Date(post.createdAt)
+              .toLocaleDateString("en-US", {
+                dateStyle: "short",
+              })
+              .replace(/\//g, ".")}
+          </span>
+          <span className="bg-zinc-900 text-stone-200 px-2 rounded-sm">
+            {new Date(post.createdAt).toLocaleTimeString()}
+          </span>
         </div>
       </div>
       <div className="bg-gray-200 px-4 py-2 rounded-sm">{post.content}</div>
