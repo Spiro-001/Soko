@@ -1,6 +1,15 @@
 export {};
 
 declare global {
+  type UserType = {
+    id: string;
+    username: string;
+    OwnedCommunities: MinimalCommunityType[];
+    JoinedCommunities: { Community: MinimalCommunityType }[];
+    createdAt: string;
+    updatedAt: string;
+  };
+
   type MinimalUserType = {
     id: string;
     username: string;
@@ -32,6 +41,24 @@ declare global {
     userId: string;
     postId?: string;
     User: MinimalUserType;
+    createdAt: string;
+    updatedAt: string;
+  };
+
+  type MinimalCommunityType = {
+    id: string;
+    title: string;
+    ownerId: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+
+  type CommunityType = {
+    id: string;
+    title: string;
+    ownerId: string;
+    Owner: MinimalUserType;
+    Members: MinimalUserType[];
     createdAt: string;
     updatedAt: string;
   };

@@ -1,7 +1,10 @@
 import React from "react";
 import Nav from "./Nav";
+import { getUserByIdServer } from "@/utils/getUserByIdServer";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({ children }: { children: React.ReactNode }) => {
+  const user = await getUserByIdServer("94b54024-efdf-4379-b36c-f2331e8ff079");
+
   return (
     <main className="min-h-screen flex flex-col">
       <Nav />
