@@ -1,16 +1,17 @@
-import Link from "next/link";
-import React from "react";
+import Search from "./Search";
+import ProfileNavBlock from "./ProfileNavBlock";
+import CommunityNavBlock from "./CommunityNavBlock";
+import NavOptions from "./NavOptions";
+import LogoNavBlock from "./LogoNavBlock";
 
 const Nav = () => {
   return (
-    <div className="bg-slate-50 py-6 px-12 flex justify-between items-center">
-      <div>Soko</div>
-      <div className="flex gap-x-2 items-center">
-        <Link href="/communities" className="px-3 py-1 bg-slate-200">
-          Communities
-        </Link>
-        <button>profile picture</button>
-      </div>
+    <div className="bg-slate-50 py-6 px-12 flex justify-between items-center gap-x-12">
+      <LogoNavBlock />
+      <CommunityNavBlock />
+      <Search />
+      <NavOptions />
+      <ProfileNavBlock />
     </div>
   );
 };

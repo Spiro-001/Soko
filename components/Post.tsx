@@ -30,7 +30,7 @@ const Post = ({ post }: { post: PostType }) => {
       </div>
       <div className="bg-gray-200 px-4 py-2 rounded-sm">{post.content}</div>
       <div className="flex justify-between">
-        <div>{post.Comments.length} Comments</div>
+        <Link href={`/post/${post.id}`}>{post.Comments.length} Comments</Link>
         <div className="flex gap-2">
           {post.tags.map((tag, idx) => (
             <span

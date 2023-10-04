@@ -1,6 +1,6 @@
 import { prisma } from ".";
 
-export const getAllPost = async ({
+export const getPost = async ({
   blocked,
   skip = 0,
   take = 10,

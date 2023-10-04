@@ -1,4 +1,4 @@
-import { getPost } from "@/prisma/getPost";
+import { getCommunity } from "@/prisma/getCommunity";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -7,13 +7,14 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       const { searchParams } = new URL(req.url);
 
       const query = {
+        interest: JSON.parse(searchParams.get("interest") ?? "[]"),
         blocked: JSON.parse(searchParams.get("blocked") ?? "[]"),
         skip: JSON.parse(searchParams.get("skip") ?? "0"),
         take: JSON.parse(searchParams.get("take") ?? "10"),
       };
 
-      const posts = await getPost(query);
-      return new Response(JSON.stringify(posts), { status: 200 });
+      const communities = await getCommunity(query);
+      return new Response(JSON.stringify(communities), { status: 200 });
     }
     return new Response(JSON.stringify("URL Invalid"), { status: 404 });
   } catch (error) {

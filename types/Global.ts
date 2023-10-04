@@ -49,14 +49,17 @@ declare global {
     id: string;
     title: string;
     ownerId: string;
+    tags: string[];
     createdAt: string;
     updatedAt: string;
+    _count: { Members: number };
   };
 
   type CommunityType = {
     id: string;
     title: string;
     ownerId: string;
+    tags: string[];
     Owner: MinimalUserType;
     Members: MinimalUserType[];
     createdAt: string;
