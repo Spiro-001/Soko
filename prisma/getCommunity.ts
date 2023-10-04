@@ -1,4 +1,3 @@
-import { PrismaPromiseTransaction } from "@prisma/client/runtime/library";
 import { prisma } from ".";
 
 export const getCommunity = async ({

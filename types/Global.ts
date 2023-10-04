@@ -48,7 +48,7 @@ declare global {
   type MinimalCommunityType = {
     id: string;
     title: string;
-    ownerId: string;
+    ownerId?: string;
     description: string;
     tags: string[];
     createdAt: string;

@@ -4,7 +4,7 @@ import React from "react";
 const CommunityBlock = ({ community }: { community: MinimalCommunityType }) => {
   return (
     <Link
-      href={community.id}
+      href={`/community/${community.id}`}
       className="border border-black w-full px-2 py-2 flex-col justify-between gap-y-2"
     >
       <div className="flex gap-x-3 items-center my-auto justify-between">
