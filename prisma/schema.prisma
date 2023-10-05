@@ -16,7 +16,7 @@ model User {
   password_digest String
 
   Posts             Post[]
-  Comments          Comments[]
+  Comments          Comment[]
   OwnedCommunities  Community[]       @relation("ownedCommunities")
   JoinedCommunities UserCommunities[]
 
@@ -30,21 +30,25 @@ model Post {
   content String
   userId  String
 
-  User     User       @relation(fields: [userId], references: [id])
-  Comments Comments[]
+  User     User      @relation(fields: [userId], references: [id])
+  Comments Comment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
 
-model Comments {
+model Comment {
   id      String @id @unique @default(uuid())
   content String
   userId  String
   postId  String
 
-  User User @relation(fields: [userId], references: [id])
-  Post Post @relation(fields: [postId], references: [id])
+  replyToId String?
+
+  User    User      @relation(fields: [userId], references: [id])
+  Post    Post      @relation(fields: [postId], references: [id])
+  ReplyTo Comment?  @relation("ChildComments", fields: [replyToId], references: [id])
+  Replies Comment[] @relation("ChildComments")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt

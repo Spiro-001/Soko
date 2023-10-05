@@ -19,6 +19,9 @@ export const getPostById = async (id: string) => {
         Comments: {
           skip: 0,
           take: 10,
+          where: {
+            replyToId: null,
+          },
           select: {
             id: true,
             content: true,
@@ -28,6 +31,28 @@ export const getPostById = async (id: string) => {
                 username: true,
               },
             },
+            Replies: {
+              skip: 0,
+              take: 5,
+              select: {
+                id: true,
+                content: true,
+                User: {
+                  select: {
+                    id: true,
+                    username: true,
+                  },
+                },
+                Replies: {
+                  select: {
+                    _count: true,
+                  },
+                },
+                createdAt: true,
+                updatedAt: true,
+              },
+            },
+            _count: true,
             createdAt: true,
             updatedAt: true,
           },

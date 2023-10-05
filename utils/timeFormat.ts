@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const dateFormat = (date: string) => {
   return new Date(date)
     .toLocaleDateString("en-US", {
@@ -11,4 +13,8 @@ export const timeFormat = (date: string) => {
     hour: "numeric",
     minute: "2-digit",
   });
+};
+
+export const timeDifference = (date: string) => {
+  return moment(date).fromNow();
 };

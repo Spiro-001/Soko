@@ -40,7 +40,21 @@ declare global {
     content: string;
     userId: string;
     postId?: string;
+    _count: { Replies: number };
     User: MinimalUserType;
+    Replies: ReplyType[];
+    createdAt: string;
+    updatedAt: string;
+  };
+
+  type ReplyType = {
+    id: string;
+    content: string;
+    userId: string;
+    postId?: string;
+    replyId: string;
+    User: MinimalUserType;
+    Replies: ReplyType[] | [{ _count: { Replies: number } }];
     createdAt: string;
     updatedAt: string;
   };

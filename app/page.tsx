@@ -1,5 +1,4 @@
 import { getPostServer } from "@/utils/getPostServer";
-import { FakeFetch } from "@/utils/FakePromise";
 import React from "react";
 import Feed from "@/components/Feed";
 import CommunityModal from "@/components/CommunityModal";
