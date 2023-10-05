@@ -5,7 +5,7 @@ const CommunityBlock = ({ community }: { community: MinimalCommunityType }) => {
   return (
     <Link
       href={`/community/${community.id}`}
-      className="border border-black w-full px-2 py-2 flex-col justify-between gap-y-2"
+      className="border border-black w-full px-2 py-2 flex flex-col justify-between gap-y-2"
     >
       <div className="flex gap-x-3 items-center my-auto justify-between">
         <p className="bg-zinc-400 text-zinc-50 text-center px-2 h-fit">
@@ -15,18 +15,18 @@ const CommunityBlock = ({ community }: { community: MinimalCommunityType }) => {
           {community.description}
         </span>
       </div>
-      <div className="flex justify-between items-center whitespace-nowrap">
+      <div className="flex justify-between items-end whitespace-nowrap">
         <span className="text-sm">
           {community._count.Members} Member
           {community._count.Members > 1 ? "s" : ""}
         </span>
-        <div className="gap-x-2 justify-center flex">
+        {/* <div className="gap-x-2 gap-y-2 justify-end flex flex-wrap">
           {community.tags.map((tag) => (
             <span key={community.id + tag} className="bg-slate-100 px-2">
               {tag}
             </span>
           ))}
-        </div>
+        </div> */}
       </div>
     </Link>
   );

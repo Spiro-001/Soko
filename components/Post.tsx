@@ -15,7 +15,7 @@ const Post = ({ post }: { post: PostType }) => {
         {"</>"}
         <Link
           href={`/post/${post.id}`}
-          className="bg-slate-200 px-2 text-gray-500 rounded-sm text-xs hover:underline"
+          className="bg-slate-200 px-2 py-1 text-gray-500 rounded-sm text-xs hover:underline"
         >
           {post.id}
         </Link>

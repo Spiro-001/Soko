@@ -19,7 +19,7 @@ const Post = async ({ params }: { params: { postId: string } }) => {
             {post.User.username}
           </Link>
           {"</>"}
-          <span className="bg-slate-200 px-2 text-gray-500 rounded-sm text-xs hover:underline">
+          <span className="bg-slate-200 px-2 text-gray-500 rounded-sm text-xs py-1">
             {post.id}
           </span>
           <div className="ml-auto flex gap-x-2 flex-wrap justify-end gap-y-1">

@@ -32,6 +32,9 @@ export const getPostById = async (id: string) => {
               },
             },
             Replies: {
+              orderBy: {
+                createdAt: "desc",
+              },
               skip: 0,
               take: 5,
               select: {
