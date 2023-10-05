@@ -4,7 +4,6 @@ import Link from "next/link";
 import React from "react";
 
 const CommentBlock = ({ comment }: { comment: CommentType | ReplyType }) => {
-  console.log(comment);
   return (
     <div className="flex flex-col h-full">
       <div className="flex gap-x-3 items-center text-sm pb-2">
@@ -37,17 +36,18 @@ const CommentBlock = ({ comment }: { comment: CommentType | ReplyType }) => {
             <div className="flex flex-col gap-y-3">
               {comment.Replies.map((reply) => {
                 if ("_count" in reply) {
-                  return (
-                    <span
-                      key={comment.id + "reply"}
-                      className="text-sm text-neutral-400 [text-shadow:_0_1px_0_rgb(0_0_0_/_10%)]"
-                    >
-                      Load more replies
-                    </span>
-                  );
+                  return;
                 }
                 return <CommentBlock key={reply.id} comment={reply} />;
               })}
+              {"_count" in comment.Replies[0] && (
+                <span
+                  key={comment.id + "reply"}
+                  className="text-sm text-neutral-400 [text-shadow:_0_1px_0_rgb(0_0_0_/_10%)]"
+                >
+                  Load more replies
+                </span>
+              )}
             </div>
           )}
         </div>

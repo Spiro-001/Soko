@@ -1,7 +1,6 @@
-import CommentBlock from "@/components/CommentBlock";
-import Comments from "@/components/Comments";
 import { getPostByIdServer } from "@/utils/getPostByIdServer";
 import { dateFormat, timeFormat } from "@/utils/timeFormat";
+import Comments from "@/components/Comments";
 import Link from "next/link";
 import React from "react";
 
@@ -43,14 +42,7 @@ const Post = async ({ params }: { params: { postId: string } }) => {
         </div>
       </div>
       <div className="flex flex-col gap-y-4 bg-slate-200 p-4">
-        <form className="flex flex-col gap-y-1">
-          <span className="text-sm">Comment as __username__</span>
-          <textarea
-            className="outline-none border border-black w-full py-2 px-2 text-black h-24 max-h-[240px] min-h-[96px]"
-            placeholder="Make a comment..."
-          />
-        </form>
-        <Comments comments={post.Comments} />
+        <Comments comments={post.Comments} post={post} />
       </div>
     </div>
   );

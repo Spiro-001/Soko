@@ -4,7 +4,7 @@ import { getCommunityServer } from "@/utils/getCommunityServer";
 
 const CommunityModal = async () => {
   const communities = await getCommunityServer(
-    "interest=[]&blocked=[]&skip=0&take=5"
+    `interest=[]&blocked=[]&skip=0&take=${process.env.NEXT_PUBLIC_TAKE_COMMUNITY}`
   );
 
   return (

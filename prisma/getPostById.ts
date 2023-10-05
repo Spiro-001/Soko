@@ -17,8 +17,11 @@ export const getPostById = async (id: string) => {
         },
         content: true,
         Comments: {
+          orderBy: {
+            createdAt: "desc",
+          },
           skip: 0,
-          take: 10,
+          take: parseInt(process.env.NEXT_PUBLIC_TAKE_COMMENT ?? "10"),
           where: {
             replyToId: null,
           },
@@ -36,7 +39,7 @@ export const getPostById = async (id: string) => {
                 createdAt: "desc",
               },
               skip: 0,
-              take: 5,
+              take: parseInt(process.env.NEXT_PUBLIC_TAKE_REPLIES ?? "5"),
               select: {
                 id: true,
                 content: true,
@@ -60,6 +63,7 @@ export const getPostById = async (id: string) => {
             updatedAt: true,
           },
         },
+        _count: true,
         createdAt: true,
         updatedAt: true,
       },

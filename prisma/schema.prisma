@@ -11,27 +11,30 @@ datasource db {
 }
 
 model User {
-  id              String @id @unique @default(uuid())
-  username        String @unique
+  id              String  @id @unique @default(uuid())
+  username        String  @unique
   password_digest String
+  email           String? @unique
 
   Posts             Post[]
   Comments          Comment[]
-  OwnedCommunities  Community[]       @relation("ownedCommunities")
-  JoinedCommunities UserCommunities[]
+  OwnedCommunities  Community[]     @relation("ownedCommunities")
+  JoinedCommunities UserCommunity[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Post {
-  id      String   @id @unique @default(uuid())
-  tags    String[] @default([])
-  content String
-  userId  String
+  id          String   @id @unique @default(uuid())
+  tags        String[] @default([])
+  content     String
+  userId      String
+  communityId String
 
-  User     User      @relation(fields: [userId], references: [id])
-  Comments Comment[]
+  User      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Comments  Comment[]
+  Community Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
@@ -45,9 +48,9 @@ model Comment {
 
   replyToId String?
 
-  User    User      @relation(fields: [userId], references: [id])
-  Post    Post      @relation(fields: [postId], references: [id])
-  ReplyTo Comment?  @relation("ChildComments", fields: [replyToId], references: [id])
+  User    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Post    Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  ReplyTo Comment?  @relation("ChildComments", fields: [replyToId], references: [id], onDelete: Cascade)
   Replies Comment[] @relation("ChildComments")
 
   createdAt DateTime @default(now())
@@ -61,20 +64,21 @@ model Community {
   description String   @default("")
   tags        String[] @default([])
 
-  Owner   User              @relation(name: "ownedCommunities", fields: [ownerId], references: [id])
-  Members UserCommunities[]
+  Owner   User            @relation(name: "ownedCommunities", fields: [ownerId], references: [id], onDelete: Cascade)
+  Members UserCommunity[]
+  Posts   Post[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
 
-model UserCommunities {
+model UserCommunity {
   id          String @id @unique @default(uuid())
-  userId      String
+  userId      String @unique
   communityId String
 
-  User      User      @relation(fields: [userId], references: [id])
-  Community Community @relation(fields: [communityId], references: [id])
+  User      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Community Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }

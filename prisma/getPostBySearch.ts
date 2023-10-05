@@ -4,7 +4,7 @@ export const getPostBySearch = async ({
   query,
   blocked,
   skip = 0,
-  take = 10,
+  take = parseInt(process.env.NEXT_PUBLIC_TAKE_POST_BY_SEARCH ?? "10"),
 }: {
   query: string;
   blocked: string[];

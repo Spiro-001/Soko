@@ -4,7 +4,7 @@ export const getCommunity = async ({
   interest,
   blocked,
   skip = 0,
-  take = 5,
+  take = parseInt(process.env.NEXT_PUBLIC_TAKE_COMMUNITY ?? "5"),
 }: {
   interest: string[];
   blocked: string[];

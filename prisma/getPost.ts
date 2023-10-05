@@ -3,7 +3,7 @@ import { prisma } from ".";
 export const getPost = async ({
   blocked,
   skip = 0,
-  take = 10,
+  take = parseInt(process.env.NEXT_PUBLIC_TAKE_POST ?? "10"),
 }: {
   blocked: string[];
   skip: number;

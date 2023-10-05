@@ -4,6 +4,7 @@ declare global {
   type UserType = {
     id: string;
     username: string;
+    email: string;
     OwnedCommunities: MinimalCommunityType[];
     JoinedCommunities: { Community: MinimalCommunityType }[];
     createdAt: string;
@@ -13,6 +14,7 @@ declare global {
   type MinimalUserType = {
     id: string;
     username: string;
+    email: string;
   };
 
   type PostType = {
@@ -31,6 +33,7 @@ declare global {
     content: string;
     User: MinimalUserType;
     Comments: CommentType[];
+    _count: { Comments: number };
     createdAt: string;
     updatedAt: string;
   };
@@ -57,6 +60,12 @@ declare global {
     Replies: ReplyType[] | [{ _count: { Replies: number } }];
     createdAt: string;
     updatedAt: string;
+  };
+
+  type NewCommentType = {
+    content: string;
+    userId: string;
+    postId: string;
   };
 
   type MinimalCommunityType = {
