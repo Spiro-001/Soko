@@ -3,6 +3,15 @@ const { PrismaClient } = require("@prisma/client");
 const { faker } = require("@faker-js/faker");
 
 const seed = async () => {
+  const seedSetting = {
+    users: 20,
+    communities: 10,
+    posts: 60,
+    comments: 100,
+    repliesI: 60,
+    repliesII: 60,
+    userCommunities: 60,
+  };
   console.log("Starting PrismaClient");
   const prisma = new PrismaClient();
 
@@ -27,7 +36,7 @@ const seed = async () => {
     // SEEDING USER
     console.log("Seeding User");
     const users: any[] = [];
-    for (let x = 0; x < 100; x++) {
+    for (let x = 0; x < seedSetting.users; x++) {
       const timeCreated = faker.date.anytime();
       const user = await prisma.user.create({
         data: {
@@ -46,7 +55,7 @@ const seed = async () => {
     // SEEDING COMMUNITY
     console.log("Seeding Community");
     const communities: any[] = [];
-    for (let x = 0; x < 35; x++) {
+    for (let x = 0; x < seedSetting.communities; x++) {
       const timeCreated = faker.date.anytime();
       const community = await prisma.community.create({
         data: {
@@ -70,7 +79,7 @@ const seed = async () => {
     // SEEDING POST
     console.log("Seeding Post");
     const posts: any[] = [];
-    for (let x = 0; x < 200; x++) {
+    for (let x = 0; x < seedSetting.posts; x++) {
       const timeCreated = faker.date.anytime();
       const post = await prisma.post.create({
         data: {
@@ -95,7 +104,7 @@ const seed = async () => {
     // SEEDING COMMENT
     console.log("Seeding Comment");
     const comments: any[] = [];
-    for (let x = 0; x < 500; x++) {
+    for (let x = 0; x < seedSetting.comments; x++) {
       const timeCreated = faker.date.anytime();
       const comment = await prisma.comment.create({
         data: {
@@ -114,7 +123,7 @@ const seed = async () => {
     // SEEDING REPLY I
     console.log("Seeding Reply I");
     const repliesI: any[] = [];
-    for (let x = 0; x < 350; x++) {
+    for (let x = 0; x < seedSetting.repliesI; x++) {
       const timeCreated = faker.date.anytime();
       const reply = await prisma.comment.create({
         data: {
@@ -134,7 +143,7 @@ const seed = async () => {
     // SEEDING REPLY II
     console.log("Seeding Reply II");
     const repliesII: any[] = [];
-    for (let x = 0; x < 200; x++) {
+    for (let x = 0; x < seedSetting.repliesII; x++) {
       const timeCreated = faker.date.anytime();
       const reply = await prisma.comment.create({
         data: {
@@ -154,17 +163,28 @@ const seed = async () => {
     // SEEDING USERCOMMUNITY
     console.log("Seeding UserCommunities");
     const userCommunities: any[] = [];
-    for (let x = 0; x < 250; x++) {
+    const userCommunityMap = new Map();
+    for (let x = 0; x < seedSetting.userCommunities; x++) {
+      let userId = users[Math.floor(Math.random() * users.length)].id;
+      if (!userCommunityMap.has(userId)) {
+        userCommunityMap.set(userId, []);
+      }
+      let communityId =
+        communities[Math.floor(Math.random() * communities.length)].id;
       const timeCreated = faker.date.anytime();
-      const userCommunity = await prisma.userCommunities.create({
+      while (userCommunityMap.get(userId).includes(communityId)) {
+        communityId =
+          communities[Math.floor(Math.random() * communities.length)].id;
+      }
+      const userCommunity = await prisma.userCommunity.create({
         data: {
-          userId: users[Math.floor(Math.random() * users.length)].id,
-          communityId:
-            communities[Math.floor(Math.random() * communities.length)].id,
+          userId,
+          communityId,
           createdAt: timeCreated,
           updatedAt: timeCreated,
         },
       });
+      userCommunityMap.get(userId).push(communityId);
       userCommunities.push(userCommunity);
       console.log(`Created UserCommunities | ${userCommunity.id}`);
     }

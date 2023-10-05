@@ -33,6 +33,7 @@ export const getPost = async ({
           select: {
             id: true,
             username: true,
+            email: true,
           },
         },
         Comments: {

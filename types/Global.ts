@@ -4,7 +4,7 @@ declare global {
   type UserType = {
     id: string;
     username: string;
-    email: string;
+    email?: string;
     OwnedCommunities: MinimalCommunityType[];
     JoinedCommunities: { Community: MinimalCommunityType }[];
     createdAt: string;
@@ -14,7 +14,7 @@ declare global {
   type MinimalUserType = {
     id: string;
     username: string;
-    email: string;
+    email?: string;
   };
 
   type PostType = {
