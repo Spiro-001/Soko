@@ -8,7 +8,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="min-h-screen flex flex-col">
       <Nav />
-      <div className="flex-1 grid grid-flow-row grid-rows-6 grid-cols-[minmax(0px,_1fr)_minmax(0px,_auto)_minmax(auto,_auto)] px-8">
+      <div className="flex-1 grid grid-flow-row grid-rows-6 grid-cols-[minmax(0.5fr,_1fr)_minmax(0,_2fr)_minmax(0.5fr,_1fr)] px-8">
         {children}
       </div>
     </main>

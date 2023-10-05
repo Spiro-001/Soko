@@ -6,7 +6,7 @@ import React from "react";
 const CommentBlock = ({ comment }: { comment: CommentType | ReplyType }) => {
   console.log(comment);
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-full">
       <div className="flex gap-x-3 items-center text-sm pb-2">
         <Image
           src="/no-profile.png"
@@ -27,7 +27,7 @@ const CommentBlock = ({ comment }: { comment: CommentType | ReplyType }) => {
         </div>
       </div>
       <div className="flex h-full" style={{ padding: "0px 19px 0px 19px" }}>
-        <div className="flex w-1.5 h-full bg-green-400 rounded-full border border-green-100 shadow-md shadow-green-300"></div>
+        <div className="flex w-1.5 h-full bg-green-400 rounded-full border border-green-100 shadow-md shadow-green-300" />
         <div className="px-6 ml-5 flex flex-col gap-y-5">
           <div className="flex flex-col">
             <span className="">{comment.content}</span>
