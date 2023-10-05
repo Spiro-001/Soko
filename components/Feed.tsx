@@ -3,7 +3,7 @@ import Post from "./Post";
 
 const Feed = async ({ posts }: { posts: PostType[] }) => {
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-4 w-full">
       <div className="border border-black flex">
         <span className="px-5 py-3">Create Post</span>
       </div>
