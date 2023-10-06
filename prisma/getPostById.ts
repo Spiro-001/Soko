@@ -1,6 +1,7 @@
 import { prisma } from ".";
 
 export const getPostById = async (id: string) => {
+  console.log(process.env.NEXT_PUBLIC_TAKE_COMMENT);
   try {
     const posts = await prisma.post.findUnique({
       where: {

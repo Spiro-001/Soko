@@ -1,11 +1,12 @@
 import React from "react";
 import Post from "./Post";
+import CreatePost from "./CreatePost";
 
 const Feed = async ({ posts }: { posts: PostType[] }) => {
   return (
     <div className="flex flex-col gap-y-4 w-full">
       <div className="border border-black flex">
-        <span className="px-5 py-3">Create Post</span>
+        <CreatePost />
       </div>
       <div className="border border-black flex">
         <span className="px-5 py-3">Filter & Sort</span>
