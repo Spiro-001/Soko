@@ -53,7 +53,7 @@ const MakeComment = ({
         onChange={handleInput}
         value={commentContent}
       />
-      <div className="bg-neutral-100 flex border-x border-b border-black py-2 px-3">
+      <div className="bg-neutral-100 flex border-x border-b border-black py-2 px-3 justify-end">
         <button
           className="bg-neutral-300 px-4 py-2 flex items-center justify-center max-w-[105px] w-full"
           type="submit"

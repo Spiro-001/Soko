@@ -1,17 +1,19 @@
 import { prisma } from ".";
 
-export const createComment = async (comment: {
+export const createReply = async (comment: {
   content: string;
   userId: string;
   postId: string;
+  replyToId: string;
 }) => {
   try {
-    const { content, userId, postId } = comment;
-    const newComment = await prisma.comment.create({
+    const { content, userId, postId, replyToId } = comment;
+    const newReply = await prisma.comment.create({
       data: {
         content,
         userId,
         postId,
+        replyToId,
       },
       select: {
         id: true,
@@ -32,7 +34,7 @@ export const createComment = async (comment: {
       },
     });
     prisma.$disconnect;
-    return newComment;
+    return newReply;
   } catch (error) {
     prisma.$disconnect;
     console.log(error);

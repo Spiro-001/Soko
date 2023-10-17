@@ -2,6 +2,7 @@ import { timeDifference } from "@/utils/timeFormat";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import CommentOptions from "./CommentOptions";
 
 const CommentBlock = ({ comment }: { comment: CommentType | ReplyType }) => {
   return (
@@ -30,7 +31,7 @@ const CommentBlock = ({ comment }: { comment: CommentType | ReplyType }) => {
         <div className="px-6 ml-5 flex flex-col gap-y-5">
           <div className="flex flex-col">
             <span className="">{comment.content}</span>
-            <span>Comment Options</span>
+            <CommentOptions comment={comment} />
           </div>
           {comment.Replies.length > 0 && (
             <div className="flex flex-col gap-y-3">
