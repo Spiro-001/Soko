@@ -7,8 +7,8 @@ const NewPost = ({
   type,
   selector,
 }: {
-  type: "post" | "image" | "video";
-  selector: Record<string, string>;
+  type: "post" | "image" | "video" | "community";
+  selector?: Record<string, string>;
 }) => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();

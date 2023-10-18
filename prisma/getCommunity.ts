@@ -53,7 +53,6 @@ export const getCommunity = async ({
       };
     }
     const communities = await prisma.community.findMany(prismaQuery);
-    console.log(communities);
     prisma.$disconnect;
     return communities;
   } catch (error) {

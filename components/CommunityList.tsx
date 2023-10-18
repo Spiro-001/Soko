@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React, { Dispatch, SetStateAction } from "react";
 
 const CommunityList = ({
@@ -18,7 +19,9 @@ const CommunityList = ({
   return (
     <>
       <div className="px-3 py-3 flex gap-x-4 items-center whitespace-nowrap border-b border-gray-200 border-dashed">
-        <div className="px-3 py-1 bg-neutral-200">Make a community</div>
+        <Link href={"/new/community"} className="px-3 py-1 bg-neutral-200">
+          Make a community
+        </Link>
       </div>
       {communities.map((community) => (
         <div

@@ -103,4 +103,11 @@ declare global {
     createdAt: string;
     updatedAt: string;
   };
+
+  type NewCommunityType = {
+    title: string;
+    ownerId: string;
+    description: string;
+    tags: Array<string>;
+  };
 }

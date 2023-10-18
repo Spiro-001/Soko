@@ -1,3 +1,5 @@
+import { createCommunity } from "@/prisma/createCommunity";
+import { createUserCommunity } from "@/prisma/createUserCommunity";
 import { getCommunity } from "@/prisma/getCommunity";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -5,8 +7,6 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.url) {
       const { searchParams } = new URL(req.url);
-
-      console.log(searchParams.get("userId"));
 
       const query = {
         interest: JSON.parse(searchParams.get("interest") ?? "[]"),
@@ -20,6 +20,33 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       return new Response(JSON.stringify(communities), { status: 200 });
     }
     return new Response(JSON.stringify("URL Invalid"), { status: 404 });
+  } catch (error) {
+    console.log(error);
+    return new Response(JSON.stringify(error), { status: 500 });
+  }
+};
+
+export const POST = async (req: Request, res: NextApiResponse) => {
+  try {
+    const communityContent = await req.json();
+    const community = await createCommunity(communityContent);
+    if (!community) {
+      return new Response(
+        JSON.stringify("There was an error creating a new community"),
+        { status: 500 }
+      );
+    }
+    const userCommunity = await createUserCommunity({
+      userId: community.ownerId,
+      communityId: community.id,
+    });
+    if (!userCommunity) {
+      return new Response(
+        JSON.stringify("There was an error linking owner to community"),
+        { status: 500 }
+      );
+    }
+    return new Response(JSON.stringify(community), { status: 200 });
   } catch (error) {
     console.log(error);
     return new Response(JSON.stringify(error), { status: 500 });
