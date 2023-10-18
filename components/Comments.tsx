@@ -15,11 +15,7 @@ const Comments = ({
 
   return (
     <>
-      <MakeComment
-        postId={post.id}
-        userId={"94b54024-efdf-4379-b36c-f2331e8ff079"}
-        setInitComment={setInitComment}
-      />
+      <MakeComment postId={post.id} setInitComment={setInitComment} />
       <div className="flex flex-col">
         <div className="bg-slate-50 p-4">Comment fiter and search</div>
         <div className="flex flex-col bg-slate-100 px-4 py-8 gap-y-4 h-full">

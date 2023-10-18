@@ -1,7 +1,8 @@
+import Link from "next/link";
 import React from "react";
 
 const LogoNavBlock = () => {
-  return <div>LogoNavBlock</div>;
+  return <Link href={"/"}>Soko</Link>;
 };
 
 export default LogoNavBlock;

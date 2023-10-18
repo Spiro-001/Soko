@@ -5,11 +5,13 @@ export const getCommunity = async ({
   blocked,
   skip = 0,
   take = parseInt(process.env.NEXT_PUBLIC_TAKE_COMMUNITY ?? "5"),
+  userId = "",
 }: {
   interest: string[];
   blocked: string[];
   skip: number;
   take: number;
+  userId: string;
 }) => {
   try {
     const prismaQuery = {
@@ -38,7 +40,20 @@ export const getCommunity = async ({
         },
       };
     }
+    if (userId) {
+      prismaQuery.where = {
+        ...prismaQuery.where,
+        ...{
+          Members: {
+            some: {
+              userId: userId,
+            },
+          },
+        },
+      };
+    }
     const communities = await prisma.community.findMany(prismaQuery);
+    console.log(communities);
     prisma.$disconnect;
     return communities;
   } catch (error) {

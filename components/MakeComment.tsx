@@ -12,11 +12,9 @@ import React, {
 
 const MakeComment = ({
   postId,
-  userId,
   setInitComment,
 }: {
   postId: string;
-  userId: string;
   setInitComment: Dispatch<SetStateAction<CommentType[]>>;
 }) => {
   const [commentContent, setCommentContent] = useState<string>("");
@@ -32,7 +30,7 @@ const MakeComment = ({
       setSubmittingComment(true);
       const comment = await createCommentClient({
         content: commentContent,
-        userId,
+        userId: "94b54024-efdf-4379-b36c-f2331e8ff079",
         postId,
       });
       setSubmittingComment(false);

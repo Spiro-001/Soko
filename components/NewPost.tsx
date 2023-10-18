@@ -1,41 +1,42 @@
 "use client";
 
 import { TextareaAutosize } from "@mui/material";
-import React, { useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import React, { SyntheticEvent, useState } from "react";
 
-const NewPost = ({ type }: { type: "post" | "image" | "video" }) => {
-  const [editorValue, setEditorValue] = useState("");
-
-  const handleInput = (value: string) => {
-    setEditorValue(value);
+const NewPost = ({
+  type,
+  selector,
+}: {
+  type: "post" | "image" | "video";
+  selector: Record<string, string>;
+}) => {
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form as HTMLFormElement);
+    const title = formData.get("title");
+    const content = formData.get("content");
+    console.log(title, content, selector);
   };
 
   return (
-    <form className="flex-1 border-x border-b border-black px-4 py-4 flex flex-col gap-y-2">
+    <form
+      onSubmit={handleSubmit}
+      className="flex-1 border-x border-b border-black px-4 py-4 flex flex-col gap-y-2"
+    >
       <TextareaAutosize
+        name="title"
         placeholder="Title"
         className="border border-neutral-200 px-4 py-2 outline-none resize-none"
         minRows={1}
       />
       <div className="flex flex-col h-fit">
         <TextareaAutosize
+          name="content"
           placeholder="Text (optional)"
           className="border border-neutral-200 px-4 py-2 outline-none resize-none"
           minRows={1}
         />
-        {/* <ReactQuill
-          value={editorValue}
-          onChange={handleInput}
-          modules={{
-            toolbar: [
-              ["bold", "italic", "underline"],
-              ["image", "code-block"],
-            ],
-          }}
-          theme="snow"
-        /> */}
       </div>
       <button>Post</button>
     </form>

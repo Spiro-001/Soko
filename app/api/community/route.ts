@@ -6,11 +6,14 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.url) {
       const { searchParams } = new URL(req.url);
 
+      console.log(searchParams.get("userId"));
+
       const query = {
         interest: JSON.parse(searchParams.get("interest") ?? "[]"),
         blocked: JSON.parse(searchParams.get("blocked") ?? "[]"),
         skip: JSON.parse(searchParams.get("skip") ?? "0"),
         take: JSON.parse(searchParams.get("take") ?? "10"),
+        userId: searchParams.get("userId") ?? "",
       };
 
       const communities = await getCommunity(query);
