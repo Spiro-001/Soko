@@ -29,6 +29,7 @@ export const getPost = async ({
         id: true,
         tags: true,
         content: true,
+        headline: true,
         User: {
           select: {
             id: true,
@@ -41,6 +42,7 @@ export const getPost = async ({
             id: true,
           },
         },
+        communityId: true,
         createdAt: true,
         updatedAt: true,
       },

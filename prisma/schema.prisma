@@ -28,6 +28,7 @@ model User {
 
 model Post {
   id          String   @id @unique @default(uuid())
+  headline    String
   tags        String[] @default([])
   content     String
   userId      String

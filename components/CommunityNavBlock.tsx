@@ -34,7 +34,11 @@ const CommunityNavBlock = () => {
     if (selector.id !== "none") {
       router.push(`/community/${selector.id}`);
     }
-  }, [selector, pathName]);
+  }, [selector]);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathName]);
 
   return (
     <div className="flex flex-col relative">

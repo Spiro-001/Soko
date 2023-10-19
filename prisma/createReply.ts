@@ -5,15 +5,17 @@ export const createReply = async (comment: {
   userId: string;
   postId: string;
   replyToId: string;
+  communityId: string;
 }) => {
   try {
-    const { content, userId, postId, replyToId } = comment;
+    const { content, userId, postId, replyToId, communityId } = comment;
     const newReply = await prisma.comment.create({
       data: {
         content,
         userId,
         postId,
         replyToId,
+        communityId,
       },
       select: {
         id: true,

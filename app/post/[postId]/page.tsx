@@ -42,7 +42,7 @@ const Post = async ({ params }: { params: { postId: string } }) => {
         </div>
       </div>
       <div className="flex flex-col gap-y-4 bg-slate-200 p-4">
-        <Comments comments={post.Comments} post={post} />
+        <Comments post={post} />
       </div>
     </div>
   );

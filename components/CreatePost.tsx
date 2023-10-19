@@ -7,7 +7,7 @@ import React from "react";
 
 const CreatePost = () => {
   const pathName = usePathname().split("/");
-
+  console.log(pathName);
   return (
     <div className="px-5 py-3 flex gap-x-4 items-center w-full">
       <Image

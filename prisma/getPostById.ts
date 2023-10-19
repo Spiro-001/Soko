@@ -8,6 +8,7 @@ export const getPostById = async (id: string) => {
       },
       select: {
         id: true,
+        headline: true,
         tags: true,
         User: {
           select: {
@@ -56,17 +57,20 @@ export const getPostById = async (id: string) => {
                 },
                 CommentLike: true,
                 postId: true,
+                communityId: true,
                 createdAt: true,
                 updatedAt: true,
               },
             },
             CommentLike: true,
             postId: true,
+            communityId: true,
             _count: true,
             createdAt: true,
             updatedAt: true,
           },
         },
+        communityId: true,
         _count: true,
         createdAt: true,
         updatedAt: true,

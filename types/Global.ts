@@ -17,11 +17,21 @@ declare global {
     email?: string;
   };
 
+  type NewPostType = {
+    headline: string;
+    tags: string[];
+    content: string;
+    userId: string;
+    communityId: string;
+  };
+
   type PostType = {
     id: string;
+    headline: string;
     tags: string[];
     content: string;
     User: MinimalUserType;
+    communityId: string;
     Comments: { id: string }[];
     createdAt: string;
     updatedAt: string;
@@ -29,10 +39,12 @@ declare global {
 
   type PostByIdType = {
     id: string;
+    headline: string;
     tags: string[];
     content: string;
     User: MinimalUserType;
     Comments: CommentType[];
+    communityId: string;
     _count: { Comments: number };
     createdAt: string;
     updatedAt: string;
@@ -54,6 +66,7 @@ declare global {
     CommentLike: CommentLikeType[];
     createdAt: string;
     updatedAt: string;
+    communityId: string;
   };
 
   type ReplyType = {
@@ -63,6 +76,7 @@ declare global {
     replyId: string;
     User: MinimalUserType;
     Replies: ReplyType[] | [{ _count: { Replies: number } }];
+    communityId: string;
     CommentLike: CommentLikeType[];
     createdAt: string;
     updatedAt: string;
@@ -72,6 +86,7 @@ declare global {
     content: string;
     userId: string;
     postId: string;
+    communityId: string;
   };
 
   type NewReplyType = {
@@ -79,6 +94,7 @@ declare global {
     userId: string;
     postId: string;
     replyToId: string;
+    communityId: string;
   };
 
   type MinimalCommunityType = {

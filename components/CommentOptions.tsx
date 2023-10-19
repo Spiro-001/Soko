@@ -39,6 +39,7 @@ const CommentOptions = ({ comment }: { comment: CommentType | ReplyType }) => {
           userId: "94b54024-efdf-4379-b36c-f2331e8ff079",
           postId: comment.postId,
           replyToId: comment.id,
+          communityId: comment.communityId,
         });
         // setInitComment((prev: CommentType[]) => [comment, ...prev]);
       }
