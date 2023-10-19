@@ -6,6 +6,7 @@ import React from "react";
 
 const Post = async ({ params }: { params: { postId: string } }) => {
   const post = await getPostByIdServer(params.postId);
+  console.log(post);
 
   return (
     <div className="border border-black row-start-1 row-end-7 flex flex-col pt-8 pb-16 px-4 gap-4 col-start-2 col-end-3 w-full max-w-[960px] mx-auto">
@@ -31,7 +32,7 @@ const Post = async ({ params }: { params: { postId: string } }) => {
           </div>
         </div>
         <div className="flex flex-col bg-slate-200 px-4 py-2 min-h-[240px] justify-between rounded-sm">
-          <span>{post.content}</span>
+          <span className="whitespace-pre-wrap">{post.content}</span>
           <div className="ml-auto flex gap-x-2">
             {post.tags.map((tag) => (
               <span key={post.id + tag} className="bg-slate-300 px-2">

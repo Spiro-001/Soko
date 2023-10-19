@@ -1,3 +1,4 @@
+import { Add } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import React, { Dispatch, SetStateAction } from "react";
@@ -17,16 +18,22 @@ const CommunityList = ({
   };
 
   return (
-    <>
-      <div className="px-3 py-3 flex gap-x-4 items-center whitespace-nowrap border-b border-gray-200 border-dashed">
-        <Link href={"/new/community"} className="px-3 py-1 bg-neutral-200">
-          Make a community
-        </Link>
+    <div className="flex flex-col py-4 px-3">
+      <div className="px-3">
+        <span className="text-xs text-neutral-400 font-semibold">
+          YOUR COMMUNITIES
+        </span>
+      </div>
+      <div className="px-3 py-3 flex gap-x-4 items-center whitespace-nowrap hover:bg-neutral-100 rounded-md">
+        <span className="w-8 h-8 rounded-full border-dashed flex justify-center items-center">
+          <Add />
+        </span>
+        <Link href={"/new/community"}>Create Community</Link>
       </div>
       {communities.map((community) => (
         <div
           key={community.id}
-          className="px-3 py-3 flex gap-x-4 items-center cursor-pointer"
+          className="px-3 py-3 flex gap-x-4 items-center cursor-pointer hover:bg-neutral-100 rounded-md"
           onClick={(e) => handleSelect(community)}
         >
           <span className="w-8 h-8 border border-black rounded-full border-dashed">
@@ -41,7 +48,7 @@ const CommunityList = ({
           <span>{community.title}</span>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

@@ -1,8 +1,17 @@
 import { dateFormat, timeFormat } from "@/utils/timeFormat";
 import Link from "next/link";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
+import MoreMenu from "./MoreMenu";
+import { ArrowForwardIos } from "@mui/icons-material";
+import { red } from "@mui/material/colors";
 
-const Post = ({ post }: { post: PostType }) => {
+const Post = ({
+  post,
+  setPostsState,
+}: {
+  post: PostType;
+  setPostsState: Dispatch<SetStateAction<PostType[]>>;
+}) => {
   return (
     <section className="flex flex-col border border-black px-8 py-4 w-full gap-y-6 rounded-sm ">
       <div className="flex gap-2 items-center flex-wrap">
@@ -12,7 +21,7 @@ const Post = ({ post }: { post: PostType }) => {
         >
           {post.User.username}
         </Link>
-        {"</>"}
+        <ArrowForwardIos sx={{ color: red[500] }} />
         <Link
           href={`/post/${post.id}`}
           className="bg-slate-200 px-2 py-1 text-gray-500 rounded-sm text-xs hover:underline"
@@ -26,11 +35,22 @@ const Post = ({ post }: { post: PostType }) => {
           <span className="bg-zinc-900 text-stone-200 px-2 rounded-sm h-fit">
             {timeFormat(post.createdAt)}
           </span>
+          <MoreMenu setPostsState={setPostsState} post={post} />
         </div>
       </div>
-      <div className="bg-gray-200 px-4 py-2 rounded-sm">{post.content}</div>
+      <div className="px-3 py-3 rounded-sm whitespace-pre-wrap font-bold border-b border-neutral-200">
+        {post.headline}
+      </div>
+      <div className="bg-gray-200 px-4 py-2 rounded-sm whitespace-pre-wrap">
+        {post.content}
+      </div>
       <div className="flex justify-between">
-        <Link href={`/post/${post.id}`}>{post.Comments.length} Comments</Link>
+        <Link
+          href={`/post/${post.id}`}
+          className="hover:underline underline-offset-2"
+        >
+          {post.Comments.length} Comment{post.Comments.length > 1 && "s"}
+        </Link>
         <div className="gap-2 sm:flex hidden">
           {post.tags.map((tag, idx) => (
             <span

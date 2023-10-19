@@ -28,7 +28,7 @@ const NewPost = ({
       const newPost = await createPostClient({
         userId: "94b54024-efdf-4379-b36c-f2331e8ff079",
         headline,
-        content,
+        content: content,
         communityId: selector.id,
         tags,
       });

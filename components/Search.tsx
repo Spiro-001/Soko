@@ -21,8 +21,8 @@ const Search = () => {
       <form className="relative flex items-center" onSubmit={handleSubmit}>
         <input
           id="input-search"
-          className="border border-black w-full px-4 py-2 outline-none"
-          placeholder="Search..."
+          className="border border-neutral-200 w-full px-6 py-2 outline-none rounded-full hover:border-blue-600 focus:border-blue-600 focus:rounded-t-3xl focus:rounded-b-none"
+          placeholder="Looking for something..."
           onChange={handleSearchFilter}
           autoComplete="off"
         />

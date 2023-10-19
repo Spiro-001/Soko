@@ -4,6 +4,7 @@ import { getCommunityClient } from "@/utils/getCommunityClient";
 import React, { useEffect, useState } from "react";
 import CommunityList from "./CommunityList";
 import { usePathname, useRouter } from "next/navigation";
+import { ExpandMore } from "@mui/icons-material";
 
 const CommunityNavBlock = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -41,13 +42,21 @@ const CommunityNavBlock = () => {
   }, [pathName]);
 
   return (
-    <div className="flex flex-col relative">
-      <button className="whitespace-nowrap" onClick={handleOpenCommunity}>
-        My Communities
+    <div
+      className={`flex flex-col relative bg-white shadow-sm px-6 py-2 ${
+        open ? "rounded-t-md" : "rounded-md"
+      }`}
+      onClick={handleOpenCommunity}
+    >
+      <button className="whitespace-nowrap">
+        <span>My Communities</span>
+        <span className="ml-16">
+          <ExpandMore />
+        </span>
       </button>
       {open && (
         <div
-          className="absolute top-full border border-black z-50 bg-white flex flex-col"
+          className="absolute left-0 top-full z-50 bg-white flex flex-col w-full rounded-b-md shadow-sm"
           onMouseLeave={handleOutside}
         >
           <CommunityList communities={communities} setSelector={setSelector} />

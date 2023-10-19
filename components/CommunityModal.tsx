@@ -7,8 +7,6 @@ const CommunityModal = async () => {
     `interest=[]&blocked=[]&skip=0&take=${process.env.NEXT_PUBLIC_TAKE_COMMUNITY}&userId=`
   );
 
-  console.log(communities);
-
   return (
     <div className="border border-black flex-col items-center py-4 px-3 gap-y-2 flex">
       {communities.map((community) => (

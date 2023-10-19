@@ -6,7 +6,7 @@ import LogoNavBlock from "./LogoNavBlock";
 
 const Nav = () => {
   return (
-    <div className="bg-slate-50 py-6 px-12 flex justify-between items-center gap-x-12">
+    <div className="bg-slate-50 py-3 px-12 flex justify-between items-center gap-x-8 shadow-sm">
       <LogoNavBlock />
       <CommunityNavBlock />
       <Search />

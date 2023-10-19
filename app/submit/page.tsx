@@ -6,6 +6,7 @@ import NewPost from "@/components/NewPost";
 import React, { useEffect, useState } from "react";
 import CommunityList from "@/components/CommunityList";
 import Image from "next/image";
+import { ExpandMore } from "@mui/icons-material";
 
 const Submit = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -35,8 +36,8 @@ const Submit = () => {
         (community) => community.id === searchParams.get("community")
       );
       setSelector({
-        id: selectedCommunityBySearchParam[0].id,
-        title: selectedCommunityBySearchParam[0].title,
+        id: selectedCommunityBySearchParam[0].id ?? "public",
+        title: selectedCommunityBySearchParam[0].title ?? "public",
       });
     };
     getCommunityList();
@@ -53,7 +54,7 @@ const Submit = () => {
             className="h-fit bg-neutral-200 px-4 py-2.5 w-80 flex flex-col relative"
             onClick={handleOpenCommunity}
           >
-            <div className="flex gap-x-4 items-center">
+            <div className="flex gap-x-4 items-center w-full">
               <span className="h-8 w-8 border border-black rounded-full border-dashed">
                 <Image
                   src="/no-image.jpg"
@@ -64,6 +65,9 @@ const Submit = () => {
                 />
               </span>
               <span>{selector.title}</span>
+              <span className="ml-auto">
+                <ExpandMore />
+              </span>
             </div>
             {open && (
               <div

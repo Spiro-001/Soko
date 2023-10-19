@@ -2,7 +2,7 @@ import { prisma } from ".";
 
 export const deleteCommentLike = async (id: string) => {
   try {
-    const newCommentLike = await prisma.commentLike.delete({
+    const deletedCommentLike = await prisma.commentLike.delete({
       where: {
         id,
       },
@@ -15,7 +15,7 @@ export const deleteCommentLike = async (id: string) => {
       },
     });
     prisma.$disconnect;
-    return newCommentLike;
+    return deletedCommentLike;
   } catch (error) {
     prisma.$disconnect;
     console.log(error);
