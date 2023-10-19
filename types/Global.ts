@@ -33,6 +33,7 @@ declare global {
     User: MinimalUserType;
     communityId: string;
     Comments: { id: string }[];
+    PostLike: { id: string; userId: string; postId: string }[];
     createdAt: string;
     updatedAt: string;
   };
@@ -44,6 +45,7 @@ declare global {
     content: string;
     User: MinimalUserType;
     Comments: CommentType[];
+    PostLike: { id: string; userId: string; postId: string }[];
     communityId: string;
     _count: { Comments: number };
     createdAt: string;
@@ -54,6 +56,12 @@ declare global {
     id: string;
     userId: string;
     commentId: string;
+  };
+
+  type PostLikeType = {
+    id: string;
+    userId: string;
+    postId: string;
   };
 
   type CommentType = {

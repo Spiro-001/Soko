@@ -19,12 +19,12 @@ const CommunityList = ({
 
   return (
     <div className="flex flex-col py-4 px-3">
-      <div className="px-3">
+      <div className="px-3 w-fit">
         <span className="text-xs text-neutral-400 font-semibold">
           YOUR COMMUNITIES
         </span>
       </div>
-      <div className="px-3 py-3 flex gap-x-4 items-center whitespace-nowrap hover:bg-neutral-100 rounded-md">
+      <div className="px-3 py-3 flex gap-x-4 items-center whitespace-nowrap hover:bg-neutral-100 rounded-md cursor-pointer">
         <span className="w-8 h-8 rounded-full border-dashed flex justify-center items-center">
           <Add />
         </span>

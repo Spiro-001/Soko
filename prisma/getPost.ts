@@ -43,6 +43,7 @@ export const getPost = async ({
           },
         },
         communityId: true,
+        PostLike: true,
         createdAt: true,
         updatedAt: true,
       },

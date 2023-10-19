@@ -10,31 +10,38 @@ const CommentBlock = ({ comment }: { comment: CommentType | ReplyType }) => {
   const [replies, setReplies] = useState<ReplyType[]>(comment.Replies);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full w-full">
       <div className="flex gap-x-3 items-center text-sm pb-2">
         <Image
           src="/no-profile.png"
-          width={45}
-          height={45}
+          width={34}
+          height={34}
           alt="profile"
-          className="border-2 border-black rounded-full"
+          className="rounded-full"
         />
         <div className="flex gap-x-1 items-center text-sm">
           <Link
             href={`/user/${comment.User.id}`}
-            className="font-semibold hover:underline underline-offset-2"
+            className="hover:underline underline-offset-2"
           >
             {comment.User.username}
           </Link>
           {"◦"}
-          <span>{timeDifference(comment.createdAt)}</span>
+          <span className="text-xs text-neutral-400">
+            {timeDifference(comment.createdAt)}
+          </span>
         </div>
       </div>
-      <div className="flex h-full" style={{ padding: "0px 19px 0px 19px" }}>
-        <div className="flex w-1.5 h-full bg-green-400 rounded-full border border-green-100 shadow-md shadow-green-300" />
-        <div className="px-6 ml-5 flex flex-col gap-y-5">
-          <div className="flex flex-col">
-            <span className="">{comment.content}</span>
+      <div
+        className="flex h-full w-full"
+        style={{ padding: "0px 0px 0px 14px" }}
+      >
+        <div className="flex min-w-[4px] w-1 h-full bg-neutral-200 rounded-full" />
+        <div className="px-1 flex flex-col gap-y-2 w-full">
+          <div className="flex flex-col gap-y-1 pl-6">
+            <span className="whitespace-pre-wrap text-sm break-words">
+              {comment.content}
+            </span>
             <CommentOptions comment={comment} setReplies={setReplies} />
           </div>
           {replies.length > 0 && (
@@ -43,13 +50,20 @@ const CommentBlock = ({ comment }: { comment: CommentType | ReplyType }) => {
                 if ("id" in reply) {
                   return <CommentBlock key={reply.id} comment={reply} />;
                 }
-                return;
+                return (
+                  <button
+                    key={comment.id + "reply"}
+                    className="text-sm text-neutral-400 [text-shadow:_0_1px_0_rgb(0_0_0_/_10%)] pl-6 w-fit"
+                  >
+                    Load more replies
+                  </button>
+                );
               })}
               {replies.length >
                 parseInt(process.env.NEXT_PUBLIC_TAKE_REPLIES ?? "5") - 1 && (
                 <button
                   key={comment.id + "reply"}
-                  className="text-sm text-neutral-400 [text-shadow:_0_1px_0_rgb(0_0_0_/_10%)] w-fit mx-auto"
+                  className="text-sm text-neutral-400 [text-shadow:_0_1px_0_rgb(0_0_0_/_10%)] w-fit pl-6"
                 >
                   Load more replies
                 </button>

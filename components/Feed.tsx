@@ -6,8 +6,6 @@ import CreatePost from "./CreatePost";
 
 const Feed = ({ posts }: { posts: PostType[] }) => {
   const [postsState, setPostsState] = useState<PostType[]>(posts);
-  console.log(postsState);
-
   return (
     <div className="flex flex-col gap-y-4 w-full">
       <div className="flex bg-white rounded-md shadow-sm">

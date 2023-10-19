@@ -22,8 +22,9 @@ model User {
   JoinedCommunities UserCommunity[]
   CommentLike       CommentLike[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now()) @updatedAt
+  PostLike  PostLike[]
 }
 
 model Post {
@@ -34,12 +35,27 @@ model Post {
   userId      String
   communityId String
 
-  User      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Community Community  @relation(fields: [communityId], references: [id], onDelete: Cascade)
   Comments  Comment[]
-  Community Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  PostLike  PostLike[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+}
+
+model PostLike {
+  id     String @id @unique @default(uuid())
+  userId String
+  postId String
+
+  User    User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Comment Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@unique([userId, postId])
 }
 
 model Comment {
@@ -72,6 +88,8 @@ model CommentLike {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+
+  @@unique([userId, commentId])
 }
 
 model Community {

@@ -40,17 +40,17 @@ const MoreMenu = ({
       </button>
       {open && (
         <ul
-          className="absolute border right-0 whitespace-nowrap bg-white px-2"
+          className="absolute border border-neutral-200 right-0 whitespace-nowrap bg-white px-2 rounded-sm shadow-md"
           onMouseLeave={handleOpenMenu}
         >
-          <li className="flex pl-3 pr-4 py-2 border-b" onClick={handleDelete}>
-            <button className="flex gap-x-2">
+          <li className="flex border-b" onClick={handleDelete}>
+            <button className="flex gap-x-2 pl-3 pr-4 py-2 items-center">
               <Delete />
               <span>Delete</span>
             </button>
           </li>
-          <li className="flex pl-3 pr-4 py-2" onClick={handleEdit}>
-            <button className="flex gap-x-2">
+          <li className="flex" onClick={handleEdit}>
+            <button className="flex pl-3 pr-4 py-2 gap-x-2 items-center">
               <Edit />
               <span>Edit</span>
             </button>

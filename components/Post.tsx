@@ -1,7 +1,5 @@
 import { dateFormat, timeFormat } from "@/utils/timeFormat";
 import {
-  Favorite,
-  FavoriteBorder,
   ModeCommentOutlined,
   ShareOutlined,
   TurnedInNotOutlined,
@@ -9,6 +7,7 @@ import {
 import Link from "next/link";
 import React, { Dispatch, SetStateAction } from "react";
 import MoreMenu from "./MoreMenu";
+import LikeButton from "./LikeButton";
 
 const Post = ({
   post,
@@ -23,13 +22,13 @@ const Post = ({
         <div className="flex gap-y-2 items-center">
           <Link
             href={`/user/${post.User.id}`}
-            className="bg-blue-400 px-2 py-1 font-semibold text-white text-xs border-r-2 border-blue-300"
+            className="bg-blue-400 px-2 py-1 font-semibold text-white text-xs border-r-4 border-blue-300"
           >
             {post.User.username}
           </Link>
           <Link
             href={`/post/${post.id}`}
-            className="bg-slate-200 px-2 flex items-center py-1 text-gray-500 text-xs whitespace-nowrap border-r-2 border-slate-100"
+            className="bg-slate-200 px-2 flex items-center py-1 text-gray-500 text-xs whitespace-nowrap border-r-4 border-slate-100"
           >
             {post.id}
           </Link>
@@ -45,12 +44,7 @@ const Post = ({
         {post.content}
       </div>
       <div className="flex justify-between gap-x-1">
-        <button className="underline-offset-2 flex gap-x-1 items-center">
-          <FavoriteBorder sx={{ color: "rgb(180 180 180)", height: 22 }} />
-          <span className="text-xs text-neutral-400 font-semibold">
-            {post.Comments.length}
-          </span>
-        </button>
+        <LikeButton postLike={post.PostLike} post={post} />
         <Link
           href={`/post/${post.id}`}
           className="underline-offset-2 flex gap-x-1 items-center"
@@ -68,22 +62,8 @@ const Post = ({
           <TurnedInNotOutlined sx={{ color: "rgb(180 180 180)", height: 22 }} />
           <span className="text-xs text-neutral-400 font-semibold">Save</span>
         </button>
-
-        {/* TAGS */}
-        {/* <div className="gap-2 sm:flex hidden">
-          {post.tags.map((tag, idx) => (
-            <span
-              key={post.id + tag + idx}
-              className="px-3 bg-stone-200 rounded-sm h-fit"
-            >
-              {tag}
-            </span>
-          ))}
-        </div> */}
-        {/* TAGS */}
-
-        <div className="ml-auto flex gap-x-2 flex-wrap justify-end gap-y-1 order-1 text-xs items-center">
-          <span className="bg-zinc-900 text-stone-200 px-2 py-0.5 rounded-sm  h-fit">
+        <div className="ml-auto flex gap-x-2 flex-wrap justify-end gap-y-1 text-xs items-center">
+          <span className="bg-zinc-900 text-stone-200 px-2 py-0.5 rounded-sm h-fit">
             {dateFormat(post.createdAt)}
           </span>
           <span className="bg-zinc-900 text-stone-200 px-2 py-0.5 rounded-sm h-fit">

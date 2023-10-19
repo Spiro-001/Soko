@@ -1,7 +1,7 @@
 "use client";
 
 import { createCommentClient } from "@/utils/createCommentClient";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, TextareaAutosize } from "@mui/material";
 import React, {
   ChangeEvent,
   Dispatch,
@@ -44,27 +44,32 @@ const MakeComment = ({
 
   return (
     <form
-      className="flex flex-col border-b border-black pb-4"
+      className="flex flex-col border-b border-neutral-200 pb-4"
       onSubmit={onSubmitComment}
     >
       <span className="text-sm py-1">Comment as __username__</span>
-      <textarea
-        className="outline-none border-x border-t border-black w-full py-2 px-2 text-black h-24 max-h-[240px] min-h-[96px]"
-        placeholder="Make a comment..."
-        onChange={handleInput}
-        value={commentContent}
-      />
-      <div className="bg-neutral-100 flex border-x border-b border-black py-2 px-3 justify-end">
-        <button
-          className="bg-neutral-300 px-4 py-2 flex items-center justify-center max-w-[105px] w-full"
-          type="submit"
-        >
-          {submittingComment ? (
-            <CircularProgress color="inherit" size="24px" />
-          ) : (
-            "Comment"
-          )}
-        </button>
+      <div className="shadow-sm rounded-md border border-neutral-100">
+        <TextareaAutosize
+          className="outline-none w-full py-2 px-3 text-black rounded-t-md max-h-[240px] min-h-[96px]"
+          placeholder="Make a comment..."
+          onChange={handleInput}
+          value={commentContent}
+          minRows={4}
+          maxRows={8}
+        />
+        <div className="bg-neutral-200 flex py-2 px-3 justify-end rounded-b-md">
+          <button
+            className="bg-green-300 text-white font-semibold px-2 py-1 flex items-center justify-center max-w-[85px] w-full text-sm rounded-md disabled:text-neutral-400 disabled:bg-neutral-300"
+            type="submit"
+            disabled={commentContent.length === 0}
+          >
+            {submittingComment ? (
+              <CircularProgress color="inherit" size="22px" />
+            ) : (
+              "Comment"
+            )}
+          </button>
+        </div>
       </div>
     </form>
   );

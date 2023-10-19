@@ -3,7 +3,12 @@
 import { createCommentLikeClient } from "@/utils/createCommentLikeClient";
 import { createReplyClient } from "@/utils/createReplyClient";
 import { deleteCommentLikeClient } from "@/utils/deleteCommentLikeClient";
-import { CircularProgress } from "@mui/material";
+import {
+  FavoriteBorderRounded,
+  FavoriteRounded,
+  ReplyRounded,
+} from "@mui/icons-material";
+import { CircularProgress, TextareaAutosize } from "@mui/material";
 import React, {
   Dispatch,
   MouseEvent,
@@ -19,11 +24,17 @@ const CommentOptions = ({
   comment: CommentType | ReplyType;
   setReplies: Dispatch<SetStateAction<ReplyType[]>>;
 }) => {
+  const [replyOpen, setReplyOpen] = useState(false);
+  const [replyAmount, setReplyAmount] = useState(0);
+
   const handleUnlike = async (e: MouseEvent, id: string) => {
     const commentLike = await deleteCommentLikeClient(id);
     setLikeButton(
-      <button className="w-fit" onClick={handleLike}>
-        {"Like"}
+      <button className="w-fit flex items-center gap-x-1" onClick={handleLike}>
+        <FavoriteBorderRounded
+          sx={{ height: 24, color: "rgba(180,180,180)" }}
+        />{" "}
+        {comment._count.CommentLike}
       </button>
     );
   };
@@ -34,8 +45,12 @@ const CommentOptions = ({
       comment.id
     );
     setLikeButton(
-      <button onClick={(e) => handleUnlike(e, commentLike.id)}>
-        {"Unlike"}
+      <button
+        className="flex items-center gap-x-1"
+        onClick={(e) => handleUnlike(e, commentLike.id)}
+      >
+        <FavoriteRounded sx={{ height: 24, color: "rgba(239, 68, 68)" }} />{" "}
+        {comment._count.CommentLike + 1}
       </button>
     );
   };
@@ -50,14 +65,18 @@ const CommentOptions = ({
         setReplyButton(
           <form
             onSubmit={handleSendReply}
-            className="w-full flex flex-col items-end bg-slate-300"
+            className="w-full flex flex-col items-end bg-neutral-200 rounded-md border border-neutral-200 "
           >
-            <textarea
+            <TextareaAutosize
               name="reply-area"
-              className="w-full outline-none px-3 py-2 min-h-[64px]"
+              className="w-full outline-none px-3 py-2 min-h-[64px] max-h-[240px] rounded-t-md"
+              minRows={2}
+              maxRows={8}
             />
-            <div className="bg-neutral-100 flex items-center justify-center w-16 px-2 py-1">
-              <CircularProgress color="inherit" size="24px" />
+            <div className="w-16 flex justify-center items-center py-1 px-1">
+              <div className="px-3 py-0.5 text-sm h-fit bg-green-300 text-white rounded-md w-full flex items-center justify-center">
+                <CircularProgress color="inherit" size="20px" />
+              </div>
             </div>
           </form>
         );
@@ -68,26 +87,38 @@ const CommentOptions = ({
           replyToId: comment.id,
           communityId: comment.communityId,
         });
+        setReplyAmount((prev) => prev + 1);
         setReplies((prev: ReplyType[]) => [newReply, ...prev]);
-        setReplyButton(<button onClick={handleReply}>Reply</button>);
+        setReplyButton(<div></div>);
       }
     };
-    setReplyButton(
-      <form
-        onSubmit={handleSendReply}
-        className="w-full flex flex-col items-end bg-slate-300"
-      >
-        <textarea
-          name="reply-area"
-          className="w-full outline-none px-3 py-2 min-h-[64px]"
-        />
-        <div className="bg-neutral-100 w-16 flex justify-center items-center">
-          <button type="submit" className="px-2 py-1">
-            Send
-          </button>
-        </div>
-      </form>
-    );
+    if (replyOpen) {
+      setReplyButton(<div></div>);
+      setReplyOpen(false);
+    } else {
+      setReplyOpen(true);
+      setReplyButton(
+        <form
+          onSubmit={handleSendReply}
+          className="w-full flex flex-col items-end bg-neutral-200 rounded-md border border-neutral-200 "
+        >
+          <TextareaAutosize
+            name="reply-area"
+            className="w-full outline-none px-3 py-2 min-h-[64px] max-h-[240px] rounded-t-md"
+            minRows={2}
+            maxRows={8}
+          />
+          <div className="w-16 flex justify-center items-center py-1 px-1">
+            <button
+              type="submit"
+              className="px-3 py-0.5 text-sm h-fit bg-green-300 text-white rounded-md w-full flex items-center justify-center"
+            >
+              Reply
+            </button>
+          </div>
+        </form>
+      );
+    }
   };
 
   const likedComment = () => {
@@ -96,23 +127,36 @@ const CommentOptions = ({
         comment.CommentLike[x].userId === "94b54024-efdf-4379-b36c-f2331e8ff079"
       ) {
         return (
-          <button onClick={(e) => handleUnlike(e, comment.CommentLike[x].id)}>
-            {"Unlike"}
+          <button
+            onClick={(e) => handleUnlike(e, comment.CommentLike[x].id)}
+            className="flex items-center gap-x-1"
+          >
+            <FavoriteRounded sx={{ height: 24, color: "rgba(239, 68, 68)" }} />{" "}
+            {comment._count.CommentLike}
           </button>
         );
       }
     }
-    return <button onClick={handleLike}>{"Like"}</button>;
+    return (
+      <button onClick={handleLike} className="flex items-center gap-x-1">
+        <FavoriteBorderRounded
+          sx={{ height: 24, color: "rgba(180,180,180)" }}
+        />{" "}
+        {comment._count.CommentLike}
+      </button>
+    );
   };
 
   const [likeButton, setLikeButton] = useState(likedComment());
-  const [replyButton, setReplyButton] = useState(
-    <button onClick={handleReply}>Reply</button>
-  );
+  const [replyButton, setReplyButton] = useState(<div></div>);
 
   return (
-    <div className="flex flex-wrap items-start">
+    <div className="flex flex-wrap items-center text-sm gap-x-2 gap-y-2">
       {likeButton}
+      <button onClick={handleReply} className="flex items-center gap-x-1">
+        <ReplyRounded sx={{ height: 24, color: "rgba(180,180,180)" }} />
+        {comment._count.Replies + replyAmount}
+      </button>
       {replyButton}
     </div>
   );

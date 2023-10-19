@@ -43,19 +43,21 @@ const NewPost = ({
     <form
       onSubmit={(e) => e.preventDefault()}
       ref={formRef}
-      className="flex-1 border-x border-b border-black px-4 py-4 flex flex-col gap-y-2"
+      className="flex-1 border-x border-b border-neutral-200 rounded-b-md px-4 py-4 flex flex-col gap-y-2 shadow-sm"
     >
       <TextareaAutosize
         name="headline"
         placeholder="Headline"
-        className="border border-neutral-200 px-4 py-2 outline-none resize-none"
+        className="border border-neutral-200 px-4 py-2 outline-none resize-none h-11 min-h-[42px] max-h-[42px] rounded-sm"
         minRows={1}
+        maxLength={50}
       />
       <TextareaAutosize
         name="content"
         placeholder="What's on your mind?"
-        className="border border-neutral-200 px-4 py-2 outline-none resize-none"
+        className="border border-neutral-200 px-4 py-2 outline-none min-h-[84px]"
         minRows={1}
+        maxLength={1500}
       />
       <InputTags tags={tags} setTags={setTags} />
       <button

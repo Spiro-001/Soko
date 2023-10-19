@@ -17,6 +17,7 @@ export const getPostById = async (id: string) => {
           },
         },
         content: true,
+        PostLike: true,
         Comments: {
           orderBy: {
             createdAt: "desc",
@@ -51,8 +52,106 @@ export const getPostById = async (id: string) => {
                   },
                 },
                 Replies: {
+                  orderBy: {
+                    createdAt: "desc",
+                  },
+                  skip: 0,
+                  take: parseInt(process.env.NEXT_PUBLIC_TAKE_REPLIES ?? "5"),
                   select: {
+                    id: true,
+                    content: true,
+                    User: {
+                      select: {
+                        id: true,
+                        username: true,
+                      },
+                    },
+                    Replies: {
+                      orderBy: {
+                        createdAt: "desc",
+                      },
+                      skip: 0,
+                      take: parseInt(
+                        process.env.NEXT_PUBLIC_TAKE_REPLIES ?? "5"
+                      ),
+                      select: {
+                        id: true,
+                        content: true,
+                        User: {
+                          select: {
+                            id: true,
+                            username: true,
+                          },
+                        },
+                        Replies: {
+                          orderBy: {
+                            createdAt: "desc",
+                          },
+                          skip: 0,
+                          take: parseInt(
+                            process.env.NEXT_PUBLIC_TAKE_REPLIES ?? "5"
+                          ),
+                          select: {
+                            id: true,
+                            content: true,
+                            User: {
+                              select: {
+                                id: true,
+                                username: true,
+                              },
+                            },
+                            Replies: {
+                              orderBy: {
+                                createdAt: "desc",
+                              },
+                              skip: 0,
+                              take: parseInt(
+                                process.env.NEXT_PUBLIC_TAKE_REPLIES ?? "5"
+                              ),
+                              select: {
+                                id: true,
+                                content: true,
+                                User: {
+                                  select: {
+                                    id: true,
+                                    username: true,
+                                  },
+                                },
+                                Replies: {
+                                  select: {
+                                    _count: true,
+                                  },
+                                },
+                                CommentLike: true,
+                                postId: true,
+                                communityId: true,
+                                _count: true,
+                                createdAt: true,
+                                updatedAt: true,
+                              },
+                            },
+                            CommentLike: true,
+                            postId: true,
+                            communityId: true,
+                            _count: true,
+                            createdAt: true,
+                            updatedAt: true,
+                          },
+                        },
+                        CommentLike: true,
+                        postId: true,
+                        communityId: true,
+                        _count: true,
+                        createdAt: true,
+                        updatedAt: true,
+                      },
+                    },
+                    CommentLike: true,
+                    postId: true,
+                    communityId: true,
                     _count: true,
+                    createdAt: true,
+                    updatedAt: true,
                   },
                 },
                 CommentLike: true,

@@ -20,6 +20,7 @@ export const createComment = async (comment: {
         content: true,
         userId: true,
         postId: true,
+        communityId: true,
         _count: true,
         User: {
           select: {

@@ -8,7 +8,7 @@ const CommunityModal = async () => {
   );
 
   return (
-    <div className="border border-black flex-col items-center py-4 px-3 gap-y-2 flex">
+    <div className="flex-col items-center py-4 px-3 gap-y-2 flex bg-white rounded-md shadow-sm">
       {communities.map((community) => (
         <CommunityBlock key={community.id} community={community} />
       ))}
