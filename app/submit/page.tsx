@@ -1,8 +1,9 @@
 "use client";
 
 import { getCommunityClient } from "@/utils/getCommunityClient";
+import { useSearchParams } from "next/navigation";
 import NewPost from "@/components/NewPost";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommunityList from "@/components/CommunityList";
 import Image from "next/image";
 
@@ -14,19 +15,32 @@ const Submit = () => {
     title: "Choose a community",
   });
 
+  const searchParams = useSearchParams();
+
   const handleOpenCommunity = async () => {
     setOpen((prev) => !prev);
-    if (communities.length === 0) {
-      const communities = await getCommunityClient(
-        `interest=[]&blocked=[]&skip=0&take=${process.env.NEXT_PUBLIC_TAKE_COMMUNITY}&userId=`
-      );
-      setCommunities(communities);
-    }
   };
 
   const handleOutside = async () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    const getCommunityList = async () => {
+      const communities = await getCommunityClient(
+        `interest=[]&blocked=[]&skip=0&take=${process.env.NEXT_PUBLIC_TAKE_COMMUNITY}&userId=`
+      );
+      setCommunities(communities);
+      const selectedCommunityBySearchParam = communities.filter(
+        (community) => community.id === searchParams.get("community")
+      );
+      setSelector({
+        id: selectedCommunityBySearchParam[0].id,
+        title: selectedCommunityBySearchParam[0].title,
+      });
+    };
+    getCommunityList();
+  });
 
   return (
     <div className="row-start-1 row-end-7 pb-16 px-4 lg:col-start-2 lg:col-end-3 col-start-1 col-end-4 flex max-w-[960px] border border-black">

@@ -1,13 +1,19 @@
 "use client";
 
 import { getCommunityClient } from "@/utils/getCommunityClient";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommunityList from "./CommunityList";
+import { usePathname, useRouter } from "next/navigation";
 
 const CommunityNavBlock = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [communities, setCommunities] = useState<MinimalCommunityType[]>([]);
-  const [selector, setSelector] = useState<Record<string, string>>({});
+  const [selector, setSelector] = useState<Record<string, string>>({
+    id: "none",
+  });
+
+  const router = useRouter();
+  const pathName = usePathname();
 
   const handleOpenCommunity = async () => {
     setOpen((prev) => !prev);
@@ -22,6 +28,13 @@ const CommunityNavBlock = () => {
   const handleOutside = async () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    setOpen(false);
+    if (selector.id !== "none") {
+      router.push(`/community/${selector.id}`);
+    }
+  }, [selector, pathName]);
 
   return (
     <div className="flex flex-col relative">

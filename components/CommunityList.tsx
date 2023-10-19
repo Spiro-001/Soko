@@ -26,7 +26,7 @@ const CommunityList = ({
       {communities.map((community) => (
         <div
           key={community.id}
-          className="px-3 py-3 flex gap-x-4 items-center"
+          className="px-3 py-3 flex gap-x-4 items-center cursor-pointer"
           onClick={(e) => handleSelect(community)}
         >
           <span className="w-8 h-8 border border-black rounded-full border-dashed">

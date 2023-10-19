@@ -57,7 +57,7 @@ const NewCommunity = () => {
             type="button"
             onClick={handleSubmit}
           >
-            Post
+            Create
           </button>
         </form>
       </div>

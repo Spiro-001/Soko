@@ -1,5 +1,6 @@
-import Feed from "@/components/Feed";
 import { getCommunityByIdServer } from "@/utils/getCommunityByIdServer";
+import Feed from "@/components/Feed";
+import MembersList from "@/components/Members";
 import Image from "next/image";
 import React from "react";
 
@@ -24,8 +25,7 @@ const Community = async ({ params }: { params: { communityId: string } }) => {
             <div className="flex gap-x-4 items-center">
               <span className="text-5xl font-bold">{community.title}</span>
               <div className="bg-neutral-200 px-2 py-1">
-                <span>{community._count.Members} Member</span>
-                <span>{community._count.Members > 1 ? "s" : ""}</span>
+                <MembersList community={community} />
               </div>
             </div>
             <span className="text-neutral-400 text-sm">
