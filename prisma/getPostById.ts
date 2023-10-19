@@ -58,6 +58,7 @@ export const getPostById = async (id: string) => {
                 CommentLike: true,
                 postId: true,
                 communityId: true,
+                _count: true,
                 createdAt: true,
                 updatedAt: true,
               },

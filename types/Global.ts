@@ -60,7 +60,7 @@ declare global {
     id: string;
     content: string;
     postId: string;
-    _count: { Replies: number };
+    _count: { Replies: number; CommentLike: number };
     User: MinimalUserType;
     Replies: ReplyType[];
     CommentLike: CommentLikeType[];
@@ -75,9 +75,10 @@ declare global {
     postId: string;
     replyId: string;
     User: MinimalUserType;
-    Replies: ReplyType[] | [{ _count: { Replies: number } }];
+    Replies: ReplyType[];
     communityId: string;
     CommentLike: CommentLikeType[];
+    _count: { Replies: number; CommentLike: number };
     createdAt: string;
     updatedAt: string;
   };

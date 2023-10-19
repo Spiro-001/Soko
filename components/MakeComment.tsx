@@ -13,11 +13,11 @@ import React, {
 const MakeComment = ({
   postId,
   communityId,
-  setInitComment,
+  setComments,
 }: {
   postId: string;
   communityId: string;
-  setInitComment: Dispatch<SetStateAction<CommentType[]>>;
+  setComments: Dispatch<SetStateAction<CommentType[]>>;
 }) => {
   const [commentContent, setCommentContent] = useState<string>("");
   const [submittingComment, setSubmittingComment] = useState<boolean>(false);
@@ -37,7 +37,7 @@ const MakeComment = ({
         communityId,
       });
       setSubmittingComment(false);
-      setInitComment((prev: CommentType[]) => [comment, ...prev]);
+      setComments((prev: CommentType[]) => [comment, ...prev]);
       setCommentContent("");
     }
   };

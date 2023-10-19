@@ -29,6 +29,7 @@ export const createReply = async (comment: {
             username: true,
           },
         },
+        communityId: true,
         Replies: true,
         CommentLike: true,
         createdAt: true,

@@ -1,10 +1,14 @@
+"use client";
+
 import { timeDifference } from "@/utils/timeFormat";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import CommentOptions from "./CommentOptions";
 
 const CommentBlock = ({ comment }: { comment: CommentType | ReplyType }) => {
+  const [replies, setReplies] = useState<ReplyType[]>(comment.Replies);
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex gap-x-3 items-center text-sm pb-2">
@@ -31,23 +35,24 @@ const CommentBlock = ({ comment }: { comment: CommentType | ReplyType }) => {
         <div className="px-6 ml-5 flex flex-col gap-y-5">
           <div className="flex flex-col">
             <span className="">{comment.content}</span>
-            <CommentOptions comment={comment} />
+            <CommentOptions comment={comment} setReplies={setReplies} />
           </div>
-          {comment.Replies.length > 0 && (
+          {replies.length > 0 && (
             <div className="flex flex-col gap-y-3">
-              {comment.Replies.map((reply) => {
-                if ("_count" in reply) {
-                  return;
+              {replies.map((reply) => {
+                if ("id" in reply) {
+                  return <CommentBlock key={reply.id} comment={reply} />;
                 }
-                return <CommentBlock key={reply.id} comment={reply} />;
+                return;
               })}
-              {"_count" in comment.Replies[0] && (
-                <span
+              {replies.length >
+                parseInt(process.env.NEXT_PUBLIC_TAKE_REPLIES ?? "5") - 1 && (
+                <button
                   key={comment.id + "reply"}
-                  className="text-sm text-neutral-400 [text-shadow:_0_1px_0_rgb(0_0_0_/_10%)]"
+                  className="text-sm text-neutral-400 [text-shadow:_0_1px_0_rgb(0_0_0_/_10%)] w-fit mx-auto"
                 >
                   Load more replies
-                </span>
+                </button>
               )}
             </div>
           )}
