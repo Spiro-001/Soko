@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { Photo } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -14,7 +15,7 @@ const CreatePost = () => {
         width={45}
         height={45}
         alt="profile"
-        className="border-2 border-black rounded-full"
+        className="border border-black rounded-full"
       />
       <Link
         href={`/submit?community=${pathName[2] ?? "public"}`}
@@ -22,10 +23,12 @@ const CreatePost = () => {
       >
         <input
           placeholder="Create Post"
-          className="w-full border border-black px-4 py-2 outline-none"
+          className="w-full border border-neutral-200 px-4 py-2 outline-none rounded-full hover:border-blue-600"
         />
       </Link>
-      <span>picture</span>
+      <Link href={`/submit?community=${pathName[2] ?? "public"}?type=photo`}>
+        <Photo />
+      </Link>
     </div>
   );
 };

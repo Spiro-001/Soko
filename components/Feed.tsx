@@ -10,10 +10,10 @@ const Feed = ({ posts }: { posts: PostType[] }) => {
 
   return (
     <div className="flex flex-col gap-y-4 w-full">
-      <div className="border border-black flex">
+      <div className="flex bg-white rounded-md shadow-sm">
         <CreatePost />
       </div>
-      <div className="border border-black flex">
+      <div className="flex rounded-md shadow-sm bg-white">
         <span className="px-5 py-3">Filter & Sort</span>
       </div>
       <div className="flex flex-col items-center gap-y-4">
