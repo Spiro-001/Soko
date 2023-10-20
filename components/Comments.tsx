@@ -4,8 +4,15 @@ import React, { useState } from "react";
 import CommentBlock from "./CommentBlock";
 import MakeComment from "./MakeComment";
 import { ExpandMore } from "@mui/icons-material";
+import { Session } from "next-auth";
 
-const Comments = ({ post }: { post: PostByIdType }) => {
+const Comments = ({
+  post,
+  session,
+}: {
+  post: PostByIdType;
+  session: Session | null;
+}) => {
   const [comments, setComments] = useState<CommentType[]>(post.Comments);
 
   return (
@@ -31,7 +38,11 @@ const Comments = ({ post }: { post: PostByIdType }) => {
         </div>
         <div className="flex flex-col px-4 py-8 gap-y-4 h-full">
           {comments.map((comment) => (
-            <CommentBlock key={comment.id} comment={comment} />
+            <CommentBlock
+              key={comment.id}
+              comment={comment}
+              session={session}
+            />
           ))}
           {comments.length > 10 && <button className="w-fit">Load More</button>}
         </div>

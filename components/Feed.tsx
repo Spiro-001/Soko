@@ -3,13 +3,20 @@
 import React, { useState } from "react";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
+import { Session } from "next-auth";
 
-const Feed = ({ posts }: { posts: PostType[] }) => {
+const Feed = ({
+  posts,
+  session,
+}: {
+  posts: PostType[];
+  session: Session | null;
+}) => {
   const [postsState, setPostsState] = useState<PostType[]>(posts);
   return (
     <div className="flex flex-col gap-y-4 w-full">
       <div className="flex bg-white rounded-md shadow-sm">
-        <CreatePost />
+        <CreatePost session={session} />
       </div>
       <div className="flex rounded-md shadow-sm bg-white">
         <span className="px-5 py-3">Filter & Sort</span>

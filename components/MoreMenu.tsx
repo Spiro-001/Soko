@@ -40,7 +40,7 @@ const MoreMenu = ({
       </button>
       {open && (
         <ul
-          className="absolute border border-neutral-200 right-0 whitespace-nowrap bg-white px-2 rounded-sm shadow-md"
+          className="absolute border border-neutral-200 right-0 whitespace-nowrap bg-white px-2 py-2 rounded-md shadow-md"
           onMouseLeave={handleOpenMenu}
         >
           <li className="flex border-b" onClick={handleDelete}>

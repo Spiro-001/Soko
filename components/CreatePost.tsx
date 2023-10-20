@@ -2,16 +2,17 @@
 
 import { usePathname } from "next/navigation";
 import { Photo } from "@mui/icons-material";
+import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const CreatePost = () => {
+const CreatePost = ({ session }: { session: Session | null }) => {
   const pathName = usePathname().split("/");
   return (
     <div className="px-5 py-3 flex gap-x-4 items-center w-full">
       <Image
-        src="/no-profile.png"
+        src={session?.user?.image ?? "/no-profile.png"}
         width={45}
         height={45}
         alt="profile"
