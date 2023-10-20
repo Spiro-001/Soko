@@ -7,8 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate",
-    "generate": "primsa generate",
     "type-check": "tsc"
   },
   "dependencies": {
