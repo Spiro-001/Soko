@@ -1,9 +1,8 @@
 import { getCommunityById } from "@/prisma/getCommunityById";
 import { getPostByCommunity } from "@/prisma/getPostByCommunity";
-import { NextApiRequest, NextApiResponse } from "next";
 
 export const GET = async (
-  req: NextApiRequest,
+  req: Request,
   { params }: { params: { communityId: string } }
 ) => {
   try {

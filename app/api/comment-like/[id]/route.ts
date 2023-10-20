@@ -1,6 +1,4 @@
 import { deleteCommentLike } from "@/prisma/deleteCommentLike";
-import { NextApiRequest, NextApiResponse } from "next";
-
 export const DELETE = async (
   req: Request,
   { params }: { params: { id: string } }

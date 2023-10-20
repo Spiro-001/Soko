@@ -1,9 +1,8 @@
 import { deletePost } from "@/prisma/deletePost";
 import { getPostById } from "@/prisma/getPostById";
-import { NextApiRequest, NextApiResponse } from "next";
 
 export const GET = async (
-  req: NextApiRequest,
+  req: Request,
   { params }: { params: { postId: string } }
 ) => {
   try {
@@ -16,7 +15,7 @@ export const GET = async (
 };
 
 export const DELETE = async (
-  req: NextApiRequest,
+  req: Request,
   { params }: { params: { postId: string } }
 ) => {
   try {

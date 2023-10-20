@@ -1,10 +1,11 @@
 import { pusherServer } from "@/lib/pusher";
 import { parsePusher } from "@/utils/parsePusher";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
 
-export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
+export const POST = async (req: Request, res: NextApiResponse) => {
   try {
-    const data = await parsePusher(req.body);
+    const pusherData = await req.json();
+    const data = await parsePusher(pusherData);
 
     const socketId = data.socket_id;
     const channel = data.channel_name;

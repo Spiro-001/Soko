@@ -1,5 +1,5 @@
 import { createPostLike } from "@/prisma/createPostLike";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
 
 export const POST = async (req: Request, res: NextApiResponse) => {
   try {

@@ -1,7 +1,7 @@
 import { getPost } from "@/prisma/getPost";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
 
-export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+export const GET = async (req: Request, res: NextApiResponse) => {
   try {
     if (req.url) {
       const { searchParams } = new URL(req.url);

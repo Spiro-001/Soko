@@ -1,8 +1,7 @@
 import { getUserById } from "@/prisma/getUserById";
-import { NextApiRequest, NextApiResponse } from "next";
 
 export const GET = async (
-  req: NextApiRequest,
+  req: Request,
   { params }: { params: { userId: string } }
 ) => {
   try {

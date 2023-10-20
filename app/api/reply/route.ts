@@ -1,5 +1,5 @@
 import { createReply } from "@/prisma/createReply";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
 
 export const POST = async (req: Request, res: NextApiResponse) => {
   try {
