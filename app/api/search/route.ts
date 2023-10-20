@@ -13,6 +13,8 @@ export const GET = async (req: Request, res: NextApiResponse) => {
         take: JSON.parse(searchParams.get("take") ?? "10"),
       };
 
+      console.log(query, "search");
+
       const posts = await getPostBySearch(query);
       return new Response(JSON.stringify(posts), { status: 200 });
     }

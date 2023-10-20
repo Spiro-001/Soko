@@ -16,6 +16,8 @@ export const GET = async (req: Request, res: NextApiResponse) => {
         userId: searchParams.get("userId") ?? "",
       };
 
+      console.log(query, "community");
+
       const communities = await getCommunity(query);
       return new Response(JSON.stringify(communities), { status: 200 });
     }

@@ -14,6 +14,8 @@ export const GET = async (
         take: JSON.parse(searchParams.get("take") ?? "10"),
       };
 
+      console.log(query, "communitybyId");
+
       const communities = await getCommunityById(params.communityId);
       const posts = await getPostByCommunity({
         blocked: query.blocked,
