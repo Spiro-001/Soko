@@ -1,3 +1,5 @@
+import { ISODateString } from "next-auth";
+
 export {};
 
 declare global {
@@ -9,6 +11,18 @@ declare global {
     JoinedCommunities: { Community: MinimalCommunityType }[];
     createdAt: string;
     updatedAt: string;
+  };
+
+  type Session = {
+    user?: {
+      name?: string | null;
+      username?: string | null;
+      email?: string | null;
+      image?: string | null;
+      createdAt?: string | null;
+      updatedAt?: string | null;
+    };
+    expires: ISODateString;
   };
 
   type MinimalUserType = {

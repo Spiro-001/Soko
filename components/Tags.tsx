@@ -11,11 +11,11 @@ export const Tags = ({
   return (
     <Box
       sx={{
-        background: "black",
+        background: "rgb(55 135 255)",
         height: "100%",
         display: "flex",
-        padding: "6px 12px",
-        margin: "0 0.5rem 0.3rem 0",
+        padding: "3px 10px",
+        margin: "0 0.5rem 0.4rem 0",
         justifyContent: "center",
         alignContent: "center",
         color: "#ffffff",
@@ -23,10 +23,10 @@ export const Tags = ({
         borderRadius: "6px",
       }}
     >
-      <Stack direction="row" gap={1}>
+      <Stack direction="row" gap={1} className="items-center">
         <Typography>{data}</Typography>
         <Cancel
-          sx={{ cursor: "pointer" }}
+          sx={{ cursor: "pointer", height: 18 }}
           onClick={() => {
             handleDelete(data);
           }}

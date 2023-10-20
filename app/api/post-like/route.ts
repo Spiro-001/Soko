@@ -4,7 +4,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 export const POST = async (req: Request, res: NextApiResponse) => {
   try {
     const postLikeContent = await req.json();
-    console.log(postLikeContent);
     const postLike = await createPostLike(postLikeContent);
     return new Response(JSON.stringify(postLike), { status: 200 });
   } catch (error) {

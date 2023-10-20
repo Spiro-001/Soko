@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
-import { Session } from "next-auth";
 
 const Feed = ({
   posts,

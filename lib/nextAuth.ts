@@ -1,5 +1,5 @@
+import { getUserByEmail } from "@/prisma/getUserByEmail";
 import { NextAuthOptions, getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
@@ -13,7 +13,9 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       // Validate user
-      console.log(user);
+
+      const foundUser = await getUserByEmail(user.email ?? "");
+      if (!foundUser) return false;
       return true;
     },
     async redirect({ url, baseUrl }) {
@@ -22,7 +24,9 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, user, token }) {
       // Return to Server Session
-      return session;
+      const foundUser = await getUserByEmail(session?.user?.email ?? "");
+      const returnUser = { ...foundUser, image: session?.user?.image };
+      return { user: returnUser, expires: session.expires };
     },
     async jwt({ token, user, account, profile }) {
       // Return to Server Session

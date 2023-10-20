@@ -14,10 +14,12 @@ const MakeComment = ({
   postId,
   communityId,
   setComments,
+  session,
 }: {
   postId: string;
   communityId: string;
   setComments: Dispatch<SetStateAction<CommentType[]>>;
+  session: Session | null;
 }) => {
   const [commentContent, setCommentContent] = useState<string>("");
   const [submittingComment, setSubmittingComment] = useState<boolean>(false);
@@ -47,7 +49,7 @@ const MakeComment = ({
       className="flex flex-col border-b border-neutral-200 pb-4"
       onSubmit={onSubmitComment}
     >
-      <span className="text-sm py-1">Comment as __username__</span>
+      <span className="text-sm py-1">Comment as {session?.user?.username}</span>
       <div className="shadow-sm rounded-md border border-neutral-100">
         <TextareaAutosize
           className="outline-none w-full py-2 px-3 text-black rounded-t-md max-h-[240px] min-h-[96px]"

@@ -1,7 +1,6 @@
 "use client";
 
 import { timeDifference } from "@/utils/timeFormat";
-import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -42,9 +41,9 @@ const CommentBlock = ({
       </div>
       <div
         className="flex h-full w-full"
-        style={{ padding: "0px 0px 0px 14px" }}
+        style={{ padding: "0px 0px 0px 15px" }}
       >
-        <div className="flex min-w-[4px] w-1 h-full bg-neutral-200 rounded-full mr-2" />
+        <div className="flex min-w-[3px] h-full bg-neutral-200 rounded-full mr-2" />
         <div className="px-1 flex flex-col gap-y-3 w-full">
           <div className="flex flex-col gap-y-1 pl-4">
             <span className="whitespace-pre-wrap text-sm break-words">

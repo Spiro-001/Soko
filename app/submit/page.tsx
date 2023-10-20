@@ -73,7 +73,7 @@ const Submit = () => {
             </div>
             {open && (
               <div
-                className="absolute top-full border-x border-b w-80 border-neutral-200 z-50 bg-white flex flex-col rounded-b-md shadow-md"
+                className="absolute top-full border-x border-b w-full box-content border-neutral-200 z-50 bg-white flex flex-col rounded-b-md shadow-md"
                 onMouseLeave={handleOutside}
                 style={{ left: -1 }}
               >

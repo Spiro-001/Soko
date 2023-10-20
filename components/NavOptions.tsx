@@ -3,7 +3,7 @@ import React from "react";
 
 const NavOptions = () => {
   return (
-    <div className="flex gap-x-4 bg-white shadow-sm px-6 py-2 rounded-lg">
+    <div className="flex gap-x-4 bg-white shadow-sm px-6 py-2 rounded-lg border border-neutral-100">
       <Chat />
       <Notifications />
       <Add />

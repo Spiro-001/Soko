@@ -40,7 +40,7 @@ const Post = ({
       <div className="px-3 py-3 rounded-sm whitespace-pre-wrap font-bold border-b border-neutral-200">
         {post.headline}
       </div>
-      <div className="bg-neutral-50 px-4 py-2 rounded-sm whitespace-pre-wrap">
+      <div className="bg-neutral-50 px-4 py-4 rounded-sm whitespace-pre-wrap">
         {post.content}
       </div>
       <div className="flex justify-between gap-x-1">

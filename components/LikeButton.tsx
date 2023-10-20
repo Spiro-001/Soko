@@ -32,6 +32,8 @@ const LikeButton = ({
   );
   const [totalLikes, setTotalLikes] = useState(postLike?.length ?? 0);
 
+  console.log(postLike, post);
+
   const handleLike = async () => {
     const postLike = await createPostLikeClient(
       "94b54024-efdf-4379-b36c-f2331e8ff079",

@@ -11,8 +11,7 @@ type ReturnNewPostType = {
 
 export const createPostClient = async (postContent: NewPostType) => {
   const res = await fetch("/api/post", {
-    cache:
-      (process.env.NEXT_PUBLIC_CACHE_TYPE as RequestCache) ?? "force-cache",
+    cache: process.env.NEXT_PUBLIC_CACHE_TYPE as RequestCache,
     method: "POST",
     body: JSON.stringify(postContent),
   });

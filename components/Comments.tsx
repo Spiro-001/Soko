@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import CommentBlock from "./CommentBlock";
 import MakeComment from "./MakeComment";
 import { ExpandMore } from "@mui/icons-material";
-import { Session } from "next-auth";
 
 const Comments = ({
   post,
@@ -21,6 +20,7 @@ const Comments = ({
         postId={post.id}
         communityId={post.communityId}
         setComments={setComments}
+        session={session}
       />
       <div className="flex flex-col">
         <div className="p-4 flex gap-x-4 items-center">

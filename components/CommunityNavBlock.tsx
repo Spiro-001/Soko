@@ -43,7 +43,7 @@ const CommunityNavBlock = () => {
 
   return (
     <div
-      className={`flex flex-col relative bg-white shadow-sm px-6 py-2 ${
+      className={`flex flex-col relative bg-white shadow-sm border border-neutral-100 px-6 py-2 m-0 ${
         open ? "rounded-t-md" : "rounded-md"
       }`}
       onClick={handleOpenCommunity}
@@ -56,7 +56,8 @@ const CommunityNavBlock = () => {
       </button>
       {open && (
         <div
-          className="absolute left-0 top-full z-50 bg-white flex flex-col w-full rounded-b-md shadow-sm"
+          className="absolute top-full z-50 bg-white flex border-x border-b border-neutral-100 flex-col flex-1 rounded-b-md shadow-sm w-full box-content"
+          style={{ left: -1 }}
           onMouseLeave={handleOutside}
         >
           <CommunityList communities={communities} setSelector={setSelector} />

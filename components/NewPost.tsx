@@ -55,14 +55,14 @@ const NewPost = ({
       <TextareaAutosize
         name="content"
         placeholder="What's on your mind?"
-        className="border border-neutral-200 px-4 py-2 outline-none min-h-[84px]"
+        className="border border-neutral-200 px-4 py-2 outline-none min-h-[84px] max-h-[750px]"
         minRows={1}
         maxLength={1500}
       />
       <InputTags tags={tags} setTags={setTags} />
       <button
         type="button"
-        className="w-fit ml-auto border"
+        className="w-fit ml-auto border px-4 py-1 bg-green-300 text-white rounded-md"
         onClick={handleSubmit}
       >
         Post

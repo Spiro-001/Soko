@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { Photo } from "@mui/icons-material";
-import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

@@ -20,9 +20,7 @@ const MoreMenu = ({
   const handleDelete = async (e: MouseEvent) => {
     try {
       const deletedPost = await deletePostClient(post.id);
-      console.log(deletedPost);
       setPostsState((prev: PostType[]) => {
-        console.log(prev);
         return prev.filter((post) => post.id !== deletedPost.id);
       });
       setOpen(false);

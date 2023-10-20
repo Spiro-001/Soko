@@ -17,7 +17,7 @@ const Post = async ({ params }: { params: { postId: string } }) => {
   const session = await getServerSession(authOptions);
 
   return (
-    <div className="row-start-1 row-end-7 flex flex-col pt-4 pb-16 px-4 gap-4 col-start-1 col-end-4 lg:col-start-2 lg:col-end-3 w-full max-w-[960px] mx-auto rounded-md shadow-sm bg-white">
+    <div className="row-start-1 row-end-7 flex flex-col pt-4 px-4 gap-4 col-start-1 col-end-4 lg:col-start-2 lg:col-end-3 w-full max-w-[960px] mx-auto rounded-md shadow-sm bg-white">
       <div className="flex flex-col gap-y-3">
         <div className="flex items-center">
           <Link

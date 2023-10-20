@@ -6,7 +6,7 @@ const CommunityBlock = ({ community }: { community: MinimalCommunityType }) => {
   return (
     <Link
       href={`/community/${community.id}`}
-      className="border border-neutral-200 w-full px-2 py-2 flex flex-col justify-between gap-y-2 rounded-md shadow-sm"
+      className="border border-neutral-200 w-full px-2 py-2 flex flex-col justify-between gap-y-2 rounded-md shadow-sm bg-white"
     >
       <div className="flex gap-x-3 items-center my-auto justify-between">
         <p className="bg-sky-100 text-sky-900 text-center px-2 h-fit whitespace-nowrap rounded-sm">
