@@ -5,14 +5,12 @@ import React from "react";
 import Feed from "@/components/Feed";
 import CommunityModal from "@/components/CommunityModal";
 import SignOutButton from "@/components/SignOutButton";
-import { revalidatePath } from "next/cache";
 
 export default async function Home() {
   const posts = await getPostServer(
     `blocked=[]&skip=0&take=${process.env.NEXT_PUBLIC_TAKE_POST}`
   );
   const session = await getServerSession(authOptions);
-  revalidatePath("/");
   return (
     <>
       <div className="row-start-1 row-end-7 col-start-1 col-end-2 flex-col items-center pt-8 pb-16 px-4 gap-4 lg:flex hidden"></div>

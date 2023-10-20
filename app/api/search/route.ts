@@ -12,9 +12,6 @@ export const GET = async (req: Request, res: NextApiResponse) => {
         skip: JSON.parse(searchParams.get("skip") ?? "0"),
         take: JSON.parse(searchParams.get("take") ?? "10"),
       };
-
-      console.log(query, "search");
-
       const posts = await getPostBySearch(query);
       return new Response(JSON.stringify(posts), { status: 200 });
     }
