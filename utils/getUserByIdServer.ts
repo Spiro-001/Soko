@@ -5,6 +5,9 @@ export const getUserByIdServer = async (id: string) => {
       cache: process.env.CACHE_TYPE as RequestCache,
     }
   );
-  const user: UserType = await res.json();
-  return user;
+  if (res.ok) {
+    const user: UserType = await res.json();
+    return user;
+  }
+  return null;
 };

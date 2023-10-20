@@ -5,10 +5,13 @@ export const getCommunityByIdServer = async (id: string) => {
       cache: process.env.CACHE_TYPE as RequestCache,
     }
   );
-  const {
-    communities,
-    posts,
-  }: { communities: MinimalCommunityType; posts: PostType[] } =
-    await res.json();
-  return { communities, posts };
+  if (res.ok) {
+    const {
+      communities,
+      posts,
+    }: { communities: MinimalCommunityType; posts: PostType[] } =
+      await res.json();
+    return { communities, posts };
+  }
+  return null;
 };

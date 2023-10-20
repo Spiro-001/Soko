@@ -11,10 +11,12 @@ import {
 import LikeButton from "@/components/LikeButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/nextAuth";
+import { redirect } from "next/navigation";
 
 const Post = async ({ params }: { params: { postId: string } }) => {
   const post = await getPostByIdServer(params.postId);
   const session = await getServerSession(authOptions);
+  if (!post) return redirect("/");
 
   return (
     <div className="row-start-1 row-end-7 flex flex-col pt-4 px-4 gap-4 col-start-1 col-end-4 lg:col-start-2 lg:col-end-3 w-full max-w-[960px] mx-auto rounded-md shadow-sm bg-white">

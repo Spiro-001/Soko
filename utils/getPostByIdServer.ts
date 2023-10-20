@@ -5,6 +5,9 @@ export const getPostByIdServer = async (id: string) => {
       cache: "no-store",
     }
   );
-  const post: PostByIdType = await res.json();
-  return post;
+  if (res.ok) {
+    const post: PostByIdType = await res.json();
+    return post;
+  }
+  return null;
 };

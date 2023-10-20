@@ -5,6 +5,9 @@ export const getPostServer = async (query: string = "") => {
       cache: process.env.CACHE_TYPE as RequestCache,
     }
   );
-  const posts: PostType[] = await res.json();
-  return posts;
+  if (res.ok) {
+    const posts: PostType[] = await res.json();
+    return posts;
+  }
+  return [];
 };

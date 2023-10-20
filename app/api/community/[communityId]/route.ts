@@ -7,7 +7,9 @@ export const GET = async (
 ) => {
   try {
     if (req.url) {
-      const { searchParams } = new URL(req.url);
+      const url = new URL(req.url);
+      const searchParams = new URLSearchParams(url.search);
+
       const query = {
         blocked: JSON.parse(searchParams.get("blocked") ?? "[]"),
         skip: JSON.parse(searchParams.get("skip") ?? "0"),

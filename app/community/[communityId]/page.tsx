@@ -5,15 +5,15 @@ import Image from "next/image";
 import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/nextAuth";
+import { redirect } from "next/navigation";
 
 const Community = async ({ params }: { params: { communityId: string } }) => {
   const data = await getCommunityByIdServer(params.communityId);
   const session = await getServerSession(authOptions);
+  if (!data) return redirect("/");
+
   const community = data.communities;
   const posts = data.posts;
-
-  console.log(data);
-
   return (
     <div className="row-start-1 row-end-7 lg:col-start-2 lg:col-end-3 col-start-1 col-end-4 flex lg:min-w-[960px]">
       <div className="flex flex-col bg-neutral-100 flex-1">

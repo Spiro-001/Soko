@@ -5,6 +5,9 @@ export const getCommunityServer = async (query: string = "") => {
       cache: process.env.CACHE_TYPE as RequestCache,
     }
   );
-  const communities: MinimalCommunityType[] = await res.json();
-  return communities;
+  if (res.ok) {
+    const communities: MinimalCommunityType[] = await res.json();
+    return communities;
+  }
+  return [];
 };

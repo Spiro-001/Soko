@@ -6,7 +6,8 @@ import { NextApiResponse } from "next";
 export const GET = async (req: Request, res: NextApiResponse) => {
   try {
     if (req.url) {
-      const { searchParams } = new URL(req.url);
+      const url = new URL(req.url);
+      const searchParams = new URLSearchParams(url.search);
 
       const query = {
         interest: JSON.parse(searchParams.get("interest") ?? "[]"),
