@@ -9,19 +9,17 @@ import React, { useState } from "react";
 const LikeButton = ({
   postLike,
   post,
+  session,
 }: {
   postLike: PostLikeType[];
   post: PostType;
+  session: Session | null;
 }) => {
   const [like, setLike] = useState(
-    postLike?.some(
-      (ele) => ele.userId === "94b54024-efdf-4379-b36c-f2331e8ff079"
-    )
+    postLike?.some((ele) => ele.userId === session?.user?.id ?? "")
   );
   const [likedPost, setLikedPost] = useState(
-    postLike?.find(
-      (ele) => ele.userId === "94b54024-efdf-4379-b36c-f2331e8ff079"
-    )?.id
+    postLike?.find((ele) => ele.userId === session?.user?.id ?? "")?.id
   );
   const [likeNode, setLikeNode] = useState(
     like ? (
@@ -35,16 +33,15 @@ const LikeButton = ({
   console.log(postLike, post);
 
   const handleLike = async () => {
-    const postLike = await createPostLikeClient(
-      "94b54024-efdf-4379-b36c-f2331e8ff079",
-      post.id
-    );
-    setLikeNode(
-      <FavoriteRounded sx={{ height: 22, color: "rgba(239, 68, 68)" }} />
-    );
-    setLikedPost(postLike.id);
-    setTotalLikes((prev) => prev + 1);
-    setLike(true);
+    if (session?.user && session.user.id) {
+      const postLike = await createPostLikeClient(session?.user?.id, post.id);
+      setLikeNode(
+        <FavoriteRounded sx={{ height: 22, color: "rgba(239, 68, 68)" }} />
+      );
+      setLikedPost(postLike.id);
+      setTotalLikes((prev) => prev + 1);
+      setLike(true);
+    }
   };
 
   const handleUnlike = async () => {

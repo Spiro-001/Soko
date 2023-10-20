@@ -3,6 +3,7 @@
 import { InputTags } from "@/components/InputTags";
 import { createCommunityClient } from "@/utils/createCommunityClient";
 import { TextareaAutosize } from "@mui/material";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { MouseEvent, useRef, useState } from "react";
 
@@ -10,20 +11,23 @@ const NewCommunity = () => {
   const [tags, setTags] = useState<Array<string>>([]);
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
+  const session = useSession().data as Session;
 
   const handleSubmit = async (e: MouseEvent) => {
     e.preventDefault();
-    const form = formRef.current;
-    const formData = new FormData(form as HTMLFormElement);
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
-    const newCommunity = await createCommunityClient({
-      title,
-      description,
-      ownerId: "94b54024-efdf-4379-b36c-f2331e8ff079",
-      tags,
-    });
-    router.push(`/community/${newCommunity.id}`);
+    if (session.user && session.user.id) {
+      const form = formRef.current;
+      const formData = new FormData(form as HTMLFormElement);
+      const title = formData.get("title") as string;
+      const description = formData.get("description") as string;
+      const newCommunity = await createCommunityClient({
+        title,
+        description,
+        ownerId: session?.user?.id,
+        tags,
+      });
+      router.push(`/community/${newCommunity.id}`);
+    }
   };
 
   return (

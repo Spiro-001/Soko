@@ -12,9 +12,11 @@ import LikeButton from "./LikeButton";
 const Post = ({
   post,
   setPostsState,
+  session,
 }: {
   post: PostType;
   setPostsState: Dispatch<SetStateAction<PostType[]>>;
+  session: Session | null;
 }) => {
   return (
     <section className="flex flex-col px-4 py-4 w-full gap-y-6 rounded-md bg-white shadow-sm">
@@ -44,7 +46,7 @@ const Post = ({
         {post.content}
       </div>
       <div className="flex justify-between gap-x-1">
-        <LikeButton postLike={post.PostLike} post={post} />
+        <LikeButton postLike={post.PostLike} post={post} session={session} />
         <Link
           href={`/post/${post.id}`}
           className="underline-offset-2 flex gap-x-1 items-center"

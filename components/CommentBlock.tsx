@@ -49,7 +49,11 @@ const CommentBlock = ({
             <span className="whitespace-pre-wrap text-sm break-words">
               {comment.content}
             </span>
-            <CommentOptions comment={comment} setReplies={setReplies} />
+            <CommentOptions
+              comment={comment}
+              setReplies={setReplies}
+              session={session}
+            />
           </div>
           {replies.length > 0 && (
             <div className="flex flex-col gap-y-3">

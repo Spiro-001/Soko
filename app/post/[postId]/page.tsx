@@ -34,7 +34,7 @@ const Post = async ({ params }: { params: { postId: string } }) => {
           <span className="whitespace-pre-wrap">{post.content}</span>
         </div>
         <div className="flex gap-x-1">
-          <LikeButton post={post} postLike={post.PostLike} />
+          <LikeButton post={post} postLike={post.PostLike} session={session} />
           <Link
             href={`/post/${post.id}`}
             className="underline-offset-2 flex gap-x-1 items-center"

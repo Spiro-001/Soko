@@ -5,6 +5,7 @@ import React, { MouseEvent, SyntheticEvent, useRef, useState } from "react";
 import { InputTags } from "./InputTags";
 import { createPostClient } from "@/utils/createPostClient";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const NewPost = ({
   type,
@@ -16,17 +17,18 @@ const NewPost = ({
   const [tags, setTags] = useState<Array<string>>([]);
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
+  const session = useSession().data as Session;
 
   const handleSubmit = async (e: MouseEvent) => {
     e.preventDefault();
-    if (selector.id !== "null") {
+    if (selector.id !== "null" && session.user && session.user.id) {
       const form = formRef.current;
       const formData = new FormData(form as HTMLFormElement);
       const headline = formData.get("headline") as string;
       const content = formData.get("content") as string;
 
       const newPost = await createPostClient({
-        userId: "94b54024-efdf-4379-b36c-f2331e8ff079",
+        userId: session.user.id,
         headline,
         content: content,
         communityId: selector.id,

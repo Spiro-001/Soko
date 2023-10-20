@@ -30,11 +30,16 @@ const MakeComment = ({
 
   const onSubmitComment = async (event: SyntheticEvent) => {
     event.preventDefault();
-    if (commentContent.length != 0) {
+    if (
+      commentContent.length != 0 &&
+      session &&
+      session.user &&
+      session.user.id
+    ) {
       setSubmittingComment(true);
       const comment = await createCommentClient({
         content: commentContent,
-        userId: "94b54024-efdf-4379-b36c-f2331e8ff079",
+        userId: session.user.id,
         postId,
         communityId,
       });

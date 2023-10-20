@@ -15,6 +15,7 @@ declare global {
 
   type Session = {
     user?: {
+      id?: string | null;
       name?: string | null;
       username?: string | null;
       email?: string | null;

@@ -22,7 +22,12 @@ const Feed = ({
       </div>
       <div className="flex flex-col items-center gap-y-4">
         {postsState.map((post: PostType) => (
-          <Post post={post} key={post.id} setPostsState={setPostsState} />
+          <Post
+            post={post}
+            key={post.id}
+            setPostsState={setPostsState}
+            session={session}
+          />
         ))}
       </div>
     </div>
