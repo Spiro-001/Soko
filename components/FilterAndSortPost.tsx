@@ -19,7 +19,7 @@ const FilterAndSortPost = ({
     setPostsState(filteredPosts);
   };
   return (
-    <span className="px-5 py-3 flex gap-x-2">
+    <div className="px-5 py-3 flex gap-x-2">
       {/* New post based on date */}
       <button
         onClick={(e) => (lastFilter !== "new" ? handleFilterSort("new") : null)}
@@ -50,7 +50,7 @@ const FilterAndSortPost = ({
         <Star sx={{ color: "gold" }} />
         <span>Top</span>
       </button>
-    </span>
+    </div>
   );
 };
 
