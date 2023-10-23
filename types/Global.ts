@@ -29,7 +29,8 @@ declare global {
   type MinimalUserType = {
     id: string;
     username: string;
-    email?: string;
+    email: string;
+    image: string;
   };
 
   type NewPostType = {

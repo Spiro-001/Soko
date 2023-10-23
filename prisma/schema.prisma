@@ -15,6 +15,7 @@ model User {
   username        String  @unique
   password_digest String?
   email           String  @unique
+  image           String  @default("/no-profile.png")
 
   Posts             Post[]
   Comments          Comment[]

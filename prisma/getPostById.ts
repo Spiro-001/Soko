@@ -34,6 +34,7 @@ export const getPostById = async (id: string) => {
               select: {
                 id: true,
                 username: true,
+                image: true,
               },
             },
             Replies: {
@@ -49,6 +50,7 @@ export const getPostById = async (id: string) => {
                   select: {
                     id: true,
                     username: true,
+                    image: true,
                   },
                 },
                 Replies: {
@@ -64,6 +66,7 @@ export const getPostById = async (id: string) => {
                       select: {
                         id: true,
                         username: true,
+                        image: true,
                       },
                     },
                     Replies: {
@@ -81,6 +84,7 @@ export const getPostById = async (id: string) => {
                           select: {
                             id: true,
                             username: true,
+                            image: true,
                           },
                         },
                         Replies: {
@@ -98,6 +102,7 @@ export const getPostById = async (id: string) => {
                               select: {
                                 id: true,
                                 username: true,
+                                image: true,
                               },
                             },
                             Replies: {
@@ -115,6 +120,7 @@ export const getPostById = async (id: string) => {
                                   select: {
                                     id: true,
                                     username: true,
+                                    image: true,
                                   },
                                 },
                                 Replies: {

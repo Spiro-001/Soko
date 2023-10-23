@@ -14,12 +14,11 @@ const CommentBlock = ({
   session: Session | null;
 }) => {
   const [replies, setReplies] = useState<ReplyType[]>(comment.Replies);
-
   return (
     <div className="flex flex-col h-full w-full">
       <div className="flex gap-x-3 items-center text-sm pb-2">
         <Image
-          src={session?.user?.image ?? "/no-profile.png"}
+          src={comment.User.image ?? "/no-profile.png"}
           width={34}
           height={34}
           alt="profile"
