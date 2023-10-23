@@ -48,7 +48,10 @@ const ProfileNavBlock = ({ session }: { session: Session | null }) => {
         </span>
       </button>
       {open && (
-        <ul className="absolute top-full bg-white w-full px-2 py-2 flex flex-col rounded-b-md border-neutral-100 border-x border-b shadow-md box-border text-sm">
+        <ul
+          className="absolute top-full bg-white w-full px-2 py-2 flex flex-col rounded-b-md border-neutral-100 border-x border-b shadow-md box-border text-sm"
+          onMouseLeave={handleOpen}
+        >
           <li className="flex">
             <Link
               href="/profile"

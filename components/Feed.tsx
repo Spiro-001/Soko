@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
+import FilterAndSortPost from "./FilterAndSortPost";
 
 const Feed = ({
   posts,
@@ -18,7 +19,7 @@ const Feed = ({
         <CreatePost session={session} />
       </div>
       <div className="flex rounded-md shadow-sm bg-white">
-        <span className="px-5 py-3">Filter & Sort</span>
+        <FilterAndSortPost setPostsState={setPostsState} />
       </div>
       <div className="flex flex-col items-center gap-y-4">
         {postsState.map((post: PostType) => (
