@@ -9,7 +9,7 @@ export default async function Home() {
   const posts = await getPostServer(
     `blocked=[]&skip=0&take=${process.env.NEXT_PUBLIC_TAKE_POST}`
   );
-  const session = await getServerSession(authOptions);
+  const session = (await getServerSession(authOptions)) as Session;
   return (
     <>
       <div className="row-start-1 row-end-7 col-start-1 col-end-2 flex-col items-center pt-8 pb-16 px-4 gap-4 lg:flex hidden"></div>

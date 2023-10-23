@@ -5,9 +5,9 @@ import React, { useEffect } from "react";
 
 const NotFound = () => {
   const router = useRouter();
-  // useEffect(() => {
-  //   router.push("/");
-  // }, []);
+  useEffect(() => {
+    router.push("/");
+  }, []);
   return <div></div>;
 };
 

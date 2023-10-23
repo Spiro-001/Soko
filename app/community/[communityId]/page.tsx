@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 
 const Community = async ({ params }: { params: { communityId: string } }) => {
   const data = await getCommunityByIdServer(params.communityId);
-  const session = await getServerSession(authOptions);
+  const session = (await getServerSession(authOptions)) as Session;
   if (!data) return redirect("/");
 
   const community = data.communities;
