@@ -14,14 +14,14 @@ declare global {
   };
 
   type Session = {
-    user?: {
-      id?: string | null;
-      name?: string | null;
-      username?: string | null;
-      email?: string | null;
-      image?: string | null;
-      createdAt?: string | null;
-      updatedAt?: string | null;
+    user: {
+      id: string;
+      name: string;
+      username: string;
+      email: string;
+      image: string;
+      createdAt: string;
+      updatedAt: string;
     };
     expires: ISODateString;
   };
