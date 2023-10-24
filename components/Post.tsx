@@ -19,7 +19,7 @@ const Post = ({
   session: Session | null;
 }) => {
   return (
-    <section className="flex flex-col px-4 py-4 w-full gap-y-6 rounded-md bg-white shadow-sm">
+    <section className="flex flex-col px-4 py-4 w-full gap-y-6 rounded-md bg-white shadow-sm border border-neutral-200">
       <div className="flex flex-wrap gap-y-2 gap-x-1 ">
         <div className="flex gap-y-2 items-center">
           <Link

@@ -7,9 +7,9 @@ import Image from "next/image";
 import React from "react";
 
 const Profile = async () => {
-  const session = await getServerSession(authOptions);
+  const session = (await getServerSession(authOptions)) as Session;
   if (!session?.user) return redirect("/");
-  const user = await getUserByIdServer((session as Session).user.id);
+  const user = await getUserByIdServer(session.user.id);
   if (!user) return redirect("/");
 
   return (
@@ -28,7 +28,7 @@ const Profile = async () => {
               width={100}
               height={100}
               alt="profile"
-              className="rounded-full text-lg z-20"
+              className="rounded-full text-lg z-20 border-4 border-green-300"
               id="profile-picture"
             />
             <div
@@ -49,7 +49,7 @@ const Profile = async () => {
           </div>
         </div>
       </div>
-      <UserNav />
+      <UserNav user={user} session={session} />
       {/* <div className="flex flex-col gap-y-3 border border-black">
         {user.JoinedCommunities.map((community) => (
           <div key={community.Community.id} className="flex flex-col gap-y-1">

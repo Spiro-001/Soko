@@ -19,7 +19,7 @@ const Feed = ({
         <CreatePost session={session} />
       </div>
       <div className="flex rounded-md shadow-sm bg-white">
-        <FilterAndSortPost setPostsState={setPostsState} />
+        <FilterAndSortPost setPostsState={setPostsState} id="" />
       </div>
       <div className="flex flex-col items-center gap-y-4">
         {postsState.map((post: PostType) => (

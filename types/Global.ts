@@ -9,6 +9,7 @@ declare global {
     email?: string;
     OwnedCommunities: MinimalCommunityType[];
     JoinedCommunities: { Community: MinimalCommunityType }[];
+    Posts: PostType[];
     createdAt: string;
     updatedAt: string;
   };

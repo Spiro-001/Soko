@@ -61,6 +61,8 @@ export const getPostBySearch = async ({
       select: {
         id: true,
         tags: true,
+        headline: true,
+        userId: true,
         content: true,
         User: {
           select: {
@@ -68,6 +70,7 @@ export const getPostBySearch = async ({
             username: true,
           },
         },
+        PostLike: true,
         Comments: {
           select: {
             id: true,

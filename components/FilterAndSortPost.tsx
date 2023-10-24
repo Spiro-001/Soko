@@ -5,8 +5,10 @@ import { FiberNew, Star, Whatshot } from "@mui/icons-material";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
 const FilterAndSortPost = ({
+  id,
   setPostsState,
 }: {
+  id: string;
   setPostsState: Dispatch<SetStateAction<PostType[]>>;
 }) => {
   const [lastFilter, setLastFilter] = useState("new");
@@ -14,7 +16,7 @@ const FilterAndSortPost = ({
     setLastFilter(by);
     setPostsState([]);
     const filteredPosts = await getPostByFilterClient(
-      `blocked=[]&skip=0&take=${process.env.NEXT_PUBLIC_TAKE_POST}&by=${by}`
+      `blocked=[]&skip=0&take=${process.env.NEXT_PUBLIC_TAKE_POST}&by=${by}&id=${id}`
     );
     setPostsState(filteredPosts);
   };

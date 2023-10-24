@@ -5,14 +5,24 @@ export const getPostByFilter = async ({
   skip = 0,
   take = parseInt(process.env.NEXT_PUBLIC_TAKE_POST ?? "10"),
   by,
+  id,
 }: {
   blocked: string[];
   skip: number;
   take: number;
   by: "new" | "hot" | "top" | any;
+  id: string;
 }) => {
   let byQuery = {};
   let hotQuery = {};
+  let byUserId = {};
+  if (id) {
+    byUserId = {
+      AND: {
+        userId: id,
+      },
+    };
+  }
   switch (by) {
     case "new":
       byQuery = {
@@ -62,6 +72,7 @@ export const getPostByFilter = async ({
             in: blocked,
           },
         },
+        ...byUserId,
       },
       select: {
         id: true,

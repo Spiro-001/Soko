@@ -12,6 +12,7 @@ export const GET = async (req: Request, res: NextApiResponse) => {
         skip: JSON.parse(searchParams.get("skip") ?? "0"),
         take: JSON.parse(searchParams.get("take") ?? "10"),
         by: searchParams.get("by") ?? "new",
+        id: searchParams.get("id") ?? "",
       };
 
       const posts = await getPostByFilter(query);

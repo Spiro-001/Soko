@@ -4,7 +4,7 @@ import { HomeRounded, PlayArrowRounded, ViewStream } from "@mui/icons-material";
 import React, { useState } from "react";
 import ProfileViewController from "./ProfileViewController";
 
-const UserNav = () => {
+const UserNav = ({ user, session }: { user: UserType; session: Session }) => {
   const [currentView, setCurrentView] = useState("home");
 
   const handleChangeView = (type: string) => {
@@ -45,7 +45,7 @@ const UserNav = () => {
         </div>
       </div>
 
-      <ProfileViewController type={currentView} />
+      <ProfileViewController type={currentView} user={user} session={session} />
     </>
   );
 };
