@@ -21,7 +21,7 @@ const Profile = async () => {
           className="object-cover rounded-md"
           fill
         />
-        <div className="flex absolute -bottom-11 left-6 items-end">
+        <div className="flex absolute -bottom-11 left-6 items-end w-full box-content">
           <div className="flex relative z-10 items-center justify-center">
             <Image
               src={session.user.image ?? "/no-profile.png"}
@@ -36,11 +36,16 @@ const Profile = async () => {
               style={{ height: 110, width: 110 }}
             />
           </div>
-          <div className="flex gap-y-1 py-1 relative -left-8 items-center gap-x-4">
-            <span className="pl-12 pr-6 py-1 bg-blue-400 text-white font-semibold w-fit border-r-4 border-blue-200">
+          <div className="flex gap-y-1 py-1 relative -left-8 flex-1">
+            <span className="pl-12 pr-6 py-1 bg-blue-400 text-white font-semibold w-fit border-r-4 border-blue-200 shadow-sm">
               {user.username}
             </span>
-            <span className="text-sm">Founder of @BASEMENT</span>
+            <span className="text-sm bg-sky-100 flex items-center px-6 rounded-r-md shadow-sm">
+              Founder of @BASEMENT
+            </span>
+            <span className="ml-auto text-sm text-neutral-400 flex items-center">
+              New York City, NY
+            </span>
           </div>
         </div>
       </div>

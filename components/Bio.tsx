@@ -1,3 +1,4 @@
+import { Link } from "@mui/material";
 import React from "react";
 
 const Bio = ({ bio }: { bio: string }) => {
@@ -6,15 +7,23 @@ const Bio = ({ bio }: { bio: string }) => {
     const formattedBio = bioSplit.map((word, idx) => {
       if (word.startsWith("@")) {
         return (
-          <b key={word + idx} className="text-blue-400">
+          <Link
+            href={`/at?name=${word}`}
+            key={word + idx}
+            className="text-blue-400 no-underline font-bold text-sm"
+          >
             {word}
-          </b>
+          </Link>
         );
       } else if (word.startsWith("#")) {
         return (
-          <b key={word + idx} className="text-red-400">
+          <Link
+            href={`/hashtag?name=${word}`}
+            key={word + idx}
+            className="text-red-400 no-underline font-bold text-sm"
+          >
             {word}
-          </b>
+          </Link>
         );
       } else {
         return word;
