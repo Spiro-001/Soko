@@ -29,6 +29,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+earth.mp4
 
 # typescript
 *.tsbuildinfo
