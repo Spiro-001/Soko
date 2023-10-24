@@ -7,17 +7,21 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 const FilterAndSortPost = ({
   id,
   setPostsState,
+  setLoading,
 }: {
   id: string;
   setPostsState: Dispatch<SetStateAction<PostType[]>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }) => {
   const [lastFilter, setLastFilter] = useState("new");
   const handleFilterSort = async (by: string) => {
+    setLoading(true);
     setLastFilter(by);
     setPostsState([]);
     const filteredPosts = await getPostByFilterClient(
       `blocked=[]&skip=0&take=${process.env.NEXT_PUBLIC_TAKE_POST}&by=${by}&id=${id}`
     );
+    setLoading(false);
     setPostsState(filteredPosts);
   };
   return (

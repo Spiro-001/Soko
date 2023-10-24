@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Post from "./Post";
 import FilterAndSortPost from "./FilterAndSortPost";
 import ProfilePostSearch from "./ProfilePostSearch";
+import { CircularProgress } from "@mui/material";
 
 const ProfilePost = ({
   posts,
@@ -12,22 +13,51 @@ const ProfilePost = ({
   posts: PostType[];
   session: Session;
 }) => {
-  const [postsState, setPostsState] = useState(posts);
+  const [postsState, setPostsState] = useState<PostType[]>(posts);
+  const [loading, setLoading] = useState(false);
+
+  const renderPosts = () => {
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center py-8">
+          <CircularProgress />
+        </div>
+      );
+    } else {
+      if (postsState.length === 0) {
+        return (
+          <div className="flex items-center justify-center py-14 text-lg text-neutral-500">
+            {"There's nothing here right now. Come back later!"}
+          </div>
+        );
+      } else {
+        return postsState.map((post) => (
+          <Post
+            post={post}
+            session={session}
+            setPostsState={setPostsState}
+            key={post.id}
+          />
+        ));
+      }
+    }
+  };
 
   return (
-    <div className="flex flex-col gap-y-2">
+    <div className="flex flex-col gap-y-3">
       <div className="flex justify-between items-center border border-neutral-200 rounded-md shadow-sm">
-        <FilterAndSortPost setPostsState={setPostsState} id={session.user.id} />
-        <ProfilePostSearch setPostsState={setPostsState} />
-      </div>
-      {postsState.map((post) => (
-        <Post
-          post={post}
-          session={session}
+        <FilterAndSortPost
           setPostsState={setPostsState}
-          key={post.id}
+          id={session.user.id}
+          setLoading={setLoading}
         />
-      ))}
+        <ProfilePostSearch
+          id={session.user.id}
+          setPostsState={setPostsState}
+          setLoading={setLoading}
+        />
+      </div>
+      {renderPosts()}
     </div>
   );
 };

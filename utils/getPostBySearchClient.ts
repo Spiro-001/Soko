@@ -1,6 +1,6 @@
-export const getPostBySearchClient = async (query: string) => {
+export const getPostBySearchClient = async (query: string, id: string) => {
   const res = await fetch(
-    `/api/search?blocked=[]&take=10&skip=0&query=${query}`,
+    `/api/search?blocked=[]&take=10&skip=0&query=${query}&id=${id}`,
     {
       cache: "no-store",
     }

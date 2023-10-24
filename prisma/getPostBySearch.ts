@@ -2,16 +2,32 @@ import { prisma } from ".";
 
 export const getPostBySearch = async ({
   query,
+  id,
   blocked,
   skip = 0,
   take = parseInt(process.env.NEXT_PUBLIC_TAKE_POST_BY_SEARCH ?? "10"),
 }: {
   query: string;
+  id: string;
   blocked: string[];
   skip: number;
   take: number;
 }) => {
   try {
+    console.log(id);
+    const date = new Date(query);
+    let dateQuery = {};
+    if (date.valueOf()) {
+      dateQuery = {
+        createdAt: {
+          gte: new Date(query),
+          lte: new Date(
+            new Date(query).setMinutes(new Date(query).getMinutes() + 1)
+          ),
+        },
+      };
+    }
+
     const posts = await prisma.post.findMany({
       orderBy: [
         {
@@ -21,6 +37,9 @@ export const getPostBySearch = async ({
       skip,
       take,
       where: {
+        User: {
+          id,
+        },
         NOT: {
           id: {
             in: blocked,
@@ -53,8 +72,30 @@ export const getPostBySearch = async ({
               },
             },
             {
-              content: query,
+              content: {
+                contains: query,
+              },
             },
+            {
+              headline: {
+                contains: query,
+              },
+            },
+            {
+              Community: {
+                OR: [
+                  {
+                    id: {
+                      equals: query,
+                    },
+                    title: {
+                      contains: query,
+                    },
+                  },
+                ],
+              },
+            },
+            dateQuery,
           ],
         },
       },
