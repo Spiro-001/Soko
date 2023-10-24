@@ -14,16 +14,13 @@ export const getPostBySearch = async ({
   take: number;
 }) => {
   try {
-    console.log(id);
     const date = new Date(query);
     let dateQuery = {};
     if (date.valueOf()) {
       dateQuery = {
         createdAt: {
           gte: new Date(query),
-          lte: new Date(
-            new Date(query).setMinutes(new Date(query).getMinutes() + 1)
-          ),
+          lte: new Date(new Date(query).setHours(23, 59, 59, 999)),
         },
       };
     }

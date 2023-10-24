@@ -15,7 +15,7 @@ import { redirect } from "next/navigation";
 
 const Post = async ({ params }: { params: { postId: string } }) => {
   const post = await getPostByIdServer(params.postId);
-  const session = await getServerSession(authOptions);
+  const session = (await getServerSession(authOptions)) as Session;
   if (!post) return redirect("/");
 
   return (
