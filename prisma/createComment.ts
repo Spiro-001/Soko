@@ -26,6 +26,7 @@ export const createComment = async (comment: {
           select: {
             id: true,
             username: true,
+            image: true,
           },
         },
         Replies: true,

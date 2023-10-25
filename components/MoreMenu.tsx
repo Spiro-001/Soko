@@ -2,6 +2,7 @@
 
 import { deletePostClient } from "@/utils/deletePostClient";
 import { Delete, Edit, MoreVert } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 import React, { Dispatch, MouseEvent, SetStateAction, useState } from "react";
 
 const MoreMenu = ({
@@ -9,8 +10,9 @@ const MoreMenu = ({
   setPostsState,
 }: {
   post: PostType;
-  setPostsState: Dispatch<SetStateAction<PostType[]>>;
+  setPostsState?: Dispatch<SetStateAction<PostType[]>>;
 }) => {
+  const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpenMenu = (e: MouseEvent) => {
@@ -20,9 +22,16 @@ const MoreMenu = ({
   const handleDelete = async (e: MouseEvent) => {
     try {
       const deletedPost = await deletePostClient(post.id);
-      setPostsState((prev: PostType[]) => {
-        return prev.filter((post) => post.id !== deletedPost.id);
-      });
+      console.log(deletePostClient);
+      if (setPostsState) {
+        setPostsState((prev: PostType[]) => {
+          return prev.filter((post) => post.id !== deletedPost.id);
+        });
+      } else {
+        // This most likely means that we are being used in the /post route which doesn't require a postsState
+        router.refresh();
+        router.push("/");
+      }
       setOpen(false);
     } catch (error) {
       console.log(error);

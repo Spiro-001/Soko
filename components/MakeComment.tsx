@@ -43,6 +43,7 @@ const MakeComment = ({
         postId,
         communityId,
       });
+
       setSubmittingComment(false);
       setComments((prev: CommentType[]) => [comment, ...prev]);
       setCommentContent("");
