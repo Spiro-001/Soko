@@ -9,8 +9,8 @@ import React from "react";
 
 const Track = () => {
   return (
-    <div className="flex flex-col gap-y-3 border border-neutral-200 px-2 py-2 rounded-md shadow-sm relative">
-      <div className="absolute -top-3.5 right-3 bg-white px-2">
+    <div className="flex flex-col gap-y-3 border border-neutral-200 px-2 py-2 rounded-md shadow-sm relative bg-white">
+      <div className="absolute -top-3.5 right-3 px-2">
         <span className=" bg-red-300 px-2 py-0.5 text-xs rounded-md font-semibold text-white">
           NEW
         </span>

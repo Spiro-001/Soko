@@ -27,7 +27,9 @@ const ProfilePost = ({
       if (postsState.length === 0) {
         return (
           <div className="flex items-center justify-center py-14 text-lg text-neutral-500">
-            {"There's nothing here right now. Come back later!"}
+            <span className="px-4 py-1 bg-white rounded-md border border-neutral-200 shadow-sm">
+              {"There's nothing here right now. Come back later!"}
+            </span>
           </div>
         );
       } else {
@@ -45,7 +47,7 @@ const ProfilePost = ({
 
   return (
     <div className="flex flex-col gap-y-3">
-      <div className="flex justify-between items-center border border-neutral-200 rounded-md shadow-sm">
+      <div className="flex justify-between items-center border border-neutral-200 rounded-md shadow-sm bg-white">
         <FilterAndSortPost
           setPostsState={setPostsState}
           id={session.user.id}

@@ -36,8 +36,8 @@ const Submit = () => {
         (community) => community.id === searchParams.get("community")
       );
       setSelector({
-        id: selectedCommunityBySearchParam[0].id ?? "public",
-        title: selectedCommunityBySearchParam[0].title ?? "public",
+        id: selectedCommunityBySearchParam[0]?.id ?? "public",
+        title: selectedCommunityBySearchParam[0]?.title ?? "public",
       });
     };
     getCommunityList();

@@ -16,7 +16,9 @@ model User {
   password_digest String?
   email           String  @unique
   image           String  @default("/no-profile.png")
+  profileId       String  @unique
 
+  Profile           Profile         @relation(fields: [profileId], references: [id], onDelete: Cascade)
   Posts             Post[]
   Comments          Comment[]
   OwnedCommunities  Community[]     @relation("ownedCommunities")
@@ -26,6 +28,25 @@ model User {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @default(now()) @updatedAt
   PostLike  PostLike[]
+}
+
+model Profile {
+  id   String @id @unique @default(uuid())
+  User User?
+
+  bio     String?
+  haveBio Boolean
+
+  featuredTrack     String?
+  haveFeaturedTrack Boolean
+
+  featuredVideo     String?
+  haveFeaturedVideo Boolean
+
+  backgroundImage       String?
+  backgroundColor       String  @default("rgba(0,0,0,0)")
+  profileContainerImage String?
+  profileContainerColor String  @default("rgb(255,255,255)")
 }
 
 model Post {

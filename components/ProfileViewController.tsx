@@ -1,8 +1,7 @@
 import React from "react";
 import ProfileHome from "./ProfileHome";
 import ProfilePost from "./ProfilePost";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/nextAuth";
+import ProfileMedia from "./ProfileMedia";
 
 const ProfileViewController = ({
   type,
@@ -22,7 +21,7 @@ const ProfileViewController = ({
         return <ProfilePost posts={user.Posts} session={session} />;
         break;
       case "media":
-        return <div>{type}</div>;
+        return <ProfileMedia />;
         break;
       default:
         break;

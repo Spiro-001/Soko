@@ -13,8 +13,8 @@ const UserNav = ({ user, session }: { user: UserType; session: Session }) => {
 
   return (
     <>
-      <div className="flex border-b border-neutral-300">
-        <div className="flex gap-x-2 pt-2 pb-3">
+      <div className="flex">
+        <div className="flex gap-x-2 py-2 px-2 bg-white rounded-md border border-neutral-200 shadow-sm">
           <button
             className={`flex items-center ${
               currentView === "home" ? "bg-blue-100" : "bg-none"
