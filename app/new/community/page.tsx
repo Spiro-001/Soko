@@ -23,7 +23,7 @@ const NewCommunity = () => {
       const newCommunity = await createCommunityClient({
         title,
         description,
-        ownerId: session?.user?.id,
+        ownerId: session.user.id,
         tags,
       });
       router.push(`/community/${newCommunity.id}`);
