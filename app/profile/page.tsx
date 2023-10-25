@@ -12,18 +12,22 @@ const Profile = async () => {
   const user = await getUserByIdServer(session.user.id);
   if (!user) return redirect("/");
 
+  const backgroundImage = ""; // /background-seamless.png
+  const backgroundProfile = ""; // /profile-background.jpg /background-profile.jpg
+  const backgroundColor = ""; // rgb(95 12 190)
+
   return (
     <div
       className="row-start-1 row-end-7 col-start-1 col-end-4 w-full mx-auto flex-1 grid grid-flow-row grid-rows-6 grid-cols-[minmax(0,_1fr)_minmax(min-content,_2fr)_minmax(0,_1fr)] px-8 py-4"
       style={{
-        backgroundImage: 'url("/background-seamless.png")',
+        backgroundImage: `url("${backgroundImage}")`,
       }}
     >
       <div
         className="flex flex-col pt-4 pb-16 px-4 gap-4 bg-white shadow-md rounded-md row-start-1 row-end-7 col-start-2 col-end-3"
         style={{
-          backgroundImage: 'url("/profile-background.jpg")',
-          backgroundColor: "rgb(95 125 190)",
+          backgroundImage: `url("${backgroundProfile}")`,
+          backgroundColor: backgroundColor,
         }}
       >
         <div className="h-56 w-full flex relative rounded-md mb-10">
@@ -33,7 +37,7 @@ const Profile = async () => {
             className="object-cover rounded-md"
             fill
           />
-          <div className="flex absolute -bottom-11 left-6 items-end w-full box-content">
+          <div className="flex absolute -bottom-10 left-6 items-end w-full box-content">
             <div className="flex relative z-10 items-center justify-center">
               <Image
                 src={session.user.image ?? "/no-profile.png"}
@@ -46,10 +50,10 @@ const Profile = async () => {
               <div
                 className="bg-white absolute rounded-full"
                 style={{
-                  height: 110,
-                  width: 110,
-                  backgroundImage: 'url("/profile-background.jpg")',
-                  backgroundColor: "rgb(95 125 190)",
+                  height: 108,
+                  width: 108,
+                  backgroundImage: `url("${backgroundProfile}")`,
+                  backgroundColor: backgroundColor,
                 }}
               />
             </div>
@@ -60,7 +64,7 @@ const Profile = async () => {
               <span className="text-sm bg-sky-100 flex items-center px-6 rounded-r-md shadow-sm">
                 Founder of @BASEMENT
               </span>
-              <span className="ml-auto text-sm text-neutral-400 flex items-center bg-white border border-neutral-200 px-2 rounded-md">
+              <span className="ml-auto text-sm text-neutral-400 flex items-center bg-white border border-neutral-200 px-3 rounded-md shadow-sm">
                 New York City, NY
               </span>
             </div>

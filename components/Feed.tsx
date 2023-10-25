@@ -43,7 +43,7 @@ const Feed = ({
     }
   };
   return (
-    <div className="flex flex-col gap-y-4 w-full">
+    <div className="flex flex-col gap-y-4 w-full px-8 py-4">
       <div className="flex bg-white rounded-md shadow-sm border border-neutral-200">
         <CreatePost session={session} />
       </div>
