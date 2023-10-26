@@ -2,9 +2,7 @@ import React from "react";
 import Nav from "./Nav";
 import { authOptions } from "@/lib/nextAuth";
 import { getServerSession } from "next-auth";
-import Login from "./Login";
 import Provider from "./Provider";
-import ProtectRoute from "./ProtectRoute";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const session = (await getServerSession(authOptions)) as Session;

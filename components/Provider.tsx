@@ -14,6 +14,9 @@ const Provider = ({
 }) => {
   const pathName = usePathname();
   const router = useRouter();
+
+  console.log(session);
+
   if (!session && pathName !== "/login") router.push("/login");
   if (!session) {
     return (
