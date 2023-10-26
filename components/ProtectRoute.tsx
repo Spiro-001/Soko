@@ -6,7 +6,6 @@ import Login from "./Login";
 
 const ProtectRoute = ({ children }: { children: ReactNode }) => {
   const session = useSession();
-  console.log(session);
   if (session.status === "unauthenticated") {
     return (
       <main className="min-h-screen flex flex-col bg-neutral-100">
