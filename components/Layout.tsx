@@ -7,7 +7,7 @@ import Provider from "./Provider";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const session = (await getServerSession(authOptions)) as Session;
-  console.log(session);
+
   if (session) {
     return (
       <Provider session={session}>
