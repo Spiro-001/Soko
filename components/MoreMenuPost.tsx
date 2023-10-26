@@ -1,9 +1,17 @@
 "use client";
 
 import { deletePostClient } from "@/utils/deletePostClient";
+import { patchCommentClient } from "@/utils/patchCommentClient";
+import { patchPostClient } from "@/utils/patchPostClient";
 import { Delete, Edit, MoreVert } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import React, { Dispatch, MouseEvent, SetStateAction, useState } from "react";
+import React, {
+  Dispatch,
+  MouseEvent,
+  ReactNode,
+  SetStateAction,
+  useState,
+} from "react";
 
 const MoreMenuPost = ({
   post,
@@ -38,7 +46,34 @@ const MoreMenuPost = ({
     }
   };
 
-  const handleEdit = (e: MouseEvent) => {};
+  const handleEdit = (e: MouseEvent) => {
+    const postContainer = document.getElementById(`${post.id}-container`);
+    const postContent = document.getElementById(`${post.id}-content`);
+    const postHeadline = document.getElementById(`${post.id}-headline`);
+    if (postContainer && postContent && postHeadline) {
+      postContent.contentEditable = "true";
+      postHeadline.contentEditable = "true";
+      const onClickOutside = async (event: any) => {
+        if (!postContainer.contains(event.target)) {
+          postContent.contentEditable = "false";
+          postHeadline.contentEditable = "false";
+          document.removeEventListener("mousedown", onClickOutside);
+          const newPostContent = postContent.innerText;
+          const newPostHeadline = postHeadline.innerText;
+          if (
+            newPostContent !== post.content ||
+            newPostHeadline !== post.headline
+          ) {
+            const editPost = await patchPostClient(post.id, {
+              headline: newPostHeadline,
+              content: newPostContent,
+            });
+          }
+        }
+      };
+      document.addEventListener("mousedown", onClickOutside);
+    }
+  };
 
   return (
     <div className="relative">

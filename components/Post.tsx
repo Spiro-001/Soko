@@ -8,6 +8,7 @@ import Link from "next/link";
 import React, { Dispatch, SetStateAction } from "react";
 import MoreMenu from "./MoreMenuPost";
 import LikeButton from "./LikeButton";
+import { isUpdated } from "@/utils/isUpdated";
 
 const Post = ({
   post,
@@ -19,7 +20,10 @@ const Post = ({
   session: Session | null;
 }) => {
   return (
-    <section className="flex flex-col px-4 py-4 w-full gap-y-6 rounded-md bg-white shadow-sm border border-neutral-200">
+    <section
+      className="flex flex-col px-4 py-4 w-full gap-y-6 rounded-md bg-white shadow-sm border border-neutral-200"
+      id={`${post.id}-container`}
+    >
       <div className="flex flex-wrap gap-y-2 gap-x-1 ">
         <div className="flex gap-y-2 items-center">
           <Link
@@ -34,15 +38,24 @@ const Post = ({
           >
             {post.id}
           </Link>
+          {isUpdated(post.createdAt, post.updatedAt) && (
+            <span className="text-xs px-2 text-neutral-400">(edited)</span>
+          )}
         </div>
         <div className="ml-auto flex gap-x-2 flex-wrap justify-end gap-y-1 text-xs items-center">
           <MoreMenu setPostsState={setPostsState} post={post} />
         </div>
       </div>
-      <div className="px-3 py-3 rounded-sm whitespace-pre-wrap font-bold border-b border-neutral-200">
+      <div
+        className="px-3 py-3 rounded-sm whitespace-pre-wrap font-bold border-b border-neutral-200"
+        id={`${post.id}-headline`}
+      >
         {post.headline}
       </div>
-      <div className="bg-neutral-50 px-4 py-4 rounded-sm whitespace-pre-wrap">
+      <div
+        className="bg-neutral-50 px-4 py-4 rounded-sm whitespace-pre-wrap"
+        id={`${post.id}-content`}
+      >
         {post.content}
       </div>
       <div className="flex justify-between gap-x-1">
