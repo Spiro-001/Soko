@@ -10,7 +10,7 @@ const LoadingPosts = ({ amount }: { amount: number }) => {
   return (
     <div className="flex flex-col w-full gap-4 flex-1">
       <div className="flex bg-white rounded-md shadow-sm">
-        <div className="px-5 py-3 flex gap-x-4 items-center w-full">
+        <div className="px-5 py-3 flex gap-x-4 items-center w-full border border-neutral-200">
           <Skeleton variant="circular" width={45} height={45} />
           <div className="flex-1">
             <input
@@ -24,7 +24,7 @@ const LoadingPosts = ({ amount }: { amount: number }) => {
           </div>
         </div>
       </div>
-      <div className="flex bg-white rounded-md shadow-sm">
+      <div className="flex bg-white rounded-md shadow-sm border border-neutral-200">
         <div className="px-5 py-3 flex gap-x-2">
           <button className="bg-blue-100 px-3 py-1 flex gap-x-2 rounded-md">
             <FiberNew sx={{ color: "purple" }} />

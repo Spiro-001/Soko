@@ -10,6 +10,7 @@ export default async function Home() {
     `blocked=[]&skip=0&take=${process.env.NEXT_PUBLIC_TAKE_POST}`
   );
   const session = (await getServerSession(authOptions)) as Session;
+  console.log(session);
 
   return (
     <>

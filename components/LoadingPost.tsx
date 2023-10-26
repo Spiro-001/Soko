@@ -3,7 +3,7 @@ import React from "react";
 
 const LoadingPost = () => {
   return (
-    <section className="flex flex-col px-4 py-4 w-full gap-y-6 rounded-md bg-white shadow-sm">
+    <section className="flex flex-col px-4 py-4 w-full gap-y-6 rounded-md bg-white shadow-sm border border-neutral-200">
       <div className="flex gap-2 items-center">
         <Skeleton variant="text" sx={{ fontSize: "1.5rem" }} width={50} />
         <Skeleton variant="text" sx={{ fontSize: "1.5rem" }} width={150} />
