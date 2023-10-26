@@ -42,6 +42,7 @@ const Comments = ({
               key={comment.id}
               comment={comment}
               session={session}
+              setComments={setComments}
             />
           ))}
           {comments.length > 10 && <button className="w-fit">Load More</button>}

@@ -1,16 +1,16 @@
 "use client";
 
-import { deletePostClient } from "@/utils/deletePostClient";
+import { deleteCommentClient } from "@/utils/deleteCommentClient";
 import { Delete, Edit, MoreVert } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import React, { Dispatch, MouseEvent, SetStateAction, useState } from "react";
 
-const MoreMenu = ({
-  post,
-  setPostsState,
+const MoreMenuComment = ({
+  comment,
+  setCommentsState,
 }: {
-  post: PostType;
-  setPostsState?: Dispatch<SetStateAction<PostType[]>>;
+  comment: CommentType;
+  setCommentsState?: Dispatch<SetStateAction<CommentType[]>>;
 }) => {
   const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
@@ -21,11 +21,10 @@ const MoreMenu = ({
 
   const handleDelete = async (e: MouseEvent) => {
     try {
-      const deletedPost = await deletePostClient(post.id);
-      console.log(deletePostClient);
-      if (setPostsState) {
-        setPostsState((prev: PostType[]) => {
-          return prev.filter((post) => post.id !== deletedPost.id);
+      const deletedComment = await deleteCommentClient(comment.id);
+      if (setCommentsState) {
+        setCommentsState((prev: CommentType[]) => {
+          return prev.filter((comment) => comment.id !== deletedComment.id);
         });
       } else {
         // This most likely means that we are being used in the /post route which doesn't require a postsState
@@ -68,4 +67,4 @@ const MoreMenu = ({
   );
 };
 
-export default MoreMenu;
+export default MoreMenuComment;

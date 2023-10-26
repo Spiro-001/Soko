@@ -12,7 +12,7 @@ import LikeButton from "@/components/LikeButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/nextAuth";
 import { redirect } from "next/navigation";
-import MoreMenu from "@/components/MoreMenu";
+import MoreMenuPost from "@/components/MoreMenuPost";
 
 const Post = async ({ params }: { params: { postId: string } }) => {
   const post = await getPostByIdServer(params.postId);
@@ -34,7 +34,7 @@ const Post = async ({ params }: { params: { postId: string } }) => {
               {post.id}
             </span>
             <div className="ml-auto flex gap-x-2 flex-wrap justify-end gap-y-1 text-xs items-center">
-              <MoreMenu post={post} />
+              <MoreMenuPost post={post} />
             </div>
           </div>
           <div className="px-3 py-3 rounded-sm whitespace-pre-wrap font-bold border-b border-neutral-200">

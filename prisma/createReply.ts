@@ -27,6 +27,7 @@ export const createReply = async (comment: {
           select: {
             id: true,
             username: true,
+            image: true,
           },
         },
         communityId: true,

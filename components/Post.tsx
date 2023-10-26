@@ -6,7 +6,7 @@ import {
 } from "@mui/icons-material";
 import Link from "next/link";
 import React, { Dispatch, SetStateAction } from "react";
-import MoreMenu from "./MoreMenu";
+import MoreMenu from "./MoreMenuPost";
 import LikeButton from "./LikeButton";
 
 const Post = ({
