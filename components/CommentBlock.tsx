@@ -6,6 +6,7 @@ import Link from "next/link";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import CommentOptions from "./CommentOptions";
 import MoreMenuComment from "./MoreMenuComment";
+import { isUpdated } from "@/utils/isUpdated";
 
 const CommentBlock = ({
   comment,
@@ -39,6 +40,9 @@ const CommentBlock = ({
           <span className="text-xs text-neutral-400">
             {timeDifference(comment.createdAt)}
           </span>
+          {isUpdated(comment.createdAt, comment.updatedAt) && (
+            <span className="text-xs px-2 text-neutral-400">(edited)</span>
+          )}
           <div className="ml-auto">
             <MoreMenuComment setCommentsState={setComments} comment={comment} />
           </div>
@@ -49,9 +53,15 @@ const CommentBlock = ({
         style={{ padding: "0px 0px 0px 15px" }}
       >
         <div className="flex min-w-[3px] h-full bg-neutral-200 rounded-full mr-2" />
-        <div className="px-1 flex flex-col gap-y-3 w-full">
+        <div
+          className="px-1 flex flex-col gap-y-3 w-full"
+          id={`${comment.id}-container`}
+        >
           <div className="flex flex-col gap-y-1 pl-4">
-            <span className="whitespace-pre-wrap text-sm break-words">
+            <span
+              className="whitespace-pre-wrap text-sm break-words outline-blue-600"
+              id={`${comment.id}-content`}
+            >
               {comment.content}
             </span>
             <CommentOptions

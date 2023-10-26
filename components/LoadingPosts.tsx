@@ -1,6 +1,5 @@
 import React from "react";
 import LoadingPost from "./LoadingPost";
-import Image from "next/image";
 import { FiberNew, Photo, Star, Whatshot } from "@mui/icons-material";
 import { Skeleton } from "@mui/material";
 
@@ -9,7 +8,7 @@ const LoadingPosts = ({ amount }: { amount: number }) => {
   loadingPosts.fill(0);
 
   return (
-    <div className="flex flex-col w-full gap-4 flex-1 px-8 py-4">
+    <div className="flex flex-col w-full gap-4 flex-1">
       <div className="flex bg-white rounded-md shadow-sm">
         <div className="px-5 py-3 flex gap-x-4 items-center w-full">
           <Skeleton variant="circular" width={45} height={45} />

@@ -65,6 +65,7 @@ const ProfileNavBlock = () => {
             <Link
               href="/profile"
               className="py-2 flex gap-x-4 px-3 rounded-md items-center h-fit hover:bg-neutral-200 w-full"
+              onClick={(e) => setOpen(false)}
             >
               <AccountCircle sx={{ color: "rgb(5 5 5)" }} />
               <span>Profile</span>
@@ -74,12 +75,13 @@ const ProfileNavBlock = () => {
             <Link
               href="/settings"
               className="py-2 flex gap-x-4 px-3 rounded-md items-center h-fit hover:bg-neutral-200 w-full"
+              onClick={(e) => setOpen(false)}
             >
               <Settings sx={{ color: "rgb(5 5 5)" }} />
               <span>Settings</span>
             </Link>
           </li>
-          <li className="flex">
+          <li className="flex" onClick={(e) => setOpen(false)}>
             <SignOutButton />
           </li>
         </ul>

@@ -1,25 +1,20 @@
 "use client";
 
 import { deletePostClient } from "@/utils/deletePostClient";
-import { patchCommentClient } from "@/utils/patchCommentClient";
 import { patchPostClient } from "@/utils/patchPostClient";
-import { Delete, Edit, MoreVert } from "@mui/icons-material";
+import { Delete, Edit, MoreVert, Report } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
-import React, {
-  Dispatch,
-  MouseEvent,
-  ReactNode,
-  SetStateAction,
-  useState,
-} from "react";
+import React, { Dispatch, MouseEvent, SetStateAction, useState } from "react";
 
 const MoreMenuPost = ({
   post,
   setPostsState,
+  session,
 }: {
   post: PostType;
   setPostsState?: Dispatch<SetStateAction<PostType[]>>;
+  session: Session | null;
 }) => {
   const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
@@ -152,19 +147,29 @@ const MoreMenuPost = ({
       </button>
       {open && (
         <ul
-          className="absolute border border-neutral-200 right-0 whitespace-nowrap bg-white px-2 py-2 rounded-md shadow-md"
+          className="absolute border border-neutral-200 top-full right-0 whitespace-nowrap bg-white px-2 py-2 rounded-md shadow-md"
           id="open-menu-post"
         >
-          <li className="flex border-b" onClick={handleDelete}>
-            <button className="flex gap-x-2 pl-3 pr-4 py-2 items-center">
-              <Delete />
-              <span>Delete</span>
-            </button>
-          </li>
-          <li className="flex" onClick={handleEdit}>
+          {session?.user.id === post.User.id && (
+            <>
+              <li className="flex" onClick={handleDelete}>
+                <button className="flex gap-x-2 pl-3 pr-4 py-2 items-center">
+                  <Delete />
+                  <span>Delete</span>
+                </button>
+              </li>
+              <li className="flex" onClick={handleEdit}>
+                <button className="flex pl-3 pr-4 py-2 gap-x-2 items-center">
+                  <Edit />
+                  <span>Edit</span>
+                </button>
+              </li>
+            </>
+          )}
+          <li className="flex">
             <button className="flex pl-3 pr-4 py-2 gap-x-2 items-center">
-              <Edit />
-              <span>Edit</span>
+              <Report />
+              <span>Report</span>
             </button>
           </li>
         </ul>

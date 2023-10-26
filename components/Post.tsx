@@ -43,7 +43,11 @@ const Post = ({
           )}
         </div>
         <div className="ml-auto flex gap-x-2 flex-wrap justify-end gap-y-1 text-xs items-center">
-          <MoreMenuPost setPostsState={setPostsState} post={post} />
+          <MoreMenuPost
+            setPostsState={setPostsState}
+            post={post}
+            session={session}
+          />
         </div>
       </div>
       <div

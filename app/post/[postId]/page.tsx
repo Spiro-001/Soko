@@ -22,7 +22,7 @@ const Post = async ({ params }: { params: { postId: string } }) => {
   return (
     <div className="row-start-1 row-end-7 col-start-1 col-end-4 w-full mx-auto flex-1 grid grid-flow-row grid-rows-6 grid-cols-[minmax(0,_1fr)_minmax(min-content,_2fr)_minmax(0,_1fr)] px-8 py-4">
       <div className="row-start-1 row-end-7 flex flex-col pt-4 px-4 gap-4 col-start-1 col-end-4 lg:col-start-2 lg:col-end-3 w-full max-w-[960px] mx-auto rounded-md shadow-sm bg-white">
-        <div className="flex flex-col gap-y-3">
+        <div className="flex flex-col gap-y-3" id={`${post.id}-container`}>
           <div className="flex items-center">
             <Link
               href={`/user/${post.User.id}`}
@@ -34,14 +34,20 @@ const Post = async ({ params }: { params: { postId: string } }) => {
               {post.id}
             </span>
             <div className="ml-auto flex gap-x-2 flex-wrap justify-end gap-y-1 text-xs items-center">
-              <MoreMenuPost post={post} />
+              <MoreMenuPost post={post} session={session} />
             </div>
           </div>
-          <div className="px-3 py-3 rounded-sm whitespace-pre-wrap font-bold border-b border-neutral-200">
+          <div
+            className="px-3 py-3 rounded-sm whitespace-pre-wrap font-bold border-b border-neutral-200 outline-blue-600"
+            id={`${post.id}-headline`}
+          >
             {post.headline}
           </div>
-          <div className="flex flex-col bg-neutral-50 px-4 py-2 min-h-[240px] justify-between rounded-sm">
-            <span className="whitespace-pre-wrap">{post.content}</span>
+          <div
+            className="flex flex-col bg-neutral-50 px-4 py-2 min-h-[240px] justify-between rounded-sm whitespace-pre-wrap outline-blue-600"
+            id={`${post.id}-content`}
+          >
+            {post.content}
           </div>
           <div className="flex gap-x-1">
             <LikeButton
