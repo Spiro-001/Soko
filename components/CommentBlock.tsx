@@ -3,20 +3,24 @@
 import { timeDifference } from "@/utils/timeFormat";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import CommentOptions from "./CommentOptions";
+import MoreMenuComment from "./MoreMenuComment";
 
 const CommentBlock = ({
   comment,
   session,
+  setComments,
 }: {
   comment: CommentType | ReplyType;
   session: Session | null;
+  setComments: Dispatch<SetStateAction<CommentType[]>>;
 }) => {
   const [replies, setReplies] = useState<ReplyType[]>(comment.Replies);
+
   return (
     <div className="flex flex-col h-full w-full">
-      <div className="flex gap-x-3 items-center text-sm pb-2">
+      <div className="flex gap-x-3 items-center text-sm pb-2 flex-1">
         <Image
           src={comment.User.image ?? "/no-profile.png"}
           width={34}
@@ -24,8 +28,7 @@ const CommentBlock = ({
           alt="profile"
           className="border border-black rounded-full"
         />
-
-        <div className="flex gap-x-1 items-center text-sm">
+        <div className="flex gap-x-1 items-center text-sm flex-1">
           <Link
             href={`/user/${comment.User.id}`}
             className="hover:underline underline-offset-2"
@@ -36,6 +39,9 @@ const CommentBlock = ({
           <span className="text-xs text-neutral-400">
             {timeDifference(comment.createdAt)}
           </span>
+          <div className="ml-auto">
+            <MoreMenuComment setCommentsState={setComments} comment={comment} />
+          </div>
         </div>
       </div>
       <div
@@ -63,6 +69,9 @@ const CommentBlock = ({
                       key={reply.id}
                       comment={reply}
                       session={session}
+                      setComments={
+                        setReplies as Dispatch<SetStateAction<CommentType[]>>
+                      }
                     />
                   );
                 }

@@ -5,10 +5,12 @@ export const createUser = async ({
   email,
   username,
   password,
+  profileId,
 }: {
   username: string;
   password: string;
   email: string;
+  profileId: string;
 }) => {
   try {
     const password_digest = await generateHashPass(password);
@@ -17,6 +19,7 @@ export const createUser = async ({
         email,
         username,
         password_digest,
+        profileId,
       },
     });
     prisma.$disconnect;

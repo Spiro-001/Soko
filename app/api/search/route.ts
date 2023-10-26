@@ -9,6 +9,7 @@ export const GET = async (req: Request, res: NextApiResponse) => {
 
       const query = {
         query: searchParams.get("query") ?? "",
+        id: searchParams.get("id") ?? "",
         blocked: JSON.parse(searchParams.get("blocked") ?? "[]"),
         skip: JSON.parse(searchParams.get("skip") ?? "0"),
         take: JSON.parse(searchParams.get("take") ?? "10"),

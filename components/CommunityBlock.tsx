@@ -9,7 +9,7 @@ const CommunityBlock = ({ community }: { community: MinimalCommunityType }) => {
       className="border border-neutral-200 w-full px-2 py-2 flex flex-col justify-between gap-y-2 rounded-md shadow-sm bg-white"
     >
       <div className="flex gap-x-3 items-center my-auto justify-between">
-        <p className="bg-sky-100 text-sky-900 text-center px-2 h-fit whitespace-nowrap rounded-sm">
+        <p className="bg-sky-100 text-center px-2 h-fit whitespace-nowrap rounded-sm">
           {community.title}
         </p>
         <span className="text-sm whitespace-nowrap text-ellipsis overflow-hidden">
