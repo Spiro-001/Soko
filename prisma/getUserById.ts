@@ -15,6 +15,20 @@ export const getUserById = async (id: string) => {
             Community: true,
           },
         },
+        Posts: {
+          skip: 0,
+          take: 10,
+          include: {
+            User: {
+              select: {
+                id: true,
+                username: true,
+              },
+            },
+            PostLike: true,
+            Comments: true,
+          },
+        },
         createdAt: true,
         updatedAt: true,
       },

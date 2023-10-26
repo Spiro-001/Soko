@@ -15,7 +15,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
       <Provider session={session}>
         <main className="min-h-screen flex flex-col bg-neutral-100">
           <Nav session={session} />
-          <div className="flex-1 grid grid-flow-row grid-rows-6 grid-cols-[minmax(0,_1fr)_minmax(min-content,_2fr)_minmax(0,_1fr)] px-8 py-4">
+          <div className="flex-1 grid grid-flow-row grid-rows-6 grid-cols-[minmax(0,_1fr)_minmax(min-content,_2fr)_minmax(0,_1fr)]">
             {children}
           </div>
         </main>
@@ -24,7 +24,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   } else {
     return (
       <main className="min-h-screen flex flex-col bg-neutral-100">
-        <div className="flex-1 grid grid-flow-row grid-rows-6 grid-cols-[minmax(0,_1fr)_minmax(min-content,_2fr)_minmax(0,_1fr)] px-8 py-4">
+        <div className="flex-1 grid grid-flow-row grid-rows-6 grid-cols-[minmax(0,_1fr)_minmax(min-content,_2fr)_minmax(0,_1fr)]">
           <Login />
         </div>
       </main>

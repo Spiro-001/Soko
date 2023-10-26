@@ -6,7 +6,7 @@ import {
 } from "@mui/icons-material";
 import Link from "next/link";
 import React, { Dispatch, SetStateAction } from "react";
-import MoreMenu from "./MoreMenu";
+import MoreMenu from "./MoreMenuPost";
 import LikeButton from "./LikeButton";
 
 const Post = ({
@@ -19,7 +19,7 @@ const Post = ({
   session: Session | null;
 }) => {
   return (
-    <section className="flex flex-col px-4 py-4 w-full gap-y-6 rounded-md bg-white shadow-sm">
+    <section className="flex flex-col px-4 py-4 w-full gap-y-6 rounded-md bg-white shadow-sm border border-neutral-200">
       <div className="flex flex-wrap gap-y-2 gap-x-1 ">
         <div className="flex gap-y-2 items-center">
           <Link
