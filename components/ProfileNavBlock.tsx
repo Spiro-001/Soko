@@ -5,8 +5,10 @@ import Image from "next/image";
 import React, { MouseEvent, useState } from "react";
 import SignOutButton from "./SignOutButton";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
-const ProfileNavBlock = ({ session }: { session: Session | null }) => {
+const ProfileNavBlock = () => {
+  const session = useSession().data as Session;
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -46,7 +48,7 @@ const ProfileNavBlock = ({ session }: { session: Session | null }) => {
         </span>
         <div className="flex flex-col">
           <span className="text-xs font-semibold w-fit">
-            {session?.user?.username}
+            {session.user.username}
           </span>
           <span className="text-xs whitespace-nowrap">1 Reputation</span>
         </div>

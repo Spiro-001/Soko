@@ -6,8 +6,8 @@ import {
 } from "@mui/icons-material";
 import Link from "next/link";
 import React, { Dispatch, SetStateAction } from "react";
-import MoreMenu from "./MoreMenuPost";
 import LikeButton from "./LikeButton";
+import MoreMenuPost from "./MoreMenuPost";
 import { isUpdated } from "@/utils/isUpdated";
 
 const Post = ({
@@ -43,7 +43,7 @@ const Post = ({
           )}
         </div>
         <div className="ml-auto flex gap-x-2 flex-wrap justify-end gap-y-1 text-xs items-center">
-          <MoreMenu setPostsState={setPostsState} post={post} />
+          <MoreMenuPost setPostsState={setPostsState} post={post} />
         </div>
       </div>
       <div

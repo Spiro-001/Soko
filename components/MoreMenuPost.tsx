@@ -4,6 +4,7 @@ import { deletePostClient } from "@/utils/deletePostClient";
 import { patchCommentClient } from "@/utils/patchCommentClient";
 import { patchPostClient } from "@/utils/patchPostClient";
 import { Delete, Edit, MoreVert } from "@mui/icons-material";
+import { CircularProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, {
   Dispatch,
@@ -22,6 +23,10 @@ const MoreMenuPost = ({
 }) => {
   const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
+  const [edit, setEdit] = useState<Record<string, boolean>>({
+    open: false,
+    loading: false,
+  });
 
   const handleOpenMenu = (e: MouseEvent) => {
     setOpen((prev) => !prev);
@@ -61,6 +66,10 @@ const MoreMenuPost = ({
 
   const handleEdit = (e: MouseEvent) => {
     setOpen(false);
+    setEdit({
+      open: true,
+      loading: false,
+    });
     const postContainer = document.getElementById(`${post.id}-container`);
     const postContent = document.getElementById(`${post.id}-content`);
     const postHeadline = document.getElementById(`${post.id}-headline`);
@@ -71,6 +80,7 @@ const MoreMenuPost = ({
       postHeadline.contentEditable = "true";
       const onClickOutside = async (event: any) => {
         if (!postContainer.contains(event.target)) {
+          setEdit({ open: false, loading: true });
           postContent.style.border = "";
           postHeadline.style.border = "";
           postContent.contentEditable = "false";
@@ -87,14 +97,56 @@ const MoreMenuPost = ({
               content: newPostContent,
             });
           }
+          setEdit({ open: false, loading: false });
         }
       };
       document.addEventListener("mousedown", onClickOutside);
     }
   };
 
+  const submitEdit = async () => {
+    const postContainer = document.getElementById(`${post.id}-container`);
+    const postContent = document.getElementById(`${post.id}-content`);
+    const postHeadline = document.getElementById(`${post.id}-headline`);
+    if (postContainer && postContent && postHeadline) {
+      setEdit({ open: false, loading: true });
+      postContent.style.border = "";
+      postHeadline.style.border = "";
+      postContent.contentEditable = "false";
+      postHeadline.contentEditable = "false";
+      const newPostContent = postContent.innerText;
+      const newPostHeadline = postHeadline.innerText;
+      if (
+        newPostContent !== post.content ||
+        newPostHeadline !== post.headline
+      ) {
+        const editPost = await patchPostClient(post.id, {
+          headline: newPostHeadline,
+          content: newPostContent,
+        });
+      }
+      setEdit({ open: false, loading: false });
+    }
+  };
+
   return (
-    <div className="relative">
+    <div className="relative flex">
+      {edit.open && (
+        <button
+          className="text-sm px-3 py-0.5 bg-green-300 rounded-md flex"
+          onClick={submitEdit}
+        >
+          Save
+        </button>
+      )}
+      {edit.loading && (
+        <button
+          className="text-sm px-3 py-0.5 bg-green-300 rounded-md flex"
+          onClick={submitEdit}
+        >
+          <CircularProgress size="22px" sx={{ color: "white" }} />
+        </button>
+      )}
       <button onClick={handleOpenMenu} onMouseLeave={handleCloseMenu}>
         <MoreVert />
       </button>
