@@ -1,15 +1,13 @@
 import React from "react";
 import Nav from "./Nav";
-import { getUserByIdServer } from "@/utils/getUserByIdServer";
 import { authOptions } from "@/lib/nextAuth";
 import { getServerSession } from "next-auth";
 import Login from "./Login";
-import { SessionProvider } from "next-auth/react";
 import Provider from "./Provider";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const session = (await getServerSession(authOptions)) as Session;
-  const user = await getUserByIdServer(session?.user?.id ?? "");
+  console.log(session);
   if (session) {
     return (
       <Provider session={session}>

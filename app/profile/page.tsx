@@ -8,7 +8,6 @@ import React from "react";
 
 const Profile = async () => {
   const session = (await getServerSession(authOptions)) as Session;
-  if (!session?.user) return redirect("/");
   const user = await getUserByIdServer(session.user.id);
   if (!user) return redirect("/");
 
