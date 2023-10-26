@@ -27,6 +27,19 @@ const MoreMenuPost = ({
     setOpen((prev) => !prev);
   };
 
+  const handleCloseMenu = (e: MouseEvent) => {
+    const menu = document.getElementById("open-menu-post");
+    if (menu) {
+      const onClickOutside = (event: any) => {
+        if (!menu.contains(event.target)) {
+          setOpen(false);
+        }
+        document.removeEventListener("mousedown", onClickOutside);
+      };
+      document.addEventListener("mousedown", onClickOutside);
+    }
+  };
+
   const handleDelete = async (e: MouseEvent) => {
     try {
       const deletedPost = await deletePostClient(post.id);
@@ -47,14 +60,19 @@ const MoreMenuPost = ({
   };
 
   const handleEdit = (e: MouseEvent) => {
+    setOpen(false);
     const postContainer = document.getElementById(`${post.id}-container`);
     const postContent = document.getElementById(`${post.id}-content`);
     const postHeadline = document.getElementById(`${post.id}-headline`);
     if (postContainer && postContent && postHeadline) {
+      postContent.style.border = "1px solid rgb(37 99 235)";
+      postHeadline.style.border = "1px solid rgb(37 99 235)";
       postContent.contentEditable = "true";
       postHeadline.contentEditable = "true";
       const onClickOutside = async (event: any) => {
         if (!postContainer.contains(event.target)) {
+          postContent.style.border = "";
+          postHeadline.style.border = "";
           postContent.contentEditable = "false";
           postHeadline.contentEditable = "false";
           document.removeEventListener("mousedown", onClickOutside);
@@ -77,13 +95,13 @@ const MoreMenuPost = ({
 
   return (
     <div className="relative">
-      <button onClick={handleOpenMenu}>
+      <button onClick={handleOpenMenu} onMouseLeave={handleCloseMenu}>
         <MoreVert />
       </button>
       {open && (
         <ul
           className="absolute border border-neutral-200 right-0 whitespace-nowrap bg-white px-2 py-2 rounded-md shadow-md"
-          onMouseLeave={handleOpenMenu}
+          id="open-menu-post"
         >
           <li className="flex border-b" onClick={handleDelete}>
             <button className="flex gap-x-2 pl-3 pr-4 py-2 items-center">

@@ -47,13 +47,13 @@ const Post = ({
         </div>
       </div>
       <div
-        className="px-3 py-3 rounded-sm whitespace-pre-wrap font-bold border-b border-neutral-200"
+        className="px-3 py-3 rounded-sm whitespace-pre-wrap font-bold border-b border-neutral-200 outline-blue-600"
         id={`${post.id}-headline`}
       >
         {post.headline}
       </div>
       <div
-        className="bg-neutral-50 px-4 py-4 rounded-sm whitespace-pre-wrap"
+        className="bg-neutral-50 px-4 py-4 rounded-sm whitespace-pre-wrap outline-blue-600"
         id={`${post.id}-content`}
       >
         {post.content}

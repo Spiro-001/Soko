@@ -1,15 +1,8 @@
 "use client";
 
-import {
-  AccountCircle,
-  AccountCircleOutlined,
-  AccountCircleRounded,
-  AccountCircleSharp,
-  ExpandMore,
-  Settings,
-} from "@mui/icons-material";
+import { AccountCircle, ExpandMore, Settings } from "@mui/icons-material";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { MouseEvent, useState } from "react";
 import SignOutButton from "./SignOutButton";
 import Link from "next/link";
 
@@ -20,6 +13,19 @@ const ProfileNavBlock = ({ session }: { session: Session | null }) => {
     setOpen((prev) => !prev);
   };
 
+  const handleClose = (e: MouseEvent) => {
+    const menu = document.getElementById("open-menu-profile");
+    if (menu) {
+      const onClickOutside = (event: any) => {
+        if (!menu.contains(event.target)) {
+          setOpen(false);
+        }
+        document.removeEventListener("mousedown", onClickOutside);
+      };
+      document.addEventListener("mousedown", onClickOutside);
+    }
+  };
+
   return (
     <div className="relative">
       <button
@@ -27,6 +33,7 @@ const ProfileNavBlock = ({ session }: { session: Session | null }) => {
           open ? "rounded-t-md border-t border-x" : "rounded-md border"
         } bg-white shadow-sm  border-neutral-100`}
         onClick={handleOpen}
+        onMouseLeave={handleClose}
       >
         <span className="w-6 h-6 rounded-full">
           <Image
@@ -50,7 +57,7 @@ const ProfileNavBlock = ({ session }: { session: Session | null }) => {
       {open && (
         <ul
           className="absolute top-full bg-white w-full px-2 py-2 flex flex-col rounded-b-md border-neutral-100 border-x border-b shadow-md box-border text-sm"
-          onMouseLeave={handleOpen}
+          id="open-menu-profile"
         >
           <li className="flex">
             <Link

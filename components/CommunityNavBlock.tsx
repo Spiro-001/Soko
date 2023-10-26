@@ -1,7 +1,7 @@
 "use client";
 
 import { getCommunityClient } from "@/utils/getCommunityClient";
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import CommunityList from "./CommunityList";
 import { usePathname, useRouter } from "next/navigation";
 import { ExpandMore } from "@mui/icons-material";
@@ -26,8 +26,17 @@ const CommunityNavBlock = () => {
     }
   };
 
-  const handleOutside = async () => {
-    setOpen(false);
+  const handleOutside = (e: MouseEvent) => {
+    const menu = document.getElementById("open-menu-community");
+    if (menu) {
+      const onClickOutside = (event: any) => {
+        if (!menu.contains(event.target)) {
+          setOpen(false);
+        }
+        document.removeEventListener("mousedown", onClickOutside);
+      };
+      document.addEventListener("mousedown", onClickOutside);
+    }
   };
 
   useEffect(() => {
@@ -47,6 +56,7 @@ const CommunityNavBlock = () => {
         open ? "rounded-t-md" : "rounded-md"
       }`}
       onClick={handleOpenCommunity}
+      onMouseLeave={handleOutside}
     >
       <button className="whitespace-nowrap">
         <span>My Communities</span>
@@ -58,7 +68,7 @@ const CommunityNavBlock = () => {
         <div
           className="absolute top-full z-50 bg-white flex border-x border-b border-neutral-100 flex-col flex-1 rounded-b-md shadow-sm w-full box-content"
           style={{ left: -1 }}
-          onMouseLeave={handleOutside}
+          id="open-menu-community"
         >
           <CommunityList communities={communities} setSelector={setSelector} />
         </div>
