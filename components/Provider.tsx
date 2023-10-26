@@ -1,23 +1,14 @@
-"use client";
-
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/nextAuth";
 import { SessionProvider } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
 import React, { ReactNode } from "react";
 import Login from "./Login";
 
-const Provider = ({
-  session,
-  children,
-}: {
-  session: Session | null;
-  children: ReactNode;
-}) => {
-  const pathName = usePathname();
-  const router = useRouter();
+const Provider = async ({ children }: { children: ReactNode }) => {
+  const session = (await getServerSession(authOptions)) as Session;
 
   console.log(session);
 
-  if (!session && pathName !== "/login") router.push("/login");
   if (!session) {
     return (
       <main className="min-h-screen flex flex-col bg-neutral-100">
