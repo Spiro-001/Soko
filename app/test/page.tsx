@@ -2,7 +2,7 @@
 
 import { getSPhotoFromS3, uploadSPhotoToS3 } from "@/aws/s3_aws";
 import Image from "next/image";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
 const Test = () => {
   const [message, setMessage] = useState<string>("");
@@ -23,7 +23,7 @@ const Test = () => {
       setMessage("Upload Complete");
       let imageURL = await getSPhotoFromS3(file.name);
       console.log(imageURL);
-      // setS3Image(imageURL);
+      setS3Image(imageURL);
       setFile(null);
     }
   };
@@ -38,7 +38,9 @@ const Test = () => {
         accept="image/png"
       />
       <input type="button" onClick={uploadFile} defaultValue="Send" />
-      <Image src={s3Image} height={50} width={50} alt="test" />
+      <div className="w-56 aspect-video relative">
+        <Image src={s3Image} fill alt="test" />
+      </div>
     </div>
   );
 };

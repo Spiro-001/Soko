@@ -1,28 +1,41 @@
-import { Credentials, S3, config } from "aws-sdk";
+import {
+  DeleteObjectCommand,
+  GetObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import axios from "axios";
 
-const s3Client = new S3({
+const s3 = new S3Client({
   region: "us-east-1",
-  signatureVersion: "v4",
-  accessKeyId: process.env.NEXT_PUBLIC_AWS_S3_CLIENT_ACCESS_KEY,
-  secretAccessKey: process.env.NEXT_PUBLIC_AWS_S3_CLIENT_SECRET_KEY,
+  credentials: {
+    accessKeyId:
+      process.env.NEXT_PUBLIC_AWS_S3_CLIENT_ACCESS_KEY ?? "ENV_VAR_NOT_FOUND",
+    secretAccessKey:
+      process.env.NEXT_PUBLIC_AWS_S3_CLIENT_SECRET_KEY ?? "ENV_VAR_NOT_FOUND",
+  },
 });
+
+// const s3Client = new S3({
+//   region: "us-east-1",
+//   signatureVersion: "v4",
+//   accessKeyId: process.env.NEXT_PUBLIC_AWS_S3_CLIENT_ACCESS_KEY,
+//   secretAccessKey: process.env.NEXT_PUBLIC_AWS_S3_CLIENT_SECRET_KEY,
+// });
 
 export const uploadSPhotoToS3 = async (photo: File) => {
   try {
-    const photoParams = {
-      Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
+    const putCommand = new PutObjectCommand({
+      Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME ?? "ENV_VAR_NOT_FOUND",
       Key: photo.name,
-      Expires: 1000,
       ContentType: photo.type,
-    };
-    const url = await s3Client.getSignedUrlPromise("putObject", photoParams);
-    await axios.put(url, photo, {
-      headers: {
-        "Content-type": String(photo.type),
-      },
+      Body: photo,
     });
-    return photoParams;
+
+    const url = await getSignedUrl(s3, putCommand, { expiresIn: 60 });
+    const response = await s3.send(putCommand);
+    return response;
   } catch (error) {
     console.log(error);
     return error;
@@ -31,11 +44,12 @@ export const uploadSPhotoToS3 = async (photo: File) => {
 
 export const getSPhotoFromS3 = async (photoId: string) => {
   try {
-    const url = await s3Client.getSignedUrlPromise("getObject", {
+    const getCommand = new GetObjectCommand({
       Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
       Key: photoId,
-      Expires: 1000,
     });
+
+    const url = await getSignedUrl(s3, getCommand, { expiresIn: 60 });
     return url;
   } catch (error) {
     console.log(error);
@@ -45,17 +59,13 @@ export const getSPhotoFromS3 = async (photoId: string) => {
 
 export const deleteSPhotoFromS3 = async (photoId: string) => {
   try {
-    s3Client.deleteObject(
-      {
-        Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME ?? "",
-        Key: photoId,
-      },
-      (err, data) => {
-        if (err) console.log(err, err.stack);
-        else console.log("S3 Item was deleted.");
-      }
-    );
-    return;
+    const deleteCommand = new DeleteObjectCommand({
+      Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
+      Key: photoId,
+    });
+
+    const response = await s3.send(deleteCommand);
+    return response;
   } catch (error) {
     console.log(error);
     return error;

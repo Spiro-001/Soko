@@ -2,7 +2,10 @@
 
 const nextConfig = {
   images: {
-    domains: ["lh3.googleusercontent.com", "picsum.photos"],
+    domains: [
+      "lh3.googleusercontent.com",
+      "basement-s3.s3.us-east-1.amazonaws.com",
+    ],
   },
 };
 
