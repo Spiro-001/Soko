@@ -11,6 +11,7 @@ export const getUserByEmail = async (email: string) => {
         username: true,
         email: true,
         password_digest: true,
+        Profile: true,
         createdAt: true,
         updatedAt: true,
       },

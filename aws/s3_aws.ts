@@ -5,7 +5,6 @@ import {
   S3Client,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import axios from "axios";
 
 const s3 = new S3Client({
   region: "us-east-1",
@@ -17,18 +16,11 @@ const s3 = new S3Client({
   },
 });
 
-// const s3Client = new S3({
-//   region: "us-east-1",
-//   signatureVersion: "v4",
-//   accessKeyId: process.env.NEXT_PUBLIC_AWS_S3_CLIENT_ACCESS_KEY,
-//   secretAccessKey: process.env.NEXT_PUBLIC_AWS_S3_CLIENT_SECRET_KEY,
-// });
-
-export const uploadSPhotoToS3 = async (photo: File) => {
+export const uploadSPhotoToS3 = async (photo: File, profile: ProfileType) => {
   try {
     const putCommand = new PutObjectCommand({
       Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME ?? "ENV_VAR_NOT_FOUND",
-      Key: photo.name,
+      Key: `${profile.id}-banner`,
       ContentType: photo.type,
       Body: photo,
     });
@@ -42,11 +34,11 @@ export const uploadSPhotoToS3 = async (photo: File) => {
   }
 };
 
-export const getSPhotoFromS3 = async (photoId: string) => {
+export const getSPhotoFromS3 = async (profile: ProfileType) => {
   try {
     const getCommand = new GetObjectCommand({
       Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
-      Key: photoId,
+      Key: `${profile.id}-banner`,
     });
 
     const url = await getSignedUrl(s3, getCommand, { expiresIn: 60 });

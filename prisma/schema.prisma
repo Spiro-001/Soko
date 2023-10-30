@@ -34,14 +34,14 @@ model Profile {
   id   String @id @unique @default(uuid())
   User User?
 
-  bio     String?
-  haveBio Boolean
-
+  headline          String?
+  banner            String  @default("/no-community-image.jpg")
+  bio               String?
+  haveBio           Boolean @default(false)
   featuredTrack     String?
-  haveFeaturedTrack Boolean
-
+  haveFeaturedTrack Boolean @default(false)
   featuredVideo     String?
-  haveFeaturedVideo Boolean
+  haveFeaturedVideo Boolean @default(false)
 
   backgroundImage       String?
   backgroundColor       String  @default("rgba(0,0,0,0)")

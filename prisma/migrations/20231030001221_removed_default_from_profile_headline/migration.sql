@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Profile" ALTER COLUMN "headline" DROP NOT NULL,
+ALTER COLUMN "headline" DROP DEFAULT;

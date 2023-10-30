@@ -14,6 +14,22 @@ declare global {
     updatedAt: string;
   };
 
+  type ProfileType = {
+    id: string;
+    headline: string;
+    banner: string;
+    bio: string;
+    haveBio: boolean;
+    featuredTrack: string;
+    haveFeaturedTrack: boolean;
+    featuredVideo: string;
+    haveFeaturedVideo: boolean;
+    backgroundImage: string;
+    backgroundColor: string;
+    profileContainerImage: string;
+    profileContainerColor: string;
+  };
+
   type Session = {
     user: {
       id: string;
@@ -21,6 +37,7 @@ declare global {
       username: string;
       email: string;
       image: string;
+      Profile: ProfileType;
       createdAt: string;
       updatedAt: string;
     };
