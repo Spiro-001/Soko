@@ -40,7 +40,7 @@ const ProfilePicture = ({
         width={100}
         height={100}
         alt="profile"
-        className="rounded-full text-lg border-4 border-green-300 object-cover max-h-[100px] max-w-[100px]"
+        className="rounded-full text-lg border-4 border-green-300 object-cover max-h-[100px] max-w-[100px] bg-white"
         id="profile-picture"
       />
       <span
