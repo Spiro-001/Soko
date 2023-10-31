@@ -25,8 +25,8 @@ const Banner = ({
       const file = event.target.files[0];
       const url = URL.createObjectURL(file);
       setBannerState(url);
-      const response = await uploadSPhotoToS3(file, profile);
-      const imageUrl = await getSPhotoFromS3(profile);
+      const response = await uploadSPhotoToS3(file, `${profile.id}-banner`);
+      const imageUrl = await getSPhotoFromS3(`${profile.id}-banner`);
     }
   };
 

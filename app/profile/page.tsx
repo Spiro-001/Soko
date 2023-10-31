@@ -3,10 +3,10 @@ import { authOptions } from "@/lib/nextAuth";
 import { getUserByIdServer } from "@/utils/getUserByIdServer";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 import React from "react";
 import Banner from "@/components/Banner";
 import { getSPhotoFromS3 } from "@/aws/s3_aws";
+import ProfilePicture from "@/components/ProfilePicture";
 
 const Profile = async () => {
   const session = (await getServerSession(authOptions)) as Session;
@@ -17,7 +17,8 @@ const Profile = async () => {
   const backgroundColor = session.user.Profile.backgroundColor;
   const backgroundProfileColor = session.user.Profile.profileContainerColor;
   const backgroundProfile = session.user.Profile.profileContainerImage;
-  const banner = await getSPhotoFromS3(session.user.Profile);
+  const banner = await getSPhotoFromS3(`${session.user.Profile.id}-banner`);
+  const profile = await getSPhotoFromS3(`${session.user.id}-profile`);
 
   return (
     <div
@@ -28,7 +29,7 @@ const Profile = async () => {
       }}
     >
       <div
-        className="flex flex-col pt-4 pb-16 px-4 gap-4 bg-white shadow-md rounded-md row-start-1 row-end-7 col-start-2 col-end-3"
+        className="flex flex-col pt-4 pb-16 px-4 gap-4 bg-white shadow-md rounded-md row-start-1 row-end-7 xl:col-start-2 xl:col-end-3 col-start-1 col-end-4"
         style={{
           backgroundImage: `url("${backgroundProfile}")`,
           backgroundColor: backgroundProfileColor,
@@ -38,14 +39,7 @@ const Profile = async () => {
           <Banner banner={banner} profile={session.user.Profile} />
           <div className="flex absolute -bottom-10 left-6 items-end w-full box-content">
             <div className="flex relative z-10 items-center justify-center">
-              <Image
-                src={session.user.image ?? "/no-profile.png"}
-                width={100}
-                height={100}
-                alt="profile"
-                className="rounded-full text-lg z-20 border-4 border-green-300"
-                id="profile-picture"
-              />
+              <ProfilePicture session={session} profile={profile} />
               {/* <div
                 className="bg-white absolute rounded-full"
                 style={{
@@ -55,14 +49,16 @@ const Profile = async () => {
                 }}
               /> */}
             </div>
-            <div className="flex gap-y-1 py-1 relative -left-8 flex-1 items-end">
-              <span className="pl-12 pr-6 py-1 bg-blue-400 text-white font-semibold w-fit border-r-4 border-blue-200 shadow-sm text-sm">
-                {user.username}
-              </span>
-              <span className="text-sm bg-sky-100 flex items-center px-6 rounded-r-md shadow-sm py-1">
-                {session.user.Profile.headline}
-              </span>
-              <span className="ml-auto text-sm text-neutral-400 flex items-center bg-white border border-neutral-200 px-3 rounded-md shadow-sm py-1">
+            <div className="flex relative flex-1 -left-8 items-center gap-x-2">
+              <div className="flex gap-y-1 py-2 flex-1 items-end">
+                <span className="pl-12 pr-6 py-1 bg-blue-400 text-white font-semibold w-fit border-r-4 border-blue-200 shadow-sm text-sm whitespace-nowrap">
+                  {user.username}
+                </span>
+                <span className="text-sm bg-sky-100 flex items-center px-6 rounded-r-md shadow-sm py-1 whitespace-nowrap">
+                  {session.user.Profile.headline}
+                </span>
+              </div>
+              <span className="ml-auto text-sm text-neutral-400 md:flex items-center bg-white border border-neutral-200 px-3 rounded-md shadow-sm py-1 whitespace-nowrap hidden">
                 New York City, NY
               </span>
             </div>

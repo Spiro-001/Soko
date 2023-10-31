@@ -16,11 +16,11 @@ const s3 = new S3Client({
   },
 });
 
-export const uploadSPhotoToS3 = async (photo: File, profile: ProfileType) => {
+export const uploadSPhotoToS3 = async (photo: File, key: string) => {
   try {
     const putCommand = new PutObjectCommand({
       Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME ?? "ENV_VAR_NOT_FOUND",
-      Key: `${profile.id}-banner`,
+      Key: key,
       ContentType: photo.type,
       Body: photo,
     });
@@ -34,11 +34,11 @@ export const uploadSPhotoToS3 = async (photo: File, profile: ProfileType) => {
   }
 };
 
-export const getSPhotoFromS3 = async (profile: ProfileType) => {
+export const getSPhotoFromS3 = async (key: string) => {
   try {
     const getCommand = new GetObjectCommand({
       Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
-      Key: `${profile.id}-banner`,
+      Key: key,
     });
 
     const url = await getSignedUrl(s3, getCommand, { expiresIn: 60 });
