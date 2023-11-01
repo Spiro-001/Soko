@@ -34,7 +34,11 @@ const ProfilePicture = ({
   };
 
   return (
-    <div className="relative flex">
+    <div className="relative flex items-center justify-center">
+      <span
+        className="absolute w-full h-full max-h-[92px] max-w-[92px] cursor-pointer hover:bg-neutral-400 z-20 opacity-50 rounded-full border-green-300"
+        onClick={handleInput}
+      ></span>
       <Image
         src={profileState ?? "/no-profile.png"}
         width={100}
@@ -44,10 +48,6 @@ const ProfilePicture = ({
         id="profile-picture"
         unoptimized
       />
-      <span
-        className="absolute w-full h-full cursor-pointer hover:bg-neutral-400 opacity-50 z-20 rounded-full"
-        onClick={handleInput}
-      ></span>
       <input
         id="profile-picture-input"
         type="file"

@@ -23,15 +23,17 @@ const Banner = ({
   const handleChange = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const file = event.target.files[0];
-      const url = URL.createObjectURL(file);
-      setBannerState(url);
-      const response = await uploadSPhotoToS3(file, `${profile.id}-banner`);
-      const imageUrl = await getSPhotoFromS3(`${profile.id}-banner`);
+      if (file) {
+        const url = URL.createObjectURL(file);
+        setBannerState(url);
+        const response = await uploadSPhotoToS3(file, `${profile.id}-banner`);
+        const imageUrl = await getSPhotoFromS3(`${profile.id}-banner`);
+      }
     }
   };
 
   return (
-    <div className="relative flex flex-1">
+    <div className="relative flex flex-1 shadow-sm">
       <Image
         src={bannerState}
         alt="community-picture"
