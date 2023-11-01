@@ -15,7 +15,8 @@ const CreatePost = ({ session }: { session: Session | null }) => {
         width={45}
         height={45}
         alt="profile"
-        className="border border-black rounded-full"
+        className="border border-neutral-200 rounded-full max-h-[45px] max-w-[45px] object-cover aspect-square"
+        unoptimized
       />
       <Link
         href={`/submit?community=${pathName[2] ?? "public"}`}

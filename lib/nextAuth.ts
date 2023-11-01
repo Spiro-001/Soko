@@ -1,4 +1,6 @@
+import { getSPhotoFromS3, uploadSPhotoToS3 } from "@/aws/s3_aws";
 import { getUserByEmail } from "@/prisma/getUserByEmail";
+import { dataURLtoBlob, toDataURL } from "@/utils/image64";
 import { NextAuthOptions, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -25,8 +27,24 @@ export const authOptions: NextAuthOptions = {
     async session({ session, user, token }) {
       // Return to Server Session
       const foundUser = await getUserByEmail(session?.user?.email ?? "");
-      const returnUser = { ...foundUser, image: session?.user?.image };
-      return { user: returnUser, expires: session.expires };
+      const returnUser = {
+        ...foundUser,
+        image: "",
+      };
+      try {
+        const image = await getSPhotoFromS3(`${foundUser?.id}-profile`);
+        if (image === "UnknownError") throw new Error("Object does not exist.");
+        returnUser.image = image;
+        return { user: returnUser, expires: session.expires };
+      } catch (error) {
+        let message = "Unknown Error";
+        if (error instanceof Error) message = error.message;
+        console.log(message);
+        if (session.user && session.user.image) {
+          returnUser.image = "/no-profile.png";
+        }
+        return { user: returnUser, expires: session.expires };
+      }
     },
     async jwt({ token, user, account, profile }) {
       // Return to Server Session

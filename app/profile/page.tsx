@@ -18,7 +18,9 @@ const Profile = async () => {
   const backgroundProfileColor = session.user.Profile.profileContainerColor;
   const backgroundProfile = session.user.Profile.profileContainerImage;
   const banner = await getSPhotoFromS3(`${session.user.Profile.id}-banner`);
-  const profile = await getSPhotoFromS3(`${session.user.id}-profile`);
+  let profile = await getSPhotoFromS3(`${session.user.id}-profile`);
+
+  if (profile === "UnknownError") profile = "/no-profile.png";
 
   return (
     <div

@@ -3,10 +3,11 @@
 import { timeDifference } from "@/utils/timeFormat";
 import Image from "next/image";
 import Link from "next/link";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import CommentOptions from "./CommentOptions";
 import MoreMenuComment from "./MoreMenuComment";
 import { isUpdated } from "@/utils/isUpdated";
+import { getSPhotoFromS3 } from "@/aws/s3_aws";
 
 const CommentBlock = ({
   comment,
@@ -18,16 +19,25 @@ const CommentBlock = ({
   setComments: Dispatch<SetStateAction<CommentType[]>>;
 }) => {
   const [replies, setReplies] = useState<ReplyType[]>(comment.Replies);
+  const [user, setUser] = useState("/no-profile.png");
+
+  useEffect(() => {
+    const getUserProfilePicture = async () => {
+      const picture = await getSPhotoFromS3(`${comment.User.id}-profile`);
+      setUser(picture);
+    };
+    getUserProfilePicture();
+  }, []);
 
   return (
     <div className="flex flex-col h-full w-full">
       <div className="flex gap-x-3 items-center text-sm pb-2 flex-1">
         <Image
-          src={comment.User.image ?? "/no-profile.png"}
+          src={user}
           width={34}
           height={34}
           alt="profile"
-          className="border border-black rounded-full"
+          className="border border-black rounded-full max-h-[34px] max-w-[34px] object-cover"
         />
         <div className="flex gap-x-1 items-center text-sm flex-1">
           <Link

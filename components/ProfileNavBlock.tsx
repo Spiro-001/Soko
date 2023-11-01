@@ -43,7 +43,8 @@ const ProfileNavBlock = () => {
             width={24}
             height={24}
             alt="profile"
-            className="border border-black rounded-full"
+            className="border border-neutral-200 rounded-full max-h-[24px] max-w-[24px] aspect-square object-cover"
+            unoptimized
           />
         </span>
         <div className="flex flex-col">

@@ -1,6 +1,7 @@
 import {
   DeleteObjectCommand,
   GetObjectCommand,
+  HeadObjectCommand,
   PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
@@ -25,12 +26,12 @@ export const uploadSPhotoToS3 = async (photo: File, key: string) => {
       Body: photo,
     });
 
-    const url = await getSignedUrl(s3, putCommand, { expiresIn: 60 });
     const response = await s3.send(putCommand);
     return response;
   } catch (error) {
-    console.log(error);
-    return error;
+    let message = "Unknown Error";
+    if (error instanceof Error) message = error.message;
+    return message;
   }
 };
 
@@ -40,12 +41,17 @@ export const getSPhotoFromS3 = async (key: string) => {
       Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
       Key: key,
     });
-
+    const objectExistCommand = new HeadObjectCommand({
+      Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
+      Key: key,
+    });
+    const response = await s3.send(objectExistCommand);
     const url = await getSignedUrl(s3, getCommand, { expiresIn: 60 });
     return url;
   } catch (error) {
-    console.log(error);
-    return "Error";
+    let message = "Unknown Error";
+    if (error instanceof Error) message = error.message;
+    return message;
   }
 };
 
@@ -59,7 +65,8 @@ export const deleteSPhotoFromS3 = async (photoId: string) => {
     const response = await s3.send(deleteCommand);
     return response;
   } catch (error) {
-    console.log(error);
-    return error;
+    let message = "Unknown Error";
+    if (error instanceof Error) message = error.message;
+    return message;
   }
 };
