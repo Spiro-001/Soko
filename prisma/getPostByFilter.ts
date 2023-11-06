@@ -92,6 +92,7 @@ export const getPostByFilter = async ({
           },
         },
         communityId: true,
+        hasImage: true,
         PostLike: true,
         createdAt: true,
         updatedAt: true,

@@ -17,7 +17,6 @@ const Feed = ({
   const [loading, setLoading] = useState(false);
 
   const renderPosts = () => {
-    console.log(1);
     if (loading) {
       return (
         <div className="flex items-center justify-center py-8">

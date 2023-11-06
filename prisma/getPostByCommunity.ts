@@ -48,6 +48,7 @@ export const getPostByCommunity = async ({
           },
         },
         communityId: true,
+        hasImage: true,
         PostLike: true,
         createdAt: true,
         updatedAt: true,

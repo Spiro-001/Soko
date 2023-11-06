@@ -114,6 +114,7 @@ export const getPostBySearch = async ({
             id: true,
           },
         },
+        hasImage: true,
         createdAt: true,
         updatedAt: true,
       },

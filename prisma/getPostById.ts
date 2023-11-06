@@ -18,6 +18,7 @@ export const getPostById = async (id: string) => {
         },
         content: true,
         PostLike: true,
+        hasImage: true,
         Comments: {
           orderBy: {
             createdAt: "desc",

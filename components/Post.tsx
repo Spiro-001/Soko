@@ -9,7 +9,6 @@ import React, { Dispatch, SetStateAction } from "react";
 import LikeButton from "./LikeButton";
 import MoreMenuPost from "./MoreMenuPost";
 import { isUpdated } from "@/utils/isUpdated";
-import PostImage from "./PostImage";
 import Image from "next/image";
 import { getSPhotoFromS3 } from "@/aws/s3_aws";
 
@@ -22,6 +21,7 @@ const Post = async ({
   setPostsState: Dispatch<SetStateAction<PostType[]>>;
   session: Session | null;
 }) => {
+  console.log(post.id);
   const image = await getSPhotoFromS3(`${post.id}-post`);
   return (
     <section
