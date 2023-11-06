@@ -52,15 +52,15 @@ const Profile = async () => {
               /> */}
             </div>
             <div className="flex relative flex-1 -left-8 items-center gap-x-2">
-              <div className="flex gap-y-1 py-2 flex-1 items-end">
-                <span className="pl-12 pr-6 py-1 bg-blue-400 text-white font-semibold w-fit border-r-4 border-blue-200 shadow-sm text-sm whitespace-nowrap">
+              <div className="flex gap-y-1 py-2 flex-1 items-end text-xs md:text-sm">
+                <span className="pl-12 pr-6 py-1 bg-blue-400 text-white font-semibold w-fit border-r-4 border-blue-200 shadow-sm whitespace-nowrap">
                   {user.username}
                 </span>
-                <span className="text-sm bg-sky-100 flex items-center px-6 rounded-r-md shadow-sm py-1 whitespace-nowrap">
+                <span className="bg-sky-100 flex items-center px-4 rounded-r-md whitespace-nowrap shadow-sm py-1 font-semibold">
                   {session.user.Profile.headline}
                 </span>
               </div>
-              <span className="ml-auto text-sm text-neutral-400 md:flex items-center bg-white border border-neutral-200 px-3 rounded-md shadow-sm py-1 whitespace-nowrap hidden">
+              <span className="ml-auto text-neutral-400 md:flex items-center bg-white border border-neutral-200 px-3 rounded-md shadow-sm py-1 whitespace-nowrap hidden">
                 New York City, NY
               </span>
             </div>
