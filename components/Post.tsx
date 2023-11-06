@@ -9,8 +9,11 @@ import React, { Dispatch, SetStateAction } from "react";
 import LikeButton from "./LikeButton";
 import MoreMenuPost from "./MoreMenuPost";
 import { isUpdated } from "@/utils/isUpdated";
+import PostImage from "./PostImage";
+import Image from "next/image";
+import { getSPhotoFromS3 } from "@/aws/s3_aws";
 
-const Post = ({
+const Post = async ({
   post,
   setPostsState,
   session,
@@ -19,6 +22,7 @@ const Post = ({
   setPostsState: Dispatch<SetStateAction<PostType[]>>;
   session: Session | null;
 }) => {
+  const image = await getSPhotoFromS3(`${post.id}-post`);
   return (
     <section
       className="flex flex-col px-4 py-4 w-full gap-y-6 rounded-md bg-white shadow-sm border border-neutral-200"
@@ -56,6 +60,17 @@ const Post = ({
       >
         {post.headline}
       </div>
+      {post.hasImage && (
+        <Image
+          src={image}
+          width={1}
+          height={1}
+          alt="profile"
+          className="rounded-md text-lg object-cover w-full h-full max-w-[400px] shadow-sm"
+          id="profile-picture"
+          unoptimized
+        />
+      )}
       <div
         className="bg-neutral-50 px-4 py-4 rounded-sm whitespace-pre-wrap outline-blue-600"
         id={`${post.id}-content`}

@@ -17,6 +17,7 @@ const Feed = ({
   const [loading, setLoading] = useState(false);
 
   const renderPosts = () => {
+    console.log(1);
     if (loading) {
       return (
         <div className="flex items-center justify-center py-8">
@@ -42,6 +43,7 @@ const Feed = ({
       }
     }
   };
+
   return (
     <div className="flex flex-col gap-y-4 w-full">
       <div className="flex bg-white rounded-md shadow-sm border border-neutral-200">

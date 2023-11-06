@@ -6,6 +6,8 @@ import { InputTags } from "./InputTags";
 import { createPostClient } from "@/utils/createPostClient";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import NewImagePost from "./NewImagePost";
+import { getSPhotoFromS3, uploadSPhotoToS3 } from "@/aws/s3_aws";
 
 const NewPost = ({
   type,
@@ -15,6 +17,7 @@ const NewPost = ({
   selector: Record<string, string>;
 }) => {
   const [tags, setTags] = useState<Array<string>>([]);
+  const [image, setImage] = useState<File | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
   const session = useSession().data as Session;
@@ -33,7 +36,12 @@ const NewPost = ({
         content: content,
         communityId: selector.id,
         tags,
+        hasImage: image !== null,
       });
+
+      if (image) {
+        const response = await uploadSPhotoToS3(image, `${newPost.id}-post`);
+      }
 
       if (newPost) {
         router.push(`/post/${newPost.id}`);
@@ -47,6 +55,7 @@ const NewPost = ({
       ref={formRef}
       className="flex-1 border-x border-b border-neutral-200 rounded-b-md px-4 py-4 flex flex-col gap-y-2 shadow-sm"
     >
+      <NewImagePost session={session} setImage={setImage} />
       <TextareaAutosize
         name="headline"
         placeholder="Headline"

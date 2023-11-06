@@ -6,9 +6,10 @@ export const createPost = async (post: {
   content: string;
   userId: string;
   communityId: string;
+  hasImage: boolean;
 }) => {
   try {
-    const { tags, content, userId, communityId, headline } = post;
+    const { tags, content, userId, communityId, headline, hasImage } = post;
     const newPost = await prisma.post.create({
       data: {
         headline,
@@ -16,6 +17,7 @@ export const createPost = async (post: {
         content,
         userId,
         communityId,
+        hasImage,
       },
     });
     prisma.$disconnect;

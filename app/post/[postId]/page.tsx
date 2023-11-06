@@ -13,11 +13,14 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/nextAuth";
 import { redirect } from "next/navigation";
 import MoreMenuPost from "@/components/MoreMenuPost";
+import Image from "next/image";
+import { getSPhotoFromS3 } from "@/aws/s3_aws";
 
 const Post = async ({ params }: { params: { postId: string } }) => {
   const post = await getPostByIdServer(params.postId);
   const session = (await getServerSession(authOptions)) as Session;
   if (!post) return redirect("/");
+  const image = await getSPhotoFromS3(`${post.id}-post`);
 
   return (
     <div className="row-start-1 row-end-7 col-start-1 col-end-4 w-full mx-auto flex-1 grid grid-flow-row grid-rows-6 grid-cols-[minmax(0,_1fr)_minmax(min-content,_2fr)_minmax(0,_1fr)] px-8 py-4">
@@ -43,6 +46,15 @@ const Post = async ({ params }: { params: { postId: string } }) => {
           >
             {post.headline}
           </div>
+          <Image
+            src={image}
+            width={1}
+            height={1}
+            alt="profile"
+            className="rounded-md text-lg object-cover w-full h-full max-w-[400px] shadow-sm"
+            id="profile-picture"
+            unoptimized
+          />
           <div
             className="flex flex-col bg-neutral-50 px-4 py-2 min-h-[240px] justify-between rounded-sm whitespace-pre-wrap outline-blue-600"
             id={`${post.id}-content`}

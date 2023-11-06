@@ -63,6 +63,7 @@ export const deleteSPhotoFromS3 = async (photoId: string) => {
     });
 
     const response = await s3.send(deleteCommand);
+    console.log(response);
     return response;
   } catch (error) {
     let message = "Unknown Error";

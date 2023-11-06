@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteSPhotoFromS3 } from "@/aws/s3_aws";
 import { deletePostClient } from "@/utils/deletePostClient";
 import { patchPostClient } from "@/utils/patchPostClient";
 import { Delete, Edit, MoreVert, Report } from "@mui/icons-material";
@@ -43,7 +44,7 @@ const MoreMenuPost = ({
   const handleDelete = async (e: MouseEvent) => {
     try {
       const deletedPost = await deletePostClient(post.id);
-      console.log(deletePostClient);
+      const deletedImage = await deleteSPhotoFromS3(`${post.id}-post`);
       if (setPostsState) {
         setPostsState((prev: PostType[]) => {
           return prev.filter((post) => post.id !== deletedPost.id);
