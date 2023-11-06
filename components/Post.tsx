@@ -10,19 +10,18 @@ import LikeButton from "./LikeButton";
 import MoreMenuPost from "./MoreMenuPost";
 import { isUpdated } from "@/utils/isUpdated";
 import Image from "next/image";
-import { getSPhotoFromS3 } from "@/aws/s3_aws";
 
 const Post = async ({
   post,
+  image,
   setPostsState,
   session,
 }: {
   post: PostType;
+  image: string;
   setPostsState: Dispatch<SetStateAction<PostType[]>>;
   session: Session | null;
 }) => {
-  console.log(post.id);
-  const image = await getSPhotoFromS3(`${post.id}-post`);
   return (
     <section
       className="flex flex-col px-4 py-4 w-full gap-y-6 rounded-md bg-white shadow-sm border border-neutral-200"
