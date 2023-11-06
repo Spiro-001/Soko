@@ -5,6 +5,7 @@ import Post from "./Post";
 import FilterAndSortPost from "./FilterAndSortPost";
 import ProfilePostSearch from "./ProfilePostSearch";
 import { CircularProgress } from "@mui/material";
+import { getSPhotoFromS3 } from "@/aws/s3_aws";
 
 const ProfilePost = ({
   posts,
@@ -33,14 +34,21 @@ const ProfilePost = ({
           </div>
         );
       } else {
-        return postsState.map((post) => (
-          <Post
-            post={post}
-            session={session}
-            setPostsState={setPostsState}
-            key={post.id}
-          />
-        ));
+        return postsState.map((post) => {
+          const getImage = async () => {
+            const image = await getSPhotoFromS3(`${post.id}-post`);
+            return (
+              <Post
+                image={image}
+                post={post}
+                session={session}
+                setPostsState={setPostsState}
+                key={post.id}
+              />
+            );
+          };
+          return getImage();
+        });
       }
     }
   };
