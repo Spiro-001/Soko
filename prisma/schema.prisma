@@ -56,6 +56,7 @@ model Post {
   content     String
   userId      String
   communityId String
+  hasImage    Boolean  @default(false)
 
   User      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   Community Community  @relation(fields: [communityId], references: [id], onDelete: Cascade)

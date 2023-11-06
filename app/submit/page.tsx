@@ -3,7 +3,7 @@
 import { getCommunityClient } from "@/utils/getCommunityClient";
 import { useSearchParams } from "next/navigation";
 import NewPost from "@/components/NewPost";
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import CommunityList from "@/components/CommunityList";
 import Image from "next/image";
 import { ExpandMore } from "@mui/icons-material";
@@ -22,8 +22,17 @@ const Submit = () => {
     setOpen((prev) => !prev);
   };
 
-  const handleOutside = async () => {
-    setOpen(false);
+  const handleClose = (e: MouseEvent) => {
+    const menu = document.getElementById("open-menu-community-submit");
+    if (menu) {
+      const onClickOutside = (event: any) => {
+        if (!menu.contains(event.target)) {
+          setOpen(false);
+        }
+        document.removeEventListener("mousedown", onClickOutside);
+      };
+      document.addEventListener("mousedown", onClickOutside);
+    }
   };
 
   useEffect(() => {
@@ -56,6 +65,7 @@ const Submit = () => {
                 open ? "rounded-t-md" : "rounded-md"
               } shadow-sm border border-neutral-200`}
               onClick={handleOpenCommunity}
+              onMouseLeave={handleClose}
             >
               <div className="flex gap-x-4 items-center w-full">
                 <span className="h-8 w-8 border border-black rounded-full border-dashed">
@@ -75,8 +85,8 @@ const Submit = () => {
               {open && (
                 <div
                   className="absolute top-full border-x border-b w-full box-content border-neutral-200 z-50 bg-white flex flex-col rounded-b-md shadow-md"
-                  onMouseLeave={handleOutside}
                   style={{ left: -1 }}
+                  id="open-menu-community-submit"
                 >
                   <CommunityList
                     communities={communities}

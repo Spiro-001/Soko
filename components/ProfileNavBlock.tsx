@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 
 const ProfileNavBlock = () => {
   const session = useSession().data as Session;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = () => {
     setOpen((prev) => !prev);
